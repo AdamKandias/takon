@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->int();
+            $table->id();
             $table->char("nisn", 10)->nullable(false);
             $table->date("birthdate")->nullable(true);
             $table->char("password", 60)->nullable(true);
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->foreign("status_id")->references("id")->on("statusses");
             $table->foreignId("role_id")->nullable(true);
             $table->foreign("role_id")->references("id")->on("roles");
-            $table->timestamps();
         });
     }
 
