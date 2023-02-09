@@ -1,0 +1,431 @@
+/* --- LEFT --- */
+.left {
+    height: 100vh;
+}
+
+.logo {
+    height: 50px;
+}
+
+.navList {
+    height: 90vh;
+    font-family: sf-pro;
+}
+
+.navList>ul {
+    width: 100%;
+}
+
+.navList>ul>li {
+    height: 50px;
+}
+
+.navList>ul>li:hover {
+    background-color: #eaf0f0;
+    border-radius: 8px;
+}
+
+.imgLogo img {
+    height: 40px;
+    width: 40px;
+}
+
+.textLogo {
+    line-height: 40px;
+    font-family: roboto-medium;
+}
+
+.textLogo>a {
+    color: #34B3F1;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nameNav {
+    line-height: 30px;
+    font-size: 1.4rem;
+}
+
+.navList ul li {
+    margin-bottom: 1vh;
+}
+
+
+/* --- MID --- */
+.mid {
+    height: 100vh;
+    border-left: 1px solid #E6E6E6;
+    border-right: 1px solid #E6E6E6;
+    overflow-y: auto;
+}
+
+.mid::-webkit-scrollbar {
+    display: none;
+}
+
+.topbar {
+    height: 50px;
+    border-bottom: 1px solid #E6E6E6;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+}
+
+.form-ask>textarea {
+    border: 0;
+    overflow: hidden;
+    resize: none;
+}
+
+.form-ask>textarea:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.form-ask>textarea:enabled {
+    border: none;
+}
+
+.myselect {
+    width: 70%;
+    background-color: #34B3F1;
+    color: #fff;
+}
+
+.btn-sumbit {
+    background-color: #181818;
+    width: 70%;
+    border-radius: 99px;
+}
+
+.navBottom>div {
+    width: 100%;
+}
+
+.navBottom>div>ul>li {
+    width: 25%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.iconNavBottom {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.iconNavBottom:hover {
+    background-color: #eaf0f0;
+}
+
+/* --- RIGHT ---- */
+.right {
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.right::-webkit-scrollbar {
+    display: none;
+}
+
+.rightTopbar {
+    height: 50px;
+    background-color: #fff;
+}
+
+.iconSB img {
+    height: 27px;
+    filter: invert(58%) sepia(9%) saturate(257%) hue-rotate(158deg) brightness(94%) contrast(82%);
+}
+
+.SB {
+    background-color: #EFF3F4;
+    border-radius: 60px;
+    height: 45px;
+    width: 100%;
+}
+
+.inputSB {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #858C90;
+}
+
+.inputSB:focus {
+    outline: none;
+    border: none;
+}
+
+.inputSB::placeholder {
+    color: #858C90;
+}
+
+.myprofile {
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+}
+
+.avatarProfile {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.myprofile>.row {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.infoProfile {
+    color: #34B3F1;
+}
+
+.infoProfile1 {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+
+/* Task */
+.right>.py-4 {
+    border: 1px solid #E6E6E6;
+}
+
+.iconTask img {
+    height: 20px;
+}
+
+.subTask {
+    font-size: 18px;
+    font-family: noto-sans-medium;
+    font-weight: 500;
+}
+
+.noTaskDone {
+    background-color: #CAFFD9;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.noTaskDisable {
+    background-color: #E4EBEA;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.textTask {
+    font-family: sf-pro;
+}
+
+.textTask1 {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.textTask2 {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666F74;
+}
+
+.btnTask {
+    height: 40px;
+    border-radius: 50px;
+    background-color: #E4EBEA;
+    font-family: noto-sans-medium;
+    font-size: 17px;
+    color: #575757;
+}
+
+/* Rank */
+.right>.pt-4 {
+    border: 1px solid #E6E6E6;
+}
+
+.rankProfile img {
+    height: 35px;
+    width: 35px;
+    border: 1px solid;
+    border-radius: 200px;
+}
+
+.rankName span {
+    font-family: sf-pro;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.rankPoin {
+    color: #34B3F1;
+}
+
+.listRank:hover {
+    color: #34B3F1;
+}
+
+.moreActionList:hover {
+    background-color: rgb(52, 179, 241, 0.2);
+}
+
+.stop {
+    height: 100px;
+    position: sticky;
+    top: 0;
+}
+
+/* footer */
+.footerText {
+    font-size: 15px;
+    font-family: noto-sans-regular;
+    color: #7A7A7A;
+}
+
+.left {
+    display: none;
+}
+
+.right {
+    display: none;
+}
+
+.leftBar {
+    display: none;
+    /* background-color: salmon; */
+}
+
+.mapel2 {
+    display: none;
+}
+
+
+/* Mini device */
+@media (max-width: 576px) {
+    .mid {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .myselect {
+        width: 100%;
+    }
+
+    .btn-sumbit {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .myrow {
+        display: flex;
+    }
+
+    .left {
+        flex: 0 0 auto;
+        width: 10%;
+        display: block;
+    }
+
+    .mid {
+        flex: 0 0 auto;
+        width: 90%;
+    }
+
+    .textLogo {
+        display: none;
+    }
+
+    .nameNav {
+        display: none;
+    }
+
+    .navBottom {
+        display: none;
+    }
+
+    .navList>ul>li>a {
+        justify-content: center;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .left {
+        flex: 0 0 auto;
+        width: 7%;
+        display: block;
+    }
+
+    .mid {
+        flex: 0 0 auto;
+        width: 60%;
+    }
+
+    .right {
+        flex: 0 0 auto;
+        width: 33%;
+        display: block;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .left {
+        flex: 0 0 auto;
+        width: 22%;
+    }
+
+    .mid {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+
+    .right {
+        flex: 0 0 auto;
+        width: 28%;
+    }
+
+    .textLogo {
+        display: block;
+    }
+
+    .nameNav {
+        display: block;
+    }
+
+    .navList>ul>li {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+
+    .iconNav {
+        margin-right: .75rem;
+    }
+
+    .logo {
+        justify-content: left !important;
+    }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {}

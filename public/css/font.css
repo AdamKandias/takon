@@ -1,0 +1,14 @@
+@font-face {
+    font-family: noto-sans-semibold;
+    src: url(../src/font/NotoSans-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: noto-sans-black;
+    src: url(../src/font/NotoSans-Black.ttf);
+}
+
+@font-face {
+    font-family: public-sans;
+    src: url(../src/font/PublicSans-SemiBold.ttf);
+}

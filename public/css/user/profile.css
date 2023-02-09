@@ -1,0 +1,335 @@
+/* --- LEFT --- */
+.left {
+    height: 100vh;
+}
+
+.logo {
+    height: 50px;
+}
+
+.navList {
+    height: 90vh;
+    font-family: sf-pro;
+}
+
+.navList>ul {
+    width: 100%;
+}
+
+.navList>ul>li {
+    height: 50px;
+}
+
+.navList>ul>li:hover {
+    background-color: #eaf0f0;
+    border-radius: 8px;
+}
+
+.imgLogo img {
+    height: 40px;
+    width: 40px;
+}
+
+.textLogo {
+    line-height: 40px;
+    font-family: roboto-medium;
+}
+
+.textLogo>a {
+    color: #34B3F1;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nameNav {
+    line-height: 30px;
+    font-size: 1.4rem;
+}
+
+.navList ul li {
+    margin-bottom: 1vh;
+}
+
+
+/* --- MID --- */
+.mid {
+    height: 100vh;
+    border-left: 1px solid #E6E6E6;
+    border-right: 1px solid #E6E6E6;
+    overflow-y: auto;
+}
+
+.mid::-webkit-scrollbar {
+    display: none;
+}
+
+.topbar {
+    height: 50px;
+    border-bottom: 1px solid #E6E6E6;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+}
+
+.contents {
+    overflow-y: auto;
+}
+
+.avatar {
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.profileTop {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+}
+
+.infoContainer {
+    width: 100%;
+}
+
+.hrbottom {
+    background-color: #000;
+    height: 1px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.nameProfile {
+    font-size: 20px;
+    line-height: 41.5px;
+    font-family: noto-sans-semibold;
+}
+
+.editProfile {
+    text-decoration: none;
+    color: #323C45;
+    border-radius: 10px;
+    border: 1.5px solid #323C45;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 15px;
+}
+
+.infoAkun>div {
+    font-size: 20px;
+    font-family: roboto-medium;
+    color: #323C45;
+}
+
+.role {
+    background: linear-gradient(91.88deg, #F83C66 4.79%, #A73489 91.31%);
+    border-radius: 20px;
+    color: #fff;
+    line-height: 15px;
+}
+
+
+.personInformation {
+    padding-top: 50px;
+}
+
+.personInformation>ul {
+    width: min-content;
+}
+
+.personInformation>div>ul>li {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.labeldata {
+    font-family: sf-pro;
+    font-size: 17px;
+    color: #323C45;
+}
+
+.valueData {
+    font-family: noto-sans-semibold;
+}
+
+.rowdata>svg {
+    margin-right: 10px;
+}
+
+.mybtn-logout {
+    border-radius: 3px;
+}
+
+
+.navBottom>div {
+    width: 100%;
+}
+
+.navBottom>div>ul>li {
+    width: 25%;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.iconNavBottom {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.iconNavBottom:hover {
+    background-color: #eaf0f0;
+}
+
+.left {
+    display: none;
+}
+
+.leftBar {
+    display: none;
+    /* background-color: salmon; */
+}
+
+/* Mini device */
+@media (max-width: 576px) {
+    .mid {
+        width: 100%;
+    }
+
+    .data * {
+        font-size: 1rem !important;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .left {
+        flex: 0 0 auto;
+        width: 10%;
+        display: block;
+    }
+
+    .mid {
+        flex: 0 0 auto;
+        width: 90%;
+    }
+
+    .textLogo {
+        display: none;
+    }
+
+    .nameNav {
+        display: none;
+    }
+
+    .navBottom {
+        display: none;
+    }
+
+    .navList>ul>li>a {
+        justify-content: center;
+    }
+
+}
+
+@media(min-width: 700px) {
+    .profileTop {
+        display: inline;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .left {
+        flex: 0 0 auto;
+        width: 7%;
+        display: block;
+    }
+
+    .mid {
+        flex: 0 0 auto;
+        width: 93%;
+    }
+
+    .profileTop {
+        display: flex;
+    }
+
+    .infoContainer>.d-flex>svg {
+        display: none;
+    }
+
+    .editProfile {
+        display: block !important;
+    }
+
+    .avatarContainer {
+        width: 50%;
+    }
+
+    .infoContainer {
+        width: 50%;
+    }
+
+    .infoContainer>.d-flex {
+        justify-content: start !important;
+    }
+
+    .role {
+        margin: 0 !important;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .left {
+        flex: 0 0 auto;
+        width: 22%;
+    }
+
+    .mid {
+        flex: 0 0 auto;
+        width: 78%;
+    }
+
+    .textLogo {
+        display: block;
+    }
+
+    .nameNav {
+        display: block;
+    }
+
+    .navList>ul>li {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+
+    .iconNav {
+        margin-right: .75rem;
+    }
+
+    .logo {
+        justify-content: left !important;
+    }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {}
