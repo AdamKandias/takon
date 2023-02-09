@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->char("id", 36)->nullable(false);
             $table->primary("id");
-            $table->longText("question")->nullable(false);
+            $table->longText("answer")->nullable(false);
             $table->string("image", 100)->nullable(true);
-            $table->foreignId("mapel_id")->nullable(false);
-            $table->foreign("mapel_id")->references("id")->on("mapel");
+            $table->foreignUuid("post_id")->nullable(false);
+            $table->foreign("post_id")->references("id")->on("posts");
             $table->foreignId("user_id")->nullable(false);
             $table->foreign("user_id")->references("id")->on("users");
             $table->timestamps();
@@ -33,10 +33,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeign(['mapel_id']);
+        Schema::table('answers', function (Blueprint $table) {
+            $table->dropForeign(['post_id']);
             $table->dropForeign(['user_id']);
         });
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('answers');
     }
 };
