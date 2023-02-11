@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             StatusSeeder::class,
             RoleSeeder::class,
+            ClassesSeeder::class,
             MapelSeeder::class,
         ]);
     }
