@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedTinyInteger("id")->autoIncrement();
             $table->string("role", 20)->nullable(false);
-            $table->unsignedInteger("minimum_point")->nullable(false);
+            $table->unsignedSmallInteger("minimum_point")->nullable(false);
         });
     }
 

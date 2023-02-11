@@ -18,7 +18,7 @@ return new class extends Migration
             $table->primary("id");
             $table->longText("question")->nullable(false);
             $table->string("image", 100)->nullable(true);
-            $table->foreignId("mapel_id")->nullable(false);
+            $table->unsignedTinyInteger("mapel_id")->nullable(false);
             $table->foreign("mapel_id")->references("id")->on("mapel");
             $table->foreignId("user_id")->nullable(false);
             $table->foreign("user_id")->references("id")->on("users");

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('statusses', function (Blueprint $table) {
-            $table->id();
-            $table->string("status", 10)->nullable(false);
+            $table->unsignedTinyInteger("id")->autoIncrement();
+            $table->string("status", 5)->nullable(false);
         });
     }
 

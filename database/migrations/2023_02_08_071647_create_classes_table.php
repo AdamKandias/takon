@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mapel', function (Blueprint $table) {
+        Schema::create('classes', function (Blueprint $table) {
             $table->unsignedTinyInteger("id")->autoIncrement();
-            $table->string("mapel", 25)->nullable(false);
+            $table->string("class", 10)->nullable(false);
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mapel');
+        Schema::dropIfExists('classes');
     }
 };

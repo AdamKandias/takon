@@ -18,12 +18,14 @@ return new class extends Migration
             $table->char("nisn", 10)->nullable(false);
             $table->date("birthdate")->nullable(true);
             $table->char("password", 60)->nullable(true);
-            $table->unsignedInteger("point")->nullable(true);
+            $table->unsignedSmallInteger("point")->nullable(true);
             $table->string("image", 100)->nullable(false);
-            $table->foreignId("status_id")->nullable(false);
+            $table->unsignedTinyInteger("status_id")->nullable(false);
             $table->foreign("status_id")->references("id")->on("statusses");
-            $table->foreignId("role_id")->nullable(true);
+            $table->unsignedTinyInteger("role_id")->nullable(true);
             $table->foreign("role_id")->references("id")->on("roles");
+            $table->unsignedTinyInteger("class_id")->nullable(true);
+            $table->foreign("class_id")->references("id")->on("classes");
         });
     }
 
@@ -34,6 +36,11 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['status_id']);
+            $table->dropForeign(['role_id']);
+            $table->dropForeign(['class_id']);
+        });
         Schema::dropIfExists('users');
     }
 };
