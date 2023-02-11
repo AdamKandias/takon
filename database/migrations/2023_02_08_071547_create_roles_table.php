@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string("roles", 25)->nullable(false);
+            $table->string("role", 20)->nullable(false);
+            $table->unsignedInteger("minimum_point")->nullable(false);
         });
     }
 

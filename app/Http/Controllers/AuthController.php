@@ -1,22 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class AuthController extends Controller
 {
     public function login()
     {
         return view("user.login");
-    }
-
-    public function index()
-    {
-        return view("post.home");
     }
 
     public function auth(Request $request)
@@ -31,7 +24,7 @@ class UserController extends Controller
         if (!empty($user)) {
             if (Auth::loginUsingId($user->id)) {
                 $request->session()->regenerate();
-                
+
                 return redirect()->intended('home');
             }
         }
@@ -42,11 +35,11 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
- 
+
         $request->session()->invalidate();
-     
+
         $request->session()->regenerateToken();
-     
+
         return redirect('/');
     }
 }

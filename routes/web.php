@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// User Route
-// Route::get('/', [UserController::class, "login"])->name("login")->middleware("guest");
-// Route::post('/login', [UserController::class, "auth"])->name("auth")->middleware("guest");
-// Route::post('/logout', [UserController::class, "logout"])->name("logout")->middleware("auth");
+// Auth Route
+Route::get('/', [AuthController::class, "login"])->name("login")->middleware("guest");
+Route::post('/login', [AuthController::class, "auth"])->name("auth")->middleware("guest");
+Route::post('/logout', [AuthController::class, "logout"])->name("logout")->middleware("auth");
 
 // Post Route
 // Route::get('/home', [UserController::class, "index"])->name("home")->middleware("auth");
