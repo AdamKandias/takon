@@ -23,12 +23,12 @@
 
                 <div class="d-flex logo align-items-center justify-content-center">
                     <div class="imgLogo">
-                        <a href="home.html">
+                        <a href="{{ route('home') }}">
                             <img src="{{ asset('img/logo.png') }}" alt="">
                         </a>
                     </div>
                     <div class="textLogo">
-                        <a href="home.html" class="text-decoration-none fs-5">
+                        <a href="{{ route('home') }}" class="text-decoration-none fs-5">
                             Takon
                         </a>
                     </div>
@@ -38,7 +38,7 @@
                     <ul>
 
                         <li class="row g-0 align-items-center">
-                            <a href="home.html" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('home') }}" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/homeColor.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -71,7 +71,7 @@
                             </a>
                         </li>
                         <li class=" row g-0 align-items-center">
-                            <a href="profile.html" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('profile') }}" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/user.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -221,7 +221,7 @@
                         <ul class="d-flex m-0">
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="home.html">
+                                    <a href="{{ route('home') }}">
                                         <img src="{{ asset('img/home.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
                                     </a>
@@ -245,7 +245,7 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="profile.html">
+                                    <a href="{{ route('profile') }}">
                                         <img src="{{ asset('img/user.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
                                     </a>

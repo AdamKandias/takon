@@ -23,12 +23,12 @@
 
                 <div class="d-flex logo align-items-center justify-content-center">
                     <div class="imgLogo">
-                        <a href="home.html">
+                        <a href="{{ route('home') }}">
                             <img src="{{ asset('img/logo.png') }}" alt="">
                         </a>
                     </div>
                     <div class="textLogo">
-                        <a href="home.html" class="text-decoration-none fs-5">
+                        <a href="{{ route('home') }}" class="text-decoration-none fs-5">
                             Takon
                         </a>
                     </div>
@@ -39,7 +39,7 @@
                     <ul>
 
                         <li class="row g-0 align-items-center">
-                            <a href="home.html" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('home') }}" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/home.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -72,7 +72,7 @@
                             </a>
                         </li>
                         <li class=" row g-0 align-items-center">
-                            <a href="profile.html" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('profile') }}" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/userColor.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -100,7 +100,7 @@
                         </div>
                         <div class="infoContainer">
                             <div class="d-flex gap-2 justify-content-center align-items-center">
-                                <span class="nameProfile">Ibnu Wazowski</span>
+                                <span class="nameProfile">{{ Auth::user()->name }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#323C45"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path
@@ -114,7 +114,10 @@
                                 <div><span class="fw-semibold">0</span> Pertanyaan</div>
                                 <div><span class="fw-semibold">0</span> Menjawab</div>
                             </div>
-                            <div class="role py-2 col-4 text-center mx-auto">role name</div>
+                            <div class="d-flex justify-content-center align-items-center gap-4">
+                                <div class="role px-5 py-3">{{ Auth::user()->role->role}}</div>
+                                <div class="">{{ Auth::user()->point}} Poin</div>
+                            </div>
                         </div>
                     </div>
                     <div class="hrbottom"></div>
@@ -145,8 +148,7 @@
                                             915 -2 999 -24z" />
                                             </g>
                                         </svg>
-                                        <span class="labeldata">Nama Lengkap : <span class="text-dark valueData">Mike
-                                                Wazowski</span></span>
+                                        <span class="labeldata">Nama Lengkap : <span class="text-dark valueData">{{ Auth::user()->name }}</span></span>
                                     </div>
                                 </li>
                                 <li>
@@ -165,7 +167,7 @@
                                             </g>
                                         </svg>
                                         <span class="labeldata">NISN : <span
-                                                class="text-dark valueData">0057679809</span></span>
+                                                class="text-dark valueData">{{ Auth::user()->nisn }}</span></span>
                                     </div>
                                 </li>
                                 <li>
@@ -218,8 +220,113 @@
                                             </g>
                                         </svg>
 
-                                        <span class="labeldata">Birth Day : <span class="text-dark valueData">08
-                                                November 1999</span></span>
+                                        <span class="labeldata">Tanggal Lahir : <span class="text-dark valueData">{{ Auth::user()->birthdate }}</span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="rowdata d-flex align-items-center">
+                                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 512.000000 512.000000"
+                                            preserveAspectRatio="xMidYMid meet">
+
+                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                                fill="#000000" stroke="none">
+                                                <path
+                                                    d="M1269 5057 c-41 -28 -134 -175 -239 -382 -119 -234 -153 -358 -131
+                                                -480 25 -136 124 -270 244 -328 56 -27 57 -28 57 -71 l0 -43 -51 -7 c-102 -14
+                                                -188 -77 -231 -171 -23 -50 -23 -52 -26 -552 l-3 -503 -135 0 c-110 0 -146 -4
+                                                -196 -21 -110 -37 -198 -114 -245 -214 l-28 -60 0 -280 0 -280 26 -55 c14 -30
+                                                40 -68 57 -85 l31 -30 1 -572 0 -573 -137 0 c-159 0 -208 -15 -243 -72 -30
+                                                -48 -24 -146 10 -184 55 -58 -133 -54 2530 -54 2663 0 2475 -4 2530 54 34 38
+                                                40 136 10 184 -35 57 -84 72 -242 72 l-138 0 0 573 1 572 29 29 c17 16 43 55
+                                                58 85 l27 56 0 280 0 280 -28 60 c-47 100 -135 177 -245 214 -50 17 -86 21
+                                                -196 21 l-135 0 -3 503 -3 502 -24 52 c-41 93 -127 155 -232 169 l-49 7 0 42
+                                                c0 42 1 43 57 71 121 61 219 193 244 329 22 122 -12 246 -131 480 -105 207
+                                                -198 354 -239 382 -23 16 -49 23 -80 23 -79 0 -107 -23 -188 -157 -99 -166
+                                                -206 -381 -243 -490 -48 -144 -37 -275 33 -392 40 -66 135 -154 193 -178 43
+                                                -18 44 -19 44 -64 l0 -46 -46 -7 c-98 -13 -186 -77 -228 -166 -20 -44 -21 -60
+                                                -24 -552 l-3 -508 -144 0 -144 0 -3 508 -3 507 -24 48 c-46 92 -159 167 -253
+                                                167 -26 0 -28 2 -28 44 0 43 1 44 58 72 169 82 276 289 244 473 -20 118 -111
+                                                319 -253 561 -90 153 -120 180 -199 180 -46 0 -85 -17 -116 -52 -61 -66 -270
+                                                -465 -313 -593 -44 -135 -38 -252 21 -369 38 -76 127 -164 201 -200 56 -28 57
+                                                -29 57 -72 0 -42 -2 -44 -28 -44 -94 0 -207 -75 -253 -167 l-24 -48 -3 -507
+                                                -3 -508 -144 0 -144 0 -3 508 c-3 492 -4 508 -24 552 -42 89 -130 153 -228
+                                                166 l-46 7 0 46 c0 45 1 46 46 65 59 24 150 109 191 177 70 117 81 248 32 393
+                                                -37 110 -140 320 -241 486 -82 137 -109 160 -189 160 -31 0 -57 -7 -80 -23z
+                                                m144 -559 c75 -155 91 -201 84 -244 -12 -73 -71 -124 -142 -124 -59 0 -106 29
+                                                -134 83 -21 43 -22 51 -11 94 13 53 129 303 140 303 4 0 32 -51 63 -112z
+                                                m1215 -15 c82 -172 91 -209 67 -263 -54 -120 -216 -120 -270 0 -16 37 -17 47
+                                                -6 88 13 52 130 302 141 302 4 0 34 -57 68 -127z m1210 -1 c33 -70 66 -149 72
+                                                -175 11 -43 10 -51 -11 -94 -68 -131 -257 -101 -276 44 -3 25 2 56 17 93 31
+                                                80 122 260 130 260 4 0 34 -57 68 -128z m-2338 -1502 l0 -460 -150 0 -150 0 0
+                                                460 0 460 150 0 150 0 0 -460z m1210 0 l0 -460 -150 0 -150 0 0 460 0 460 150
+                                                0 150 0 0 -460z m1210 0 l0 -460 -150 0 -150 0 0 460 0 460 150 0 150 0 0
+                                                -460z m586 -803 c24 -28 24 -31 24 -232 0 -199 0 -204 -22 -219 -12 -9 -33
+                                                -16 -46 -16 -13 0 -123 29 -244 65 -330 97 -347 100 -598 100 -247 0 -263 -3
+                                                -573 -95 -241 -71 -344 -90 -487 -90 -143 0 -243 19 -499 94 -298 87 -320 91
+                                                -566 91 -245 0 -266 -3 -591 -100 -121 -36 -230 -65 -244 -65 -14 0 -36 7 -48
+                                                16 -21 15 -22 20 -22 217 0 217 4 237 54 257 11 5 867 8 1929 7 l1909 -2 24
+                                                -28z m-2908 -608 c111 -10 186 -28 494 -118 171 -50 310 -71 468 -71 163 0
+                                                301 22 489 77 382 112 483 129 668 113 124 -11 154 -18 398 -90 110 -32 221
+                                                -64 248 -71 l47 -11 0 -524 0 -524 -1850 0 -1850 0 0 524 0 524 33 8 c17 3
+                                                136 37 262 74 216 64 317 86 425 93 25 2 47 4 50 5 3 1 56 -3 118 -9z" />
+                                            </g>
+                                        </svg>
+
+                                        <span class="labeldata">Password : <span class="text-dark valueData">null \ buat sekarang</span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="rowdata d-flex align-items-center">
+                                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 512.000000 512.000000"
+                                            preserveAspectRatio="xMidYMid meet">
+
+                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                                fill="#000000" stroke="none">
+                                                <path
+                                                    d="M1269 5057 c-41 -28 -134 -175 -239 -382 -119 -234 -153 -358 -131
+                                                -480 25 -136 124 -270 244 -328 56 -27 57 -28 57 -71 l0 -43 -51 -7 c-102 -14
+                                                -188 -77 -231 -171 -23 -50 -23 -52 -26 -552 l-3 -503 -135 0 c-110 0 -146 -4
+                                                -196 -21 -110 -37 -198 -114 -245 -214 l-28 -60 0 -280 0 -280 26 -55 c14 -30
+                                                40 -68 57 -85 l31 -30 1 -572 0 -573 -137 0 c-159 0 -208 -15 -243 -72 -30
+                                                -48 -24 -146 10 -184 55 -58 -133 -54 2530 -54 2663 0 2475 -4 2530 54 34 38
+                                                40 136 10 184 -35 57 -84 72 -242 72 l-138 0 0 573 1 572 29 29 c17 16 43 55
+                                                58 85 l27 56 0 280 0 280 -28 60 c-47 100 -135 177 -245 214 -50 17 -86 21
+                                                -196 21 l-135 0 -3 503 -3 502 -24 52 c-41 93 -127 155 -232 169 l-49 7 0 42
+                                                c0 42 1 43 57 71 121 61 219 193 244 329 22 122 -12 246 -131 480 -105 207
+                                                -198 354 -239 382 -23 16 -49 23 -80 23 -79 0 -107 -23 -188 -157 -99 -166
+                                                -206 -381 -243 -490 -48 -144 -37 -275 33 -392 40 -66 135 -154 193 -178 43
+                                                -18 44 -19 44 -64 l0 -46 -46 -7 c-98 -13 -186 -77 -228 -166 -20 -44 -21 -60
+                                                -24 -552 l-3 -508 -144 0 -144 0 -3 508 -3 507 -24 48 c-46 92 -159 167 -253
+                                                167 -26 0 -28 2 -28 44 0 43 1 44 58 72 169 82 276 289 244 473 -20 118 -111
+                                                319 -253 561 -90 153 -120 180 -199 180 -46 0 -85 -17 -116 -52 -61 -66 -270
+                                                -465 -313 -593 -44 -135 -38 -252 21 -369 38 -76 127 -164 201 -200 56 -28 57
+                                                -29 57 -72 0 -42 -2 -44 -28 -44 -94 0 -207 -75 -253 -167 l-24 -48 -3 -507
+                                                -3 -508 -144 0 -144 0 -3 508 c-3 492 -4 508 -24 552 -42 89 -130 153 -228
+                                                166 l-46 7 0 46 c0 45 1 46 46 65 59 24 150 109 191 177 70 117 81 248 32 393
+                                                -37 110 -140 320 -241 486 -82 137 -109 160 -189 160 -31 0 -57 -7 -80 -23z
+                                                m144 -559 c75 -155 91 -201 84 -244 -12 -73 -71 -124 -142 -124 -59 0 -106 29
+                                                -134 83 -21 43 -22 51 -11 94 13 53 129 303 140 303 4 0 32 -51 63 -112z
+                                                m1215 -15 c82 -172 91 -209 67 -263 -54 -120 -216 -120 -270 0 -16 37 -17 47
+                                                -6 88 13 52 130 302 141 302 4 0 34 -57 68 -127z m1210 -1 c33 -70 66 -149 72
+                                                -175 11 -43 10 -51 -11 -94 -68 -131 -257 -101 -276 44 -3 25 2 56 17 93 31
+                                                80 122 260 130 260 4 0 34 -57 68 -128z m-2338 -1502 l0 -460 -150 0 -150 0 0
+                                                460 0 460 150 0 150 0 0 -460z m1210 0 l0 -460 -150 0 -150 0 0 460 0 460 150
+                                                0 150 0 0 -460z m1210 0 l0 -460 -150 0 -150 0 0 460 0 460 150 0 150 0 0
+                                                -460z m586 -803 c24 -28 24 -31 24 -232 0 -199 0 -204 -22 -219 -12 -9 -33
+                                                -16 -46 -16 -13 0 -123 29 -244 65 -330 97 -347 100 -598 100 -247 0 -263 -3
+                                                -573 -95 -241 -71 -344 -90 -487 -90 -143 0 -243 19 -499 94 -298 87 -320 91
+                                                -566 91 -245 0 -266 -3 -591 -100 -121 -36 -230 -65 -244 -65 -14 0 -36 7 -48
+                                                16 -21 15 -22 20 -22 217 0 217 4 237 54 257 11 5 867 8 1929 7 l1909 -2 24
+                                                -28z m-2908 -608 c111 -10 186 -28 494 -118 171 -50 310 -71 468 -71 163 0
+                                                301 22 489 77 382 112 483 129 668 113 124 -11 154 -18 398 -90 110 -32 221
+                                                -64 248 -71 l47 -11 0 -524 0 -524 -1850 0 -1850 0 0 524 0 524 33 8 c17 3
+                                                136 37 262 74 216 64 317 86 425 93 25 2 47 4 50 5 3 1 56 -3 118 -9z" />
+                                            </g>
+                                        </svg>
+
+                                        <span class="labeldata">Kelas : <span class="text-dark valueData">{{ Auth::user()->class->class }}</span></span>
                                     </div>
                                 </li>
                                 <li>
@@ -298,7 +405,10 @@
                         </div>
                         <div class="d-flex justify-content-center py-5">
 
-                            <button type="button" class="btn btn-danger mybtn-logout px-4">LOG OUT</button>
+                            <form action="/logout" method="POST" class="text-center">
+                                @csrf
+                                <button class="btn btn-danger mybtn-logout px-4 rounded" type="submit">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -307,7 +417,7 @@
                         <ul class="d-flex m-0">
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="home.html">
+                                    <a href="{{ route('home') }}">
                                         <img src="{{ asset('img/home.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
                                     </a>
@@ -331,7 +441,7 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="profile.html">
+                                    <a href="{{ route('profile') }}">
                                         <img src="{{ asset('img/userColor.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
                                     </a>

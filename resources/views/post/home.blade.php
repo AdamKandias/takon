@@ -66,7 +66,7 @@
                             </a>
                         </li>
                         <li class=" row g-0 align-items-center">
-                            <a href="profile.html" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('profile') }}" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/user.svg') }}" width="30" height="30" viewBox="0 0 24 24">
                                 </div>
@@ -174,7 +174,7 @@
                     <a class="text-decoration-none text-dark" href="detailPost.html">
                         <div class="content px-4 py-2">
                             <div class="headerContent d-flex py-2">
-                                <img src="{{ asset('img/avatar3.jpg') }}" class="avatar me-2">
+                                <img src="{{ asset('img/avatar3.png') }}" class="avatar me-2">
                                 <div class="names col row align-items-center g-0">
                                     <div class="nameCnt">User123 <span class="dot">•</span>
                                     <span class="dateUpload">14-11-2022</span>
@@ -195,7 +195,7 @@
                     <a class="text-decoration-none text-dark" href="answer.html">
                         <div class="content px-4 py-2">
                             <div class="headerContent d-flex py-2">
-                                <img src="{{ asset('img/avatar2.jpg') }}" class="avatar me-2">
+                                <img src="{{ asset('img/avatar2.png') }}" class="avatar me-2">
                                 <div class="names col row align-items-center g-0">
                                     <div class="nameCnt">User123 <span class="dot">•</span>
                                     <span class="dateUpload">14-11-2022</span>
@@ -260,7 +260,7 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="profile.html">
+                                    <a href="{{ route('profile') }}">
                                         <img src="{{ asset('img/user.svg') }}" width="30" height="30" viewBox="0 0 24 24">
                                     </a>
                                 </div>
@@ -283,15 +283,11 @@
                 </div>
                 <div class="myprofile">
                     <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset('img/avatar1.png') }}" class="big-avatar">
+                        <img src="{{ asset("img/avatar" . Auth::user()->image . ".png") }}" class="big-avatar">
                         <div class="text-center">
                             <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
-                            <span class="me-1">300 Poin</span>
+                            <span class="me-1">{{ Auth::user()->point }} poin</span>
                         </div>
-                        <form action="/logout" method="POST" class="text-center">
-                            @csrf
-                            <button class="btn btn-warning btn-sm" type="submit">Logout</button>
-                        </form>
                     </div>
 
                     <div class="infoProfile">
@@ -325,7 +321,7 @@
                     <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
                         <div class="col-2 me-1">
                             <div class="rankProfile">
-                                <img src="{{ asset('img/avatar4.jpg') }}">
+                                <img src="{{ asset('img/avatar3.png') }}">
                             </div>
                         </div>
                         <div class="col d-flex justify-content-between">
@@ -336,7 +332,7 @@
                     <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
                         <div class="col-2 me-1">
                             <div class="rankProfile">
-                                <img src="{{ asset('img/avatar2.jpg') }}">
+                                <img src="{{ asset('img/avatar2.png') }}">
                             </div>
                         </div>
                         <div class="col d-flex justify-content-between">
@@ -347,7 +343,7 @@
                     <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
                         <div class="col-2 me-1">
                             <div class="rankProfile">
-                                <img src="{{ asset('img/avatar3.jpg') }}">
+                                <img src="{{ asset('img/avatar3.png') }}">
                             </div>
                         </div>
                         <div class="col d-flex justify-content-between">

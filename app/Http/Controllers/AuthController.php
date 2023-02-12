@@ -14,12 +14,11 @@ class AuthController extends Controller
 
     public function auth(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'nisn' => 'required|max:10',
-            'birthdate' => 'required'
         ]);
 
-        $user = User::where("nisn", (string) $credentials["nisn"])->where("birthdate", (string) ($credentials["birthdate"]))->first();
+        $user = User::where("nisn", $request->nisn)->where("birthdate", implode('-', array_reverse(explode('-', $request->birthdate))))->first();
 
         if (!empty($user)) {
             if (Auth::loginUsingId($user->id)) {
@@ -29,7 +28,7 @@ class AuthController extends Controller
             }
         }
 
-        return redirect("/login")->with("status", "Nisn atau tanggal lahir salah!");
+        return redirect()->route("login")->with("status", "Incorrect data entry! Please fill the field correctly!");
     }
 
     public function logout(Request $request)
@@ -40,6 +39,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route("home");
     }
 }

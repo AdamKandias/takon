@@ -25,9 +25,7 @@
                 <div class="cnt-mid d-flex justify-content-center align-items-center">
                     <div class="my-text text-center">
                         <p class="welcome">Welcome!</p>
-                        <span class="artikel">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-                            consequatur aliquam, molestias ea veritatis culpa provident accusamus quae dignissimos
-                            facere.</span>
+                        <span class="artikel">An social media applications, platform, and forums where users can interact with each other by asking and answering questions. Sign in now to start the journey together!</span>
                         <div class="my-5 scrollSpy">
                             <a href="#inputNISN" class="btn-go-login d-block-md">
                                 <svg width="30" height="30" fill="#000" viewBox="0 0 48 48"
@@ -48,8 +46,8 @@
         </div>
         <div class="bg-display-2 col d-flex align-items-center justify-content-center g-0">
             <div class="ggg">
-                {{-- <form action="{{ route('auth') }}" method="POST"> --}}
-                    {{-- @csrf
+                <form action="{{ route('auth') }}" method="POST">
+                    @csrf
                     <p class="text-header-login text-center fs-2">Sign in to Takon</p>
                     @if (Session::has('status'))
                         <div class="alert alert-danger text-center" role="alert">
@@ -58,32 +56,24 @@
                     @endif
                     @if ($errors->any())
                         <div class="alert alert-danger">
-                            <ul>
+                            <ul class="py-0 my-0">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
-                    @endif --}}
+                    @endif
                     <div class="forms d-grid gap-3 my-4">
                         <input type="text" name="nisn" class="myinput px-3 form-control" id="inputNISN"
                             placeholder="NISN" required>
                         <input type="text" name="birthdate" class="myinput form-control px-3" id="inputBirthDate"
-                            placeholder="Birth Date (ex : 2001-03-31)" required>
+                            placeholder="Birth Date (ex : 18-03-2005)" required>
                         <input type="password" name="password" class="myinput form-control px-3" id="inputPassword"
                             placeholder="Password">
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="remember-me" id="invalidCheck">
-                            <label class="form-check-label">
-                                Remember me
-                            </label>
-                        </div>
-
-                        <button class="mybtn btn-pm mt-3" type="submit">Masuk</button>
+                        <button class="mybtn btn-pm mt-3" type="submit">Sign In</button>
 
                         <a href="#">
-                            <button class="mybtn btn-sc" type="submit">Forgot Password</button>
+                            <button class="mybtn btn-sc" type="button">Forgot Password</button>
                         </a>
                     </div>
                 </form>
