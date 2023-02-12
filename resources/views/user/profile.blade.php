@@ -92,11 +92,18 @@
                     <div class="namePage">
                         Profile
                     </div>
+                    
+                    <div class="d-flex justify-content-end">
+                        <form action="{{ route('logout') }}" method="POST" class="text-center">
+                            @csrf
+                            <button class="btn btn-danger mybtn-logout px-4 rounded" type="submit">Logout</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="contents">
                     <div class="profileTop justify-content-center">
                         <div class="avatarContainer d-flex justify-content-center">
-                            <img src="{{ asset('img/avatar1.png') }}" alt="" class="avatar">
+                            <img src="{{ asset("img/avatar" . Auth::user()->image . ".png") }}" alt="" class="avatar">
                         </div>
                         <div class="infoContainer">
                             <div class="d-flex gap-2 justify-content-center align-items-center">
@@ -115,7 +122,7 @@
                                 <div><span class="fw-semibold">0</span> Menjawab</div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center gap-4">
-                                <div class="role px-5 py-3">{{ Auth::user()->role->role}}</div>
+                                <div class="role px-4 py-2">{{ Auth::user()->role->role}}</div>
                                 <div class="">{{ Auth::user()->point}} Poin</div>
                             </div>
                         </div>
@@ -220,7 +227,7 @@
                                             </g>
                                         </svg>
 
-                                        <span class="labeldata">Tanggal Lahir : <span class="text-dark valueData">{{ Auth::user()->birthdate }}</span></span>
+                                        <span class="labeldata">Tanggal Lahir : <span class="text-dark valueData">{{ implode('-', array_reverse(explode('-', Auth::user()->birthdate))) }}</span></span>
                                     </div>
                                 </li>
                                 <li>
@@ -273,7 +280,9 @@
                                             </g>
                                         </svg>
 
-                                        <span class="labeldata">Password : <span class="text-dark valueData">null \ buat sekarang</span></span>
+                                        <span class="labeldata">Password : <span class="@if (Auth::user()->password) text-success @else text-danger @endif valueData">@if (Auth::user()->password)
+                                            Password sudah ada, akun anda aman! @else Password tidak ada, harap buat sekarang!                             
+                                        @endif</span></span>
                                     </div>
                                 </li>
                                 <li>
@@ -329,86 +338,7 @@
                                         <span class="labeldata">Kelas : <span class="text-dark valueData">{{ Auth::user()->class->class }}</span></span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="rowdata d-flex align-items-center">
-                                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 512.000000 512.000000"
-                                            preserveAspectRatio="xMidYMid meet">
-                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                                                fill="#000000" stroke="none">
-                                                <path
-                                                    d="M1152 5099 c-25 -12 -55 -39 -70 -62 -25 -38 -27 -48 -30 -178 l-3
-                                            -137 -207 -4 c-191 -4 -213 -7 -287 -31 -131 -44 -219 -99 -321 -201 -101
-                                            -101 -156 -189 -202 -321 l-27 -80 0 -1725 0 -1725 27 -80 c46 -132 101 -220
-                                            202 -321 101 -101 189 -156 321 -202 l80 -27 874 -3 873 -3 45 22 c27 13 55
-                                            37 71 62 23 35 27 51 27 117 0 66 -4 82 -27 117 -16 24 -44 49 -70 62 -44 21
-                                            -50 21 -824 21 -465 0 -807 4 -849 10 -182 26 -319 163 -345 345 -13 95 -13
-                                            3115 0 3210 13 91 51 168 114 231 95 94 193 123 414 124 l112 0 0 -127 c0
-                                            -150 16 -197 83 -241 35 -23 51 -27 117 -27 66 0 82 4 117 27 67 44 83 91 83
-                                            241 l0 127 450 0 450 0 0 -127 c0 -150 16 -197 83 -241 35 -23 51 -27 117 -27
-                                            66 0 82 4 117 27 67 44 83 91 83 241 l0 127 455 0 455 0 0 -127 c0 -150 16
-                                            -197 83 -241 35 -23 51 -27 117 -27 66 0 82 4 117 27 67 44 83 91 83 241 l0
-                                            127 118 0 c225 -1 323 -30 418 -124 63 -63 101 -140 114 -231 5 -40 10 -319
-                                            10 -654 0 -575 0 -585 21 -629 13 -26 38 -54 62 -70 35 -23 51 -27 117 -27 66
-                                            0 82 4 117 27 25 16 49 44 62 71 22 45 22 46 19 723 l-3 679 -27 80 c-46 132
-                                            -101 220 -202 321 -102 102 -190 157 -321 201 -74 25 -95 27 -292 31 l-213 4
-                                            0 126 c0 149 -16 196 -83 240 -35 23 -51 27 -117 27 -66 0 -82 -4 -117 -27
-                                            -67 -44 -83 -91 -83 -241 l0 -127 -455 0 -455 0 0 127 c0 150 -16 197 -83 241
-                                            -35 23 -51 27 -117 27 -66 0 -82 -4 -117 -27 -67 -44 -83 -91 -83 -241 l0
-                                            -127 -450 0 -450 0 0 127 c0 150 -16 197 -83 241 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M1152 3199 c-62 -31 -95 -86 -100 -165 -8 -124 61 -204 184 -212 124
-                                            -8 204 61 212 184 5 81 -22 143 -81 182 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M2022 3199 c-62 -31 -95 -86 -100 -165 -8 -124 61 -204 184 -212 124
-                                            -8 204 61 212 184 5 81 -22 143 -81 182 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M2892 3199 c-62 -31 -95 -86 -100 -165 -8 -124 61 -204 184 -212 124
-                                            -8 204 61 212 184 5 81 -22 143 -81 182 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M3762 3199 c-62 -31 -95 -86 -100 -165 -8 -124 61 -204 184 -212 124
-                                            -8 204 61 212 184 5 81 -22 143 -81 182 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M3687 2405 c-245 -46 -474 -171 -649 -354 -148 -153 -249 -332 -306
-                                            -541 -24 -88 -26 -111 -26 -300 0 -189 2 -212 26 -300 60 -220 161 -395 322
-                                            -556 161 -161 336 -262 556 -322 88 -24 111 -26 300 -26 189 0 212 2 300 26
-                                            220 60 395 161 556 322 161 161 262 336 322 556 24 88 26 111 26 300 0 189 -2
-                                            212 -26 300 -60 220 -161 395 -322 556 -162 161 -339 264 -556 321 -80 21
-                                            -122 26 -270 29 -125 2 -197 -1 -253 -11z m395 -411 c252 -58 466 -235 566
-                                            -470 84 -199 84 -429 0 -628 -100 -235 -314 -412 -566 -470 -92 -21 -252 -21
-                                            -344 0 -305 69 -543 307 -612 612 -21 92 -21 252 0 344 69 301 297 533 599
-                                            609 92 23 262 24 357 3z" />
-                                                <path
-                                                    d="M3812 1799 c-25 -12 -55 -39 -70 -62 l-27 -40 -3 -270 c-3 -258 -2
-                                            -270 19 -314 13 -27 37 -55 62 -71 40 -27 42 -27 249 -30 198 -3 212 -2 254
-                                            19 28 13 56 37 72 62 23 35 27 51 27 117 0 66 -4 82 -27 117 -38 57 -95 83
-                                            -186 83 l-72 0 0 132 c0 156 -15 201 -83 246 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M1152 2329 c-62 -31 -95 -86 -100 -165 -8 -124 61 -204 184 -212 124
-                                            -8 204 61 212 184 5 81 -22 143 -81 182 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M2022 2329 c-62 -31 -95 -86 -100 -165 -8 -124 61 -204 184 -212 124
-                                            -8 204 61 212 184 5 81 -22 143 -81 182 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M1152 1459 c-62 -31 -95 -86 -100 -165 -8 -124 61 -204 184 -212 124
-                                            -8 204 61 212 184 5 81 -22 143 -81 182 -56 37 -154 42 -215 11z" />
-                                                <path
-                                                    d="M2022 1459 c-62 -31 -95 -86 -100 -165 -8 -124 61 -204 184 -212 124
-                                            -8 204 61 212 184 5 81 -22 143 -81 182 -56 37 -154 42 -215 11z" />
-                                            </g>
-                                        </svg>
-                                        <span class="labeldata">Bergabung pada : <span class="text-dark valueData">16
-                                                November 2022</span></span>
-                                    </div>
-                                </li>
                             </ul>
-                        </div>
-                        <div class="d-flex justify-content-center py-5">
-
-                            <form action="/logout" method="POST" class="text-center">
-                                @csrf
-                                <button class="btn btn-danger mybtn-logout px-4 rounded" type="submit">Logout</button>
-                            </form>
                         </div>
                     </div>
                 </div>

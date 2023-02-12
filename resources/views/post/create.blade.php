@@ -94,28 +94,38 @@
                 </div>
                 <div class="contents">
                     <div class="container-fluid px-3">
-                        <form action="" class="form-ask my-4">
-                            <textarea rows="5" class="form-control py-3 px-3" id="text" placeholder="Tulis Pertanyaan mu disini"
-                                style="background-color: #e9f8f8;"></textarea>
+                        @if ($errors->any())
+                            <div class="alert alert-danger text-center">
+                                <ul class="py-0 my-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form action="{{ route('post.store') }}" class="form-ask my-4" method="POST">
+                            @csrf
+                            <textarea rows="5" class="form-control py-3 px-3 @if ($errors->has('question')) is-invalid @endif"
+                                id="text" name="question" placeholder="Tulis Pertanyaan mu disini" style="background-color: #e9f8f8;">{{ old('question') }}</textarea>
+                            <div class="myrow align-items-end mb-4">
+                                <div class="col">
+                                    <span style="font-size: 12px; color: #858C90;">Harap memilih mapel sesuai dengan
+                                        pertanyaan</span>
+                                    <select name="mapel_id"
+                                        class="form-select myselect mt-1 @if ($errors->has('mapel_id')) is-invalid @endif"
+                                        aria-label="Default select example">
+                                        @foreach ($mapel as $data)
+                                            <option {{ old('mapel_id') == $data->id ? 'selected' : '' }}
+                                                value="{{ $data->id }}">{{ $data->mapel }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-dark btn-sumbit float-end">KIRIM
+                                        PERTANYAAN</button>
+                                </div>
+                            </div>
                         </form>
-
-                        <div class="myrow align-items-end mb-4">
-                            <div class="col">
-                                <span style="font-size: 12px; color: #858C90;">Harap agar mapel sesuai dengan
-                                    pertanyaan</span>
-                                <select class="form-select myselect mt-1" aria-label="Default select example">
-                                    <option selected>Mata Pelajaran</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-dark btn-sumbit float-end">KIRIM
-                                    PERTANYAAN</button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <nav class="navBottom fixed-bottom bg-light">
@@ -171,10 +181,10 @@
                 </div>
                 <div class="myprofile">
                     <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset('img/avatar1.png') }}" alt="" class="avatarProfile">
+                        <img src="{{ asset('img/avatar' . Auth::user()->image . '.png') }}" class="avatarProfile">
                         <div class="text-center">
-                            <span class="fw-semibold">Mike Wazowski</span><br>
-                            <span class="me-1">300 Poin</span>
+                            <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
+                            <span class="me-1">{{ Auth::user()->point }} poin</span>
                         </div>
                     </div>
 
@@ -201,7 +211,7 @@
                     </div>
                     <hr>
                     <div class="footerText">
-                        Takon Inc © 2022. All rights reserved
+                        Takon Inc © 2023. All rights reserved
                     </div>
                 </div>
             </div>

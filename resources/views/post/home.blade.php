@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +12,9 @@
     <link rel="stylesheet" href="{{ asset('css/font.css') }}">
     <link rel="stylesheet" href="{{ asset('css/post/home.css') }}">
 </head>
+
 <body>
-    
+
     <div class="container-md g-0">
         <div class="d-flex">
 
@@ -34,11 +36,12 @@
 
                 <nav class="navList align-items-center d-flex">
                     <ul>
-                        
+
                         <li class="row g-0 align-items-center">
                             <a href="{{ route('home') }}" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
-                                    <img src="{{ asset('img/homeColor.svg') }}" width="30" height="30" viewBox="0 0 24 24">
+                                    <img src="{{ asset('img/homeColor.svg') }}" width="30" height="30"
+                                        viewBox="0 0 24 24">
                                 </div>
                                 <div class="nameNav col">
                                     Home
@@ -48,7 +51,8 @@
                         <li class="row g-0 align-items-center">
                             <a href="mapel.html" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
-                                    <img src="{{ asset('img/note.svg') }}" width="30" height="30" viewBox="0 0 24 24">
+                                    <img src="{{ asset('img/note.svg') }}" width="30" height="30"
+                                        viewBox="0 0 24 24">
                                 </div>
                                 <div class="nameNav col">
                                     Mata Pelajaran
@@ -58,7 +62,8 @@
                         <li class="row g-0 align-items-center">
                             <a href="notification.html" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
-                                    <img src="{{ asset('img/notification.svg') }}" width="30" height="30" viewBox="0 0 24 24">
+                                    <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
+                                        viewBox="0 0 24 24">
                                 </div>
                                 <div class="nameNav col">
                                     Notification
@@ -68,7 +73,8 @@
                         <li class=" row g-0 align-items-center">
                             <a href="{{ route('profile') }}" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
-                                    <img src="{{ asset('img/user.svg') }}" width="30" height="30" viewBox="0 0 24 24">
+                                    <img src="{{ asset('img/user.svg') }}" width="30" height="30"
+                                        viewBox="0 0 24 24">
                                 </div>
                                 <div class="nameNav col">
                                     Profile
@@ -95,7 +101,8 @@
                         <div class="col-1 iconSB d-flex justify-content-center">
                             <img src="{{ asset('img/search.png') }}">
                         </div>
-                        <input type="text" class="col inputSB inputSB-mid" placeholder="Cari pertanyaan atau jawaban">
+                        <input type="text" class="col inputSB inputSB-mid"
+                            placeholder="Cari pertanyaan atau jawaban">
                     </div>
 
                 </div>
@@ -108,7 +115,7 @@
                             </div>
                             <span class="fs-2 fw-semibold">Punya Pertanyaan?</span>
                         </div>
-                        <a href="formAsk.html">
+                        <a href="{{ route('ask') }}">
                             <button class="btn btn-dark btnHero px-4">TANYAKAN SEKARANG</button>
                         </a>
                     </div>
@@ -119,12 +126,18 @@
                             <span>Tampilkan pertanyaan sesuai</span>
                         </div>
                         <div class="dropdown">
-                            <button class="justify-content-between align-items-center py-2 btnDropdown d-flex" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <button class="justify-content-between align-items-center py-2 btnDropdown d-flex"
+                                type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                aria-expanded="false">
                                 <div class="nameShortby">
                                     <span>Terbaru, </span><span>Belum Terjawab</span>
                                 </div>
                                 <div>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" viewBox="0 0 25 30"><path fill="#fff" d="M16.682 19.674c.01-.012.014-.028.024-.04l6.982-7.714c.39-.434.39-1.138 0-1.572-.004-.004-.008-.006-.012-.008a.936.936 0 0 0-.712-.34H8.998a.948.948 0 0 0-.722.352l-.004-.004a1.202 1.202 0 0 0 0 1.572l6.998 7.754a.928.928 0 0 0 1.412 0z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="30"
+                                        viewBox="0 0 25 30">
+                                        <path fill="#fff"
+                                            d="M16.682 19.674c.01-.012.014-.028.024-.04l6.982-7.714c.39-.434.39-1.138 0-1.572-.004-.004-.008-.006-.012-.008a.936.936 0 0 0-.712-.34H8.998a.948.948 0 0 0-.722.352l-.004-.004a1.202 1.202 0 0 0 0 1.572l6.998 7.754a.928.928 0 0 0 1.412 0z" />
+                                    </svg>
                                 </div>
                             </button>
                             <ul class="p px-3 py-2 dropdown-menu">
@@ -132,17 +145,19 @@
                                     <ul>
                                         <li class="margin-listdown">
                                             <div class="form-check d-flex align-items-center gap-2">
-                                                <input class="form-check-input mt-0" type="checkbox" value="" id="checkTerbaru">
+                                                <input class="form-check-input mt-0" type="checkbox" value=""
+                                                    id="checkTerbaru">
                                                 <label class="form-check-label col" for="checkTerbaru">
-                                                  Terbaru
+                                                    Terbaru
                                                 </label>
                                             </div>
                                         </li>
                                         <li class="margin-listdown">
                                             <div class="form-check d-flex align-items-center gap-2">
-                                                <input class="form-check-input mt-0" type="checkbox" value="" id="checkTerlama">
+                                                <input class="form-check-input mt-0" type="checkbox" value=""
+                                                    id="checkTerlama">
                                                 <label class="form-check-label col" for="checkTerlama">
-                                                  Terlama
+                                                    Terlama
                                                 </label>
                                             </div>
                                         </li>
@@ -152,17 +167,19 @@
                                     <ul>
                                         <li class="margin-listdown">
                                             <div class="form-check d-flex align-items-center gap-2">
-                                                <input class="form-check-input mt-0" type="checkbox" value="" id="checkTerbaru">
+                                                <input class="form-check-input mt-0" type="checkbox" value=""
+                                                    id="checkTerbaru">
                                                 <label class="form-check-label col" for="checkTerbaru">
-                                                  Terjawab
+                                                    Terjawab
                                                 </label>
                                             </div>
                                         </li>
                                         <li class="margin-listdown">
                                             <div class="form-check d-flex align-items-center gap-2">
-                                                <input class="form-check-input mt-0" type="checkbox" value="" id="checkTerlama">
+                                                <input class="form-check-input mt-0" type="checkbox" value=""
+                                                    id="checkTerlama">
                                                 <label class="form-check-label col" for="checkTerlama">
-                                                  Belum Terjawab
+                                                    Belum Terjawab
                                                 </label>
                                             </div>
                                         </li>
@@ -171,23 +188,30 @@
                             </ul>
                         </div>
                     </div>
+                    @if (Session::has('status'))
+                        <div class="alert alert-success text-center" role="alert">
+                            {{ Session::get('status') }}
+                        </div>
+                    @endif
                     <a class="text-decoration-none text-dark" href="detailPost.html">
                         <div class="content px-4 py-2">
                             <div class="headerContent d-flex py-2">
                                 <img src="{{ asset('img/avatar3.png') }}" class="avatar me-2">
                                 <div class="names col row align-items-center g-0">
                                     <div class="nameCnt">User123 <span class="dot">•</span>
-                                    <span class="dateUpload">14-11-2022</span>
+                                        <span class="dateUpload">14-11-2023</span>
                                     </div>
                                     <span class="mapelCnt">Matematika</span>
                                 </div>
                                 <div class="moreAction col-1"></div>
                             </div>
                             <div class="pertanyaan mb-2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda
+                                aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
                             </div>
                             <div class="bottomContent my-2">
-                                <span class="bottomContent1">Terjawab oleh 2 orang <span class="dot mx-1">•</span></span>
+                                <span class="bottomContent1">Terjawab oleh 2 orang <span
+                                        class="dot mx-1">•</span></span>
                                 <span class="seeMore">Lihat</span>
                             </div>
                         </div>
@@ -198,14 +222,15 @@
                                 <img src="{{ asset('img/avatar2.png') }}" class="avatar me-2">
                                 <div class="names col row align-items-center g-0">
                                     <div class="nameCnt">User123 <span class="dot">•</span>
-                                    <span class="dateUpload">14-11-2022</span>
+                                        <span class="dateUpload">14-11-2023</span>
                                     </div>
                                     <span class="mapelCnt">Matematika</span>
                                 </div>
                                 <div class="moreAction col-1"></div>
                             </div>
                             <div class="pertanyaan mb-2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda
+                                aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
                             </div>
                             <div class="bottomContent my-2">
                                 <span class="bottomContent1">Belum terjawab</span>
@@ -218,17 +243,19 @@
                                 <img src="{{ asset('img/avatar1.png') }}" class="avatar me-2">
                                 <div class="names col row align-items-center g-0">
                                     <div class="nameCnt">User123 <span class="dot">•</span>
-                                    <span class="dateUpload">14-11-2022</span>
+                                        <span class="dateUpload">14-11-2023</span>
                                     </div>
                                     <span class="mapelCnt">Matematika</span>
                                 </div>
                                 <div class="moreAction col-1"></div>
                             </div>
                             <div class="pertanyaan mb-2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda
+                                aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
                             </div>
                             <div class="bottomContent my-2">
-                                <span class="bottomContent1">Terjawab oleh 2 orang <span class="dot mx-1">•</span></span>
+                                <span class="bottomContent1">Terjawab oleh 2 orang <span
+                                        class="dot mx-1">•</span></span>
                                 <span class="seeMore">Lihat</span>
                             </div>
                         </div>
@@ -240,35 +267,39 @@
                             <li>
                                 <div class="iconNavBottom">
                                     <a href="{{ route('home') }}">
-                                        <img src="{{ asset('img/homeColor.svg') }}" width="30" height="30" viewBox="0 0 24 24">
+                                        <img src="{{ asset('img/homeColor.svg') }}" width="30" height="30"
+                                            viewBox="0 0 24 24">
                                     </a>
                                 </div>
                             </li>
                             <li>
                                 <div class="iconNavBottom">
                                     <a href="mapel.html">
-                                        <img src="{{ asset('img/note.svg') }}" width="30" height="30" viewBox="0 0 24 24">
+                                        <img src="{{ asset('img/note.svg') }}" width="30" height="30"
+                                            viewBox="0 0 24 24">
                                     </a>
                                 </div>
                             </li>
                             <li>
                                 <div class="iconNavBottom">
                                     <a href="notification.html">
-                                        <img src="{{ asset('img/notification.svg') }}" width="30" height="30" viewBox="0 0 24 24">
+                                        <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
+                                            viewBox="0 0 24 24">
                                     </a>
                                 </div>
                             </li>
                             <li>
                                 <div class="iconNavBottom">
                                     <a href="{{ route('profile') }}">
-                                        <img src="{{ asset('img/user.svg') }}" width="30" height="30" viewBox="0 0 24 24">
+                                        <img src="{{ asset('img/user.svg') }}" width="30" height="30"
+                                            viewBox="0 0 24 24">
                                     </a>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </nav>
-                  
+
             </div>
 
             <!-- --RIGHT-- -->
@@ -283,7 +314,7 @@
                 </div>
                 <div class="myprofile">
                     <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset("img/avatar" . Auth::user()->image . ".png") }}" class="big-avatar">
+                        <img src="{{ asset('img/avatar' . Auth::user()->image . '.png') }}" class="big-avatar">
                         <div class="text-center">
                             <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
                             <span class="me-1">{{ Auth::user()->point }} poin</span>
@@ -299,7 +330,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="pt-4 mt-4">
                     <div class="d-flex justify-content-between px-4 mb-4">
                         <span class="subTask">Top Rank</span>
@@ -307,62 +338,21 @@
                             <img src="{{ asset('img/trophy.png') }}">
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
-                        <div class="col-2 me-1">
-                            <div class="rankProfile">
-                                <img src="{{ asset('img/avatar1.png') }}">
+                    @foreach ($topRank as $user)
+                        <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
+                            <div class="col-2 me-1">
+                                <div class="rankProfile">
+                                    <img src="{{ asset('img/avatar' . $user->image . '.png') }}">
+                                </div>
+                            </div>
+                            <div class="col d-flex justify-content-between">
+                                <div class="rankName"><span>{{ $user->name }}</span></div>
+                                <div class="rankPoin"><span>{{ $user->point }} Poin</span></div>
                             </div>
                         </div>
-                        <div class="col d-flex justify-content-between">
-                            <div class="rankName"><span>Kopling Gemink</span></div>
-                            <div class="rankPoin"><span>300 poin</span></div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
-                        <div class="col-2 me-1">
-                            <div class="rankProfile">
-                                <img src="{{ asset('img/avatar3.png') }}">
-                            </div>
-                        </div>
-                        <div class="col d-flex justify-content-between">
-                            <div class="rankName"><span>Kopling Gemink</span></div>
-                            <div class="rankPoin"><span>300 poin</span></div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
-                        <div class="col-2 me-1">
-                            <div class="rankProfile">
-                                <img src="{{ asset('img/avatar2.png') }}">
-                            </div>
-                        </div>
-                        <div class="col d-flex justify-content-between">
-                            <div class="rankName"><span>Kopling Gemink</span></div>
-                            <div class="rankPoin"><span>300 poin</span></div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
-                        <div class="col-2 me-1">
-                            <div class="rankProfile">
-                                <img src="{{ asset('img/avatar3.png') }}">
-                            </div>
-                        </div>
-                        <div class="col d-flex justify-content-between">
-                            <div class="rankName"><span>Kopling Gemink</span></div>
-                            <div class="rankPoin"><span>300 poin</span></div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
-                        <div class="col-2 me-1">
-                            <div class="rankProfile">
-                                <img src="{{ asset('img/avatar1.png') }}">
-                            </div>
-                        </div>
-                        <div class="col d-flex justify-content-between">
-                            <div class="rankName"><span>Kopling Gemink</span></div>
-                            <div class="rankPoin"><span>300 poin</span></div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center moreActionList py-3"><span>Lihat lainnya</span></div>
+                    @endforeach
+                    <div class="d-flex justify-content-center align-items-center moreActionList py-3"><span>Lihat
+                            lainnya</span></div>
                 </div>
                 <div class="footer my-5">
                     <div class="d-flex justify-contentc-center">
@@ -377,7 +367,7 @@
                     </div>
                     <hr>
                     <div class="footerText">
-                        Takon Inc © 2022. All rights reserved
+                        Takon Inc © 2023. All rights reserved
                     </div>
                 </div>
             </div>
@@ -388,4 +378,5 @@
     <!-- BOOTSTRAP JS -->
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 </html>

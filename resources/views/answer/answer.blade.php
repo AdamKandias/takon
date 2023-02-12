@@ -186,7 +186,7 @@
                     </div>
                     <hr>
                     <div class="footerText">
-                        Takon Inc © 2022. All rights reserved
+                        Takon Inc © 2023. All rights reserved
                     </div>
                 </div>
             </div>

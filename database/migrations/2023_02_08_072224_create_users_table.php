@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreign("role_id")->references("id")->on("roles");
             $table->unsignedTinyInteger("class_id")->nullable(true);
             $table->foreign("class_id")->references("id")->on("classes");
+            $table->timestamps();
         });
     }
 

@@ -26,3 +26,5 @@ Route::view('/profile', 'user.profile')->name("profile")->middleware("auth");
 
 // Post Route
 Route::get('/home', [PostController::class, "index"])->name("home")->middleware("auth");
+Route::get('/ask', [PostController::class, "create"])->name("ask")->middleware("auth");
+Route::post('/ask', [PostController::class, "store"])->name("post.store")->middleware("auth");

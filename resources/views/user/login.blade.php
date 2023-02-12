@@ -65,9 +65,9 @@
                     @endif
                     <div class="forms d-grid gap-3 my-4">
                         <input type="text" name="nisn" class="myinput px-3 form-control" id="inputNISN"
-                            placeholder="NISN" required>
+                            placeholder="NISN" value="{{ old('nisn') }}" required>
                         <input type="text" name="birthdate" class="myinput form-control px-3" id="inputBirthDate"
-                            placeholder="Birth Date (ex : 18-03-2005)" required>
+                            placeholder="Birth Date (ex : 18-03-2005)" value="{{ old('birthdate') }}">
                         <input type="password" name="password" class="myinput form-control px-3" id="inputPassword"
                             placeholder="Password">
                         <button class="mybtn btn-pm mt-3" type="submit">Sign In</button>

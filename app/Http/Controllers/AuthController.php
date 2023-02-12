@@ -21,14 +21,30 @@ class AuthController extends Controller
         $user = User::where("nisn", $request->nisn)->where("birthdate", implode('-', array_reverse(explode('-', $request->birthdate))))->first();
 
         if (!empty($user)) {
-            if (Auth::loginUsingId($user->id)) {
-                $request->session()->regenerate();
-
-                return redirect()->intended('home');
+            if ($user->password != null) {
+                if ($request->password != null) {
+                    if(password_verify($request->password, $user->password)){
+                        if (Auth::loginUsingId($user->id)) {
+                            $request->session()->regenerate();
+                            
+                            return redirect()->intended('home');
+                        }
+                    } else {
+                        return redirect()->back()->withInput()->with("status", "Data yang diinputkan tidak ada atau salah, harap mengisi dengan benar!");
+                    }
+                } else {
+                    return redirect()->back()->withInput()->with("status", "Harap masukkan password!");
+                }
+            } else {
+                if (Auth::loginUsingId($user->id)) {
+                    $request->session()->regenerate();
+        
+                    return redirect()->intended('home');
+                }
             }
+        } else {
+            return redirect()->back()->withInput()->with("status", "Data yang diinputkan tidak ada atau salah, harap mengisi dengan benar!");
         }
-
-        return redirect()->route("login")->with("status", "Incorrect data entry! Please fill the field correctly!");
     }
 
     public function logout(Request $request)
