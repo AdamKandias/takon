@@ -65,7 +65,31 @@ ul {
 .mid::-webkit-scrollbar {
     display: none;
 }
+.mybtn-logout {
+    padding: 7px 15px;
+    border: 1px solid;
+    background-color: #fff;
+    color: #000;
+    font-weight: 400;
+    font-size: 15px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+  }
+  
+  .mybtn-logout:hover {
+    background-color: #fd2332;
+    color: #fff;
 
+    box-shadow: 0 0 20px #ff6f9150;
+  }
+  
+  .mybtn-logout:active {
+    background-color: #3d94cf;
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    box-shadow: none;
+  }
+  
 .topbar {
     height: 50px;
     border-bottom: 1px solid #E6E6E6;

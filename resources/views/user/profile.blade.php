@@ -88,22 +88,28 @@
 
             <!-- --MID-- -->
             <div class="mid">
-                <div class="topbar sticky-top d-flex justify-content-center align-items-center">
-                    <div class="namePage">
+                <div class="topbar sticky-top d-flex">
+                    <div class="void-box col-4"></div>
+                    <div class="namePage col-4 d-flex justify-content-center align-items-center">
                         Profile
                     </div>
-                    
-                    <div class="d-flex justify-content-end">
+                    <div class="box-logout col-4 d-flex justify-content-end align-items-center">
                         <form action="{{ route('logout') }}" method="POST" class="text-center">
                             @csrf
-                            <button class="btn btn-danger mybtn-logout px-4 rounded" type="submit">Logout</button>
+                            <button class="mybtn-logout rounded-pill me-2" type="submit">Logout</button>
                         </form>
                     </div>
                 </div>
                 <div class="contents">
+                    @if (Session::has('status'))
+                        <div class="alert alert-danger text-center mb-0" role="alert">
+                            {{ Session::get('status') }}
+                        </div>
+                    @endif
                     <div class="profileTop justify-content-center">
                         <div class="avatarContainer d-flex justify-content-center">
-                            <img src="{{ asset("img/avatar" . Auth::user()->image . ".png") }}" alt="" class="avatar">
+                            <img src="{{ asset('img/avatar' . Auth::user()->image . '.png') }}" alt=""
+                                class="avatar">
                         </div>
                         <div class="infoContainer">
                             <div class="d-flex gap-2 justify-content-center align-items-center">
@@ -122,8 +128,8 @@
                                 <div><span class="fw-semibold">0</span> Menjawab</div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center gap-4">
-                                <div class="role px-4 py-2">{{ Auth::user()->role->role}}</div>
-                                <div class="">{{ Auth::user()->point}} Poin</div>
+                                <div class="role px-4 py-2">{{ Auth::user()->role->role }}</div>
+                                <div class="">{{ Auth::user()->point }} Poin</div>
                             </div>
                         </div>
                     </div>
@@ -155,7 +161,8 @@
                                             915 -2 999 -24z" />
                                             </g>
                                         </svg>
-                                        <span class="labeldata">Nama Lengkap : <span class="text-dark valueData">{{ Auth::user()->name }}</span></span>
+                                        <span class="labeldata">Nama Lengkap : <span
+                                                class="text-dark valueData">{{ Auth::user()->name }}</span></span>
                                     </div>
                                 </li>
                                 <li>
@@ -227,7 +234,8 @@
                                             </g>
                                         </svg>
 
-                                        <span class="labeldata">Tanggal Lahir : <span class="text-dark valueData">{{ implode('-', array_reverse(explode('-', Auth::user()->birthdate))) }}</span></span>
+                                        <span class="labeldata">Tanggal Lahir : <span
+                                                class="text-dark valueData">{{ implode('-', array_reverse(explode('-', Auth::user()->birthdate))) }}</span></span>
                                     </div>
                                 </li>
                                 <li>
@@ -280,9 +288,17 @@
                                             </g>
                                         </svg>
 
-                                        <span class="labeldata">Password : <span class="@if (Auth::user()->password) text-success @else text-danger @endif valueData">@if (Auth::user()->password)
-                                            Password sudah ada, akun anda aman! @else Password tidak ada, harap buat sekarang!                             
-                                        @endif</span></span>
+                                        <span class="labeldata">Password : <span
+                                                class="@if (Auth::user()->password) text-success @else text-danger @endif valueData">
+                                                @if (Auth::user()->password)
+                                                    Password sudah ada,
+                                                    <a class="text-decoration-none text-secondary" href="">edit
+                                                        password?</a>
+                                                @else
+                                                    Password tidak ada, <a class="text-decoration-none text-secondary"
+                                                        href="">buat password!</a>
+                                                @endif
+                                            </span></span>
                                     </div>
                                 </li>
                                 <li>
@@ -335,7 +351,8 @@
                                             </g>
                                         </svg>
 
-                                        <span class="labeldata">Kelas : <span class="text-dark valueData">{{ Auth::user()->class->class }}</span></span>
+                                        <span class="labeldata">Kelas : <span
+                                                class="text-dark valueData">{{ Auth::user()->class->class }}</span></span>
                                     </div>
                                 </li>
                             </ul>

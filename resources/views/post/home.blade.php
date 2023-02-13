@@ -193,73 +193,28 @@
                             {{ Session::get('status') }}
                         </div>
                     @endif
-                    <a class="text-decoration-none text-dark" href="detailPost.html">
-                        <div class="content px-4 py-2">
-                            <div class="headerContent d-flex py-2">
-                                <img src="{{ asset('img/avatar3.png') }}" class="avatar me-2">
-                                <div class="names col row align-items-center g-0">
-                                    <div class="nameCnt">User123 <span class="dot">•</span>
-                                        <span class="dateUpload">14-11-2023</span>
+                    @foreach ($posts as $post)
+                        <a class="text-decoration-none text-dark row g-0" href="detailPost.html">
+                            <div class="content px-4 py-2">
+                                <div class="headerContent d-flex py-2">
+                                    <img src="{{ asset('img/avatar' . $post->user->image . '.png') }}" class="avatar me-2">
+                                    <div class="names col row align-items-center g-0">
+                                        <div class="nameCnt">{{ $post->user->name }} <span class="dot">•</span>
+                                            <span class="dateUpload">{{ $post->created_at->diffForHumans() }}</span>
+                                        </div>
+                                        <span class="mapelCnt">{{ $post->mapel->mapel }}</span>
                                     </div>
-                                    <span class="mapelCnt">Matematika</span>
+                                    <div class="moreAction col-1"></div>
                                 </div>
-                                <div class="moreAction col-1"></div>
-                            </div>
-                            <div class="pertanyaan mb-2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda
-                                aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
-                            </div>
-                            <div class="bottomContent my-2">
-                                <span class="bottomContent1">Terjawab oleh 2 orang <span
-                                        class="dot mx-1">•</span></span>
-                                <span class="seeMore">Lihat</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="text-decoration-none text-dark" href="answer.html">
-                        <div class="content px-4 py-2">
-                            <div class="headerContent d-flex py-2">
-                                <img src="{{ asset('img/avatar2.png') }}" class="avatar me-2">
-                                <div class="names col row align-items-center g-0">
-                                    <div class="nameCnt">User123 <span class="dot">•</span>
-                                        <span class="dateUpload">14-11-2023</span>
-                                    </div>
-                                    <span class="mapelCnt">Matematika</span>
+                                <div class="text-truncate-container"><p class="">{{ $post->question }}</p></div>
+                                <div class="bottomContent my-2">
+                                    <span class="bottomContent1">Belum terjawab <span
+                                            class="dot mx-1">•</span></span>
+                                    <span class="seeMore">Lihat</span>
                                 </div>
-                                <div class="moreAction col-1"></div>
                             </div>
-                            <div class="pertanyaan mb-2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda
-                                aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
-                            </div>
-                            <div class="bottomContent my-2">
-                                <span class="bottomContent1">Belum terjawab</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="text-decoration-none text-dark" href="detailPost.html">
-                        <div class="content px-4 py-2">
-                            <div class="headerContent d-flex py-2">
-                                <img src="{{ asset('img/avatar1.png') }}" class="avatar me-2">
-                                <div class="names col row align-items-center g-0">
-                                    <div class="nameCnt">User123 <span class="dot">•</span>
-                                        <span class="dateUpload">14-11-2023</span>
-                                    </div>
-                                    <span class="mapelCnt">Matematika</span>
-                                </div>
-                                <div class="moreAction col-1"></div>
-                            </div>
-                            <div class="pertanyaan mb-2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quam assumenda
-                                aliquam veritatis laudantium modi quos dolorem blanditiis enim amet!
-                            </div>
-                            <div class="bottomContent my-2">
-                                <span class="bottomContent1">Terjawab oleh 2 orang <span
-                                        class="dot mx-1">•</span></span>
-                                <span class="seeMore">Lihat</span>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    @endforeach
                 </div>
                 <nav class="navBottom fixed-bottom bg-light">
                     <div>
