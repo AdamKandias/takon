@@ -23,6 +23,8 @@ Route::post('/logout', [AuthController::class, "logout"])->name("logout")->middl
 
 // User Route
 Route::view('/profile', 'user.profile')->name("profile")->middleware("auth");
+Route::post("/password", [UserController::class, "createPassword"])->name("createPassword")->middleware("auth");
+Route::put("/password", [UserController::class, "editPassword"])->name("editPassword")->middleware("auth");
 
 // Post Route
 Route::get('/home', [PostController::class, "index"])->name("home")->middleware("auth");

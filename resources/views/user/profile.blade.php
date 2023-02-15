@@ -102,7 +102,7 @@
                 </div>
                 <div class="contents">
                     @if (Session::has('status'))
-                        <div class="alert alert-danger text-center mb-0" role="alert">
+                        <div class="alert alert-success text-center mb-0" role="alert">
                             {{ Session::get('status') }}
                         </div>
                     @endif
@@ -293,8 +293,12 @@
                                                 @if (Auth::user()->password)
                                                     Password sudah ada,
                                                     <a class="text-decoration-none text-secondary" href=""
-                                                        data-bs-toggle="modal" data-bs-target="#edit-pass">edit
-                                                        password?</a>
+                                                        data-bs-toggle="modal" data-bs-target="#edit-pass"><mark
+                                                            class="text-primary py-2 px-2 rounded">edit password?
+                                                            @if ($errors->any())
+                                                                <span class="text-danger">*error</span>
+                                                            @endif
+                                                        </mark></a>
                                                     <div class="modal fade" id="edit-pass" data-bs-backdrop="static"
                                                         data-bs-keyboard="false" tabindex="-1"
                                                         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -308,34 +312,58 @@
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="Close"></button>
                                                                 </div>
-                                                                <div class="modal-body py-0">
-                                                                    <div class="inputGroup">
-                                                                        <input type="text" required=""
-                                                                            autocomplete="off">
-                                                                        <label for="name">Password Sekarang</label>
+                                                                <form action="{{ route('editPassword') }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="modal-body py-0">
+                                                                        @if ($errors->any())
+                                                                            <div
+                                                                                class="alert alert-danger text-center">
+                                                                                <ul class="py-0 my-0">
+                                                                                    @foreach ($errors->all() as $error)
+                                                                                        <li>{{ $error }}
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            </div>
+                                                                        @endif
+                                                                        <div class="inputGroup">
+                                                                            <input name="password" type="password"
+                                                                                required="" autocomplete="off">
+                                                                            <label for="name">Password
+                                                                                Sekarang</label>
+                                                                        </div>
+                                                                        <div class="inputGroup">
+                                                                            <input name="new_password" type="password"
+                                                                                required="" autocomplete="off">
+                                                                            <label for="name">Password Baru</label>
+                                                                        </div>
+                                                                        <div class="inputGroup">
+                                                                            <input name="password_confirm"
+                                                                                type="password" required=""
+                                                                                autocomplete="off">
+                                                                            <label for="name">Konfirmasi
+                                                                                Password</label>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="inputGroup">
-                                                                        <input type="text" required=""
-                                                                            autocomplete="off">
-                                                                        <label for="name">Password Baru</label>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-pass px-3">Ubah
+                                                                            Password</button>
                                                                     </div>
-                                                                    <div class="inputGroup">
-                                                                        <input type="text" required=""
-                                                                            autocomplete="off">
-                                                                        <label for="name">Konfirmasi Password</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button"
-                                                                        class="btn btn-pass px-3">Selesai</button>
-                                                                </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @else
-                                                    Password tidak ada, <a class="text-decoration-none text-secondary"
-                                                        href="" data-bs-toggle="modal"
-                                                        data-bs-target="#create-pass">konsol</a>
+                                                    Password tidak ada, <a class="text-decoration-none" href=""
+                                                        data-bs-toggle="modal" data-bs-target="#create-pass"><mark
+                                                            class="text-primary py-2 px-2 rounded">buat password!
+                                                            @if ($errors->any())
+                                                                <span class="text-danger">*error</span>
+                                                            @endif
+                                                        </mark></a>
                                                     <div class="modal fade" id="create-pass"
                                                         data-bs-backdrop="static" data-bs-keyboard="false"
                                                         tabindex="-1" aria-labelledby="staticBackdropLabel"
@@ -343,23 +371,48 @@
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content rounded-1 shadow">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title fw-semibold">BUAT PASSWORD
+                                                                    <h5 class="modal-title fw-semibold text-dark">
+                                                                        BUAT
+                                                                        PASSWORD
                                                                     </h5>
                                                                     <button type="button" class="btn-close"
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="Close"></button>
                                                                 </div>
-                                                                <div class="modal-body py-0">
-                                                                    <div class="inputGroup">
-                                                                        <input type="password" required=""
-                                                                            autocomplete="off">
-                                                                        <label for="name">Password</label>
+                                                                <form action="{{ route('createPassword') }}"
+                                                                    method="POST">
+                                                                    <div class="modal-body py-0">
+                                                                        @if ($errors->any())
+                                                                            <div
+                                                                                class="alert alert-danger text-center">
+                                                                                <ul class="py-0 my-0">
+                                                                                    @foreach ($errors->all() as $error)
+                                                                                        <li>{{ $error }}
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            </div>
+                                                                        @endif
+                                                                        @csrf
+                                                                        <div class="inputGroup">
+                                                                            <input name="password" type="password"
+                                                                                required="" autocomplete="off">
+                                                                            <label for="name">Password</label>
+                                                                        </div>
+                                                                        <div class="inputGroup">
+                                                                            <input name="password_confirm"
+                                                                                type="password" required=""
+                                                                                autocomplete="off">
+                                                                            <label for="name">Konfirmasi
+                                                                                Password</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button"
-                                                                        class="btn btn-pass px-3">Bikin</button>
-                                                                </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-pass px-3">Buat
+                                                                            Sekarang</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                 @endif
