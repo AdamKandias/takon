@@ -120,81 +120,13 @@
                         </a>
                     </div>
 
-                    <div class="shortby px-4 mb-3">
-                        <div>
-                            <div class="shortIcon"></div>
-                            <span>Tampilkan pertanyaan sesuai</span>
-                        </div>
-                        <div class="dropdown">
-                            <button class="justify-content-between align-items-center py-2 btnDropdown d-flex"
-                                type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-                                aria-expanded="false">
-                                <div class="nameShortby">
-                                    <span>Terbaru, </span><span>Belum Terjawab</span>
-                                </div>
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="30"
-                                        viewBox="0 0 25 30">
-                                        <path fill="#fff"
-                                            d="M16.682 19.674c.01-.012.014-.028.024-.04l6.982-7.714c.39-.434.39-1.138 0-1.572-.004-.004-.008-.006-.012-.008a.936.936 0 0 0-.712-.34H8.998a.948.948 0 0 0-.722.352l-.004-.004a1.202 1.202 0 0 0 0 1.572l6.998 7.754a.928.928 0 0 0 1.412 0z" />
-                                    </svg>
-                                </div>
-                            </button>
-                            <ul class="p px-3 py-2 dropdown-menu">
-                                <li class="border-listshort">
-                                    <ul>
-                                        <li class="margin-listdown">
-                                            <div class="form-check d-flex align-items-center gap-2">
-                                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                                    id="checkTerbaru">
-                                                <label class="form-check-label col" for="checkTerbaru">
-                                                    Terbaru
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li class="margin-listdown">
-                                            <div class="form-check d-flex align-items-center gap-2">
-                                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                                    id="checkTerlama">
-                                                <label class="form-check-label col" for="checkTerlama">
-                                                    Terlama
-                                                </label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul>
-                                        <li class="margin-listdown">
-                                            <div class="form-check d-flex align-items-center gap-2">
-                                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                                    id="checkTerbaru">
-                                                <label class="form-check-label col" for="checkTerbaru">
-                                                    Terjawab
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li class="margin-listdown">
-                                            <div class="form-check d-flex align-items-center gap-2">
-                                                <input class="form-check-input mt-0" type="checkbox" value=""
-                                                    id="checkTerlama">
-                                                <label class="form-check-label col" for="checkTerlama">
-                                                    Belum Terjawab
-                                                </label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                     @if (Session::has('status'))
                         <div class="alert alert-success text-center" role="alert">
                             {{ Session::get('status') }}
                         </div>
                     @endif
                     @foreach ($posts as $post)
-                        <a class="text-decoration-none text-dark row g-0" href="detailPost.html">
+                        <a class="text-decoration-none text-dark row g-0" href="{{ route('post.show', $post->id) }}">
                             <div class="content px-4 py-2">
                                 <div class="headerContent d-flex py-2">
                                     <img src="{{ asset('img/avatar' . $post->user->image . '.png') }}" class="avatar me-2">
@@ -216,6 +148,7 @@
                         </a>
                     @endforeach
                 </div>
+                {{ $posts->links() }}
                 <nav class="navBottom fixed-bottom bg-light">
                     <div>
                         <ul class="d-flex m-0">

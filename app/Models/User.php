@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -26,6 +27,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public static function pointDecrease()
+    {
+        DB::table('users')->where('id', Auth::user()->id)->decrement('point', 5);
+        return;
+    }
 
     public function role()
     {

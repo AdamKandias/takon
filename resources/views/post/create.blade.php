@@ -103,6 +103,11 @@
                                 </ul>
                             </div>
                         @endif
+                        @if (Session::has('status'))
+                        <div class="alert alert-danger text-center" role="alert">
+                            {{ Session::get('status') }}
+                        </div>
+                    @endif
                         <form action="{{ route('post.store') }}" class="form-ask my-4" method="POST">
                             @csrf
                             <textarea rows="5" class="form-control py-3 px-3 {{ ($errors->has('question')) ? "is-invalid" : "" }}"

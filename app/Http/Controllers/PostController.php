@@ -12,12 +12,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        return view('post.home', ["topRank" => User::topRank(), "posts" =>  Post::orderBy('created_at', 'desc')->take(10)->get()]);
+        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(5);
+        return view('post.home', ["topRank" => User::topRank(), "posts" =>  $posts]);
     }
 
     public function create()
     {
-        if(Auth::user()->password == null){
+        if (Auth::user()->password == null) {
             return redirect()->route("profile")->with("status", "Harap membuat password terlebih dahulu!");
         }
 
@@ -26,6 +27,10 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        if (Auth::user()->point < 5) {
+            return redirect()->back()->with("status", "Poin anda tidak cukup!");
+        }
+
         $request->validate([
             "question" => "required",
             "mapel_id" => "required",
@@ -37,6 +42,13 @@ class PostController extends Controller
             "user_id" => Auth::user()->id,
         ]);
 
+        User::pointDecrease();
+
         return redirect()->route("home")->with("status", "Pertanyaan berhasil diposting!");
+    }
+
+    public function show(Post $post)
+    {
+        return view("post.show", ["post" => $post]);
     }
 }
