@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,5 +38,23 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('profile')->with("status", "Pasword berhasil diubah!");
+    }
+
+    public function editImage(Request $request)
+    {
+        $request->validateWithBag('editImage', [
+            'image' => 'required|image|max:1024',
+        ]);
+
+        if ($request->file('image')->isValid()) {
+            $user = User::find(Auth::user()->id);
+            if (!Str::contains($user->image, 'avatar')) {
+                Storage::delete($user->image);
+            }
+            $user->image = $request->file('image')->store('user-image');
+            $user->save();
+        }
+
+        return redirect()->route('profile')->with("status", "Foto profil berhasil diubah!");
     }
 }

@@ -186,7 +186,7 @@
                 </div>
                 <div class="myprofile">
                     <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset('img/avatar' . Auth::user()->image . '.png') }}" class="avatarProfile">
+                        <img src="{{ asset('storage/' . Auth::user()->image) }}" class="avatarProfile">
                         <div class="text-center">
                             <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
                             <span class="me-1">{{ Auth::user()->point }} poin</span>

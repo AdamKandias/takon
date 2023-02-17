@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date("birthdate")->nullable(true);
             $table->char("password", 60)->nullable(true);
             $table->unsignedSmallInteger("point")->nullable(true);
-            $table->string("image", 100)->nullable(false);
+            $table->string("image", 60)->nullable(false);
             $table->unsignedTinyInteger("status_id")->nullable(false);
             $table->foreign("status_id")->references("id")->on("statusses");
             $table->unsignedTinyInteger("role_id")->nullable(true);

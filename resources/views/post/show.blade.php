@@ -95,7 +95,7 @@
                 <div class="contents">
                     <div class="content px-4 py-2">
                         <div class="headerContent d-flex py-2">
-                            <img src="{{ asset('img/avatar' . $post->user->image . '.png') }}" alt="" class="avatar me-2">
+                            <img src="{{ asset('storage/' . $post->user->image) }}" alt="" class="avatar me-2">
                             <div class="names col row align-items-center g-0">
                                 <div class="nameCnt">{{ $post->user->name }} <span class="dot">•</span>
                                     <span class="dateUpload">{{ $post->created_at->diffForHumans() }}</span>
@@ -268,7 +268,7 @@
                 </div>
                 <div class="myprofile">
                     <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset('img/avatar' . Auth::user()->image . '.png') }}" alt="" class="avatarProfile">
+                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="" class="avatarProfile">
                         <div class="text-center">
                             <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
                             <span class="me-1">{{ Auth::user()->point }} Poin</span>

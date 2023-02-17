@@ -106,11 +106,85 @@
                             {{ Session::get('status') }}
                         </div>
                     @endif
+                    @if ($errors->editImage->first())
+                    <div class="alert alert-danger text-center mb-0" role="alert">
+                        Gambar yang diinputkan tidak valid!
+                    </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger text-center mb-0" role="alert">
+                            Password yang diisikan tidak valid!
+                        </div>
+                    @endif
+                    @if (Session::has('passwordStatus'))
+                        <div class="alert alert-danger text-center mb-0" role="alert">
+                            {{ Session::get('passwordStatus') }}
+                        </div>
+                    @endif
                     <div class="profileTop justify-content-center">
                         <div class="avatarContainer d-flex justify-content-center">
-                            <img src="{{ asset('img/avatar' . Auth::user()->image . '.png') }}" alt=""
-                                class="avatar">
+                            <a href="#imageModalToggle" data-bs-toggle="modal">
+                                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="" class="avatar">
+                            </a>
                         </div>
+                        <div class="modal fade" id="imageModalToggle" aria-hidden="true"
+                            aria-labelledby="imageModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 text-dark" id="imageModalToggleLabel">Foto Profil
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-warning" data-bs-target="#editModalToggle"
+                                            data-bs-toggle="modal">Ubah Gambar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="editModalToggle" aria-hidden="true"
+                            aria-labelledby="editModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 text-dark" id="editModalToggleLabel">Edit Gambar
+                                            Profile</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('editImage') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-body">
+                                            @if ($errors->editImage->first())
+                                                <div class="alert alert-danger text-center">
+                                                    <ul class="py-0 my-0">
+                                                        <li>{{ $errors->editImage->first('image') }}</li>
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                            <img id="output" class="img-fluid mb-4" style="display: none" />
+                                            <input type="file" name="image" class="form-control"
+                                                onchange="loadFile(event)">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-target="#imageModalToggle"
+                                                data-bs-toggle="modal">Kembali</button>
+                                            <button class="btn btn-primary" type="submit">Ganti Gambar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="infoContainer">
                             <div class="d-flex gap-2 justify-content-center align-items-center">
                                 <span class="nameProfile">{{ Auth::user()->name }}</span>
@@ -128,7 +202,8 @@
                                 <div><span class="fw-semibold">0</span> Menjawab</div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center gap-4">
-                                <div class="role px-4 py-2">{{ Auth::user()->role->role }}</div>
+                                <div class="role role-{{ Auth::user()->role->id }} px-4 py-2">
+                                    {{ Auth::user()->role->role }}</div>
                                 <div class="">{{ Auth::user()->point }} Poin</div>
                             </div>
                         </div>
@@ -287,7 +362,6 @@
                                                 136 37 262 74 216 64 317 86 425 93 25 2 47 4 50 5 3 1 56 -3 118 -9z" />
                                             </g>
                                         </svg>
-
                                         <span class="labeldata">Password : <span
                                                 class="@if (Auth::user()->password) text-success @else text-danger @endif valueData">
                                                 @if (Auth::user()->password)
@@ -295,9 +369,6 @@
                                                     <a class="text-decoration-none text-secondary" href=""
                                                         data-bs-toggle="modal" data-bs-target="#edit-pass"><mark
                                                             class="text-primary py-2 px-2 rounded">edit password?
-                                                            @if ($errors->any())
-                                                                <span class="text-danger">*error</span>
-                                                            @endif
                                                         </mark></a>
                                                     <div class="modal fade" id="edit-pass" data-bs-backdrop="static"
                                                         data-bs-keyboard="false" tabindex="-1"
@@ -360,9 +431,6 @@
                                                     Password tidak ada, <a class="text-decoration-none" href=""
                                                         data-bs-toggle="modal" data-bs-target="#create-pass"><mark
                                                             class="text-primary py-2 px-2 rounded">buat password!
-                                                            @if ($errors->any())
-                                                                <span class="text-danger">*error</span>
-                                                            @endif
                                                         </mark></a>
                                                     <div class="modal fade" id="create-pass"
                                                         data-bs-backdrop="static" data-bs-keyboard="false"
@@ -522,6 +590,16 @@
 
     <!-- BOOTSTRAP JS -->
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.style.display = "block";
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src)
+            }
+        };
+    </script>
 </body>
 
 </html>

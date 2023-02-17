@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
             ClassesSeeder::class,
             MapelSeeder::class,
         ]);
-        User::factory()->count(10)->create();
+        User::factory()->hasPosts(3)->count(10)->create();
     }
 }

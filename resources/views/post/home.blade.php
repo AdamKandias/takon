@@ -129,7 +129,7 @@
                         <a class="text-decoration-none text-dark row g-0" href="{{ route('post.show', $post->id) }}">
                             <div class="content px-4 py-2">
                                 <div class="headerContent d-flex py-2">
-                                    <img src="{{ asset('img/avatar' . $post->user->image . '.png') }}" class="avatar me-2">
+                                    <img src="{{ asset('storage/' . $post->user->image) }}" class="avatar me-2">
                                     <div class="names col row align-items-center g-0">
                                         <div class="nameCnt">{{ $post->user->name }} <span class="dot">•</span>
                                             <span class="dateUpload">{{ $post->created_at->diffForHumans() }}</span>
@@ -148,7 +148,9 @@
                         </a>
                     @endforeach
                 </div>
-                {{ $posts->links() }}
+                <div class="mx-auto d-flex justify-content-center mt-4 mb-2">
+                    {{ $posts->links() }}
+                </div>
                 <nav class="navBottom fixed-bottom bg-light">
                     <div>
                         <ul class="d-flex m-0">
@@ -202,16 +204,16 @@
                 </div>
                 <div class="myprofile">
                     <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset('img/avatar' . Auth::user()->image . '.png') }}" class="big-avatar">
+                        <img src="{{ asset('storage/' . Auth::user()->image) }}" class="big-avatar">
                         <div class="text-center">
                             <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
-                            <span class="me-1">{{ Auth::user()->point }} poin</span>
+                            <span class="me-1">{{ Auth::user()->point }} Poin</span>
                         </div>
                     </div>
 
                     <div class="infoProfile">
                         <div class="infoProfile1 px-3 py-2">
-                            <span class="me-1">0</span>Mengajukan Pertanyaan
+                            <span class="me-1">{{ $totalPosts }}</span>Mengajukan Pertanyaan
                         </div>
                         <div class="infoProfile2 px-3 py-2">
                             <span class="me-1">0</span>Memberikan Jawaban
@@ -230,11 +232,11 @@
                         <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
                             <div class="col-2 me-1">
                                 <div class="rankProfile">
-                                    <img src="{{ asset('img/avatar' . $user->image . '.png') }}">
+                                    <img src="{{ asset('storage/' . $user->image) }}">
                                 </div>
                             </div>
                             <div class="col d-flex justify-content-between">
-                                <div class="rankName"><span>{{ $user->name }}</span></div>
+                                <div class="rankName d-inline-block text-truncate" style="max-width: 140px"><span>{{ $user->name }}</span></div>
                                 <div class="rankPoin"><span>{{ $user->point }} Poin</span></div>
                             </div>
                         </div>

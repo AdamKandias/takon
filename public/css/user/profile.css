@@ -205,10 +205,41 @@ ul {
 }
 
 .role {
-    background: linear-gradient(91.88deg, #F83C66 4.79%, #A73489 91.31%);
     border-radius: 20px;
     color: #fff;
     line-height: 15px;
+}
+
+.role-8{
+    background: linear-gradient(91.88deg, #F83C66 4.79%, #A73489 91.31%);
+}
+
+.role-7{
+    background: linear-gradient(91.88deg, #0ec5fc 4.79%, #A73489 91.31%);
+}
+
+.role-6{
+    background: linear-gradient(91.88deg, #374efa 4.79%, #A73489 91.31%);
+}
+
+.role-5{
+    background: linear-gradient(91.88deg, #00ff80c4 4.79%, #A73489 91.31%);
+}
+
+.role-4{    
+    background: linear-gradient(91.88deg, #ffb700 4.79%, #A73489 91.31%);
+}
+
+.role-3{
+    background: linear-gradient(91.88deg, #fcf871 4.79%, #A73489 91.31%);
+}
+
+.role-2{
+    background: linear-gradient(91.88deg, #36de7c 4.79%, #A73489 91.31%);
+}
+
+.role-1{
+    background: linear-gradient(91.88deg, #937e82 4.79%, #A73489 91.31%);
 }
 
 

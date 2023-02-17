@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->belongsTo(Classes::class);
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public static function topRank()
     {
         return User::orderBy("point", "desc")->take(5)->get();
