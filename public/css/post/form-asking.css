@@ -296,6 +296,19 @@ ul {
     color: #7A7A7A;
 }
 
+.lite-editor{
+    min-height: 100px !important;
+    max-height: 400px !important;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 17px !important;
+    line-height: 20px!important;
+}
+
+.lite-editor-btn-group-wrap-right{
+    display: none;
+    visibility: hidden;
+}
+
 .left {
     display: none;
 }

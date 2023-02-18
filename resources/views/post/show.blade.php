@@ -11,6 +11,8 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/font.css') }}">
     <link rel="stylesheet" href="{{ asset('css/post/detail-post.css') }}">
+    <script src="https://unpkg.com/lite-editor@1.6.39/js/lite-editor.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/lite-editor@1.6.39/css/lite-editor.css">
 </head>
 
 <body onload="init();">
@@ -105,44 +107,84 @@
                             <div class="moreAction col-1"></div>
                         </div>
                         <div class="pertanyaan mb-3 mt-3">
-                            {{ $post->question }}
+                            {!! $post->question !!}
+                            @if ($post->image)
+                                <img src="{{ asset('storage/' . $post->image) }}">
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="py-3 text-center" style="border-bottom: 1px solid #E6E6E6;">
                     JAWABAN
                 </div>
-                <div class="contents" style="background-color: rgba(0, 135, 203, 0.055);">
-                    <div class="content px-4 py-2">
-                        <div class="headerContent d-flex py-2">
-                            <img src="{{ asset('img/avatar1.png') }}" alt="" class="avatar me-2">
-                            <div class="names col row align-items-center g-0">
-                                <div class="nameCnt">Mike Wazowski <span class="dot">•</span>
-                                    <span class="dateUpload">14-11-2022</span>
-                                </div>
-                                <span class="mapelCnt" style="color: #e628e9;">Sepuh</span>
-                            </div>
-                            <div class="moreAction col-1"></div>
-                        </div>
-                        <div class="jawaban mb-2">
-                            m(x-x1) + y1 <br>= 7(x-3) -4 <br>= 7x - 21 - 4 <br>= 7x - 25
-                        </div>
+                @if (Session::has('status'))
+                    <div class="alert alert-danger text-center" role="alert">
+                        {{ Session::get('status') }}
                     </div>
-                </div>
+                @endif
+                @if (Session::has('status-success'))
+                    <div class="alert alert-success text-center" role="alert">
+                        {{ Session::get('status-success') }}
+                    </div>
+                @endif
+                @if ($post->answer)
+                    <div class="contents" style="background-color: rgba(0, 135, 203, 0.055);">
 
-                <div class="d-flex px-4 py-2" style="border-bottom: 1px solid #E6E6E6;">
-                    <div class="coment-avatar">
-                        <img src="{{ asset('img/avatar1.png') }}" alt="" class="avatar">
-                    </div>
-                    <div class="d-flex" style="width: 100%;">
-                        <textarea rows="1" class="input-comentar py-2 ms-2" placeholder="Tambahkan komentar"
-                            aria-label="With textarea" id="text" style="border-bottom: 1px solid #E6E6E6;"></textarea>
-                        <div class="d-flex align-items-center" style="height: auto;">
-                            <button type="button" class="float-end btn btn-dark px-4"
-                                style="background-color: #181818; border-radius: 99px; font-size: 13px;">KIRIM</button>
+                        <div class="content px-4 py-2">
+                            <div class="headerContent d-flex py-2">
+                                <img src="{{ asset('storage/' . $post->answer->user->image) }}" alt=""
+                                    class="avatar me-2">
+                                <div class="names col row align-items-center g-0">
+                                    <div class="nameCnt">{{ $post->answer->user->name }} <span class="dot">•</span>
+                                        <span
+                                            class="dateUpload">{{ $post->answer->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <span class="mapelCnt"
+                                        style="color: #e628e9;">{{ $post->answer->user->role->role }}</span>
+                                </div>
+                                <div class="moreAction col-1"></div>
+                            </div>
+                            <div class="jawaban mb-2">
+                                {!! $post->answer->answer !!}
+                                @if ($post->image)
+                                    <img src="{{ asset('storage/' . $post->answer->image) }}">
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="d-flex px-4 py-2" style="border-bottom: 1px solid #E6E6E6;">
+                        @if ($errors->any())
+                            <div class="alert alert-danger text-center">
+                                <ul class="py-0 my-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="coment-avatar">
+                            <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="" class="avatar">
+                        </div>
+                        <div class="d-flex" style="width: 100%;">
+                            <form action="{{ route('answer.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <textarea rows="1" name="answer" class="input-comentar py-2 ms-2 js-editor lite-editor" placeholder="Tambahkan jawaban"
+                                    aria-label="With textarea" id="text" style="border-bottom: 1px solid #E6E6E6;"></textarea>
+                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                <img id="output" class="img-fluid mb-4" style="display: none" />
+                                <input type="file" name="image" class="form-control"
+                                    onchange="loadFile(event)">
+                                <div class="d-flex align-items-center" style="height: auto;">
+                                    <button type="submit" class="float-end btn btn-dark px-4"
+                                        style="background-color: #181818; border-radius: 99px; font-size: 13px;">KIRIM</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="py-2 px-4 fw-semibold" style="border-bottom: 1px solid #E6E6E6;">
                     Komentar
                 </div>
@@ -212,9 +254,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <div>Tidak Ada Komentar</div>
-                </div>
                 <nav class="navBottom fixed-bottom bg-light">
                     <div>
                         <ul class="d-flex m-0">
@@ -268,7 +307,8 @@
                 </div>
                 <div class="myprofile">
                     <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="" class="avatarProfile">
+                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt=""
+                            class="avatarProfile">
                         <div class="text-center">
                             <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
                             <span class="me-1">{{ Auth::user()->point }} Poin</span>
@@ -277,10 +317,10 @@
 
                     <div class="infoProfile">
                         <div class="infoProfile1 px-3 py-2">
-                            <span class="me-1">0</span>Mengajukan Pertanyaan
+                            <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
                         </div>
                         <div class="infoProfile2 px-3 py-2">
-                            <span class="me-1">0</span>Memberikan Jawaban
+                            <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
                         </div>
                     </div>
                 </div>
@@ -298,7 +338,7 @@
                     </div>
                     <hr>
                     <div class="footerText">
-                        Takon Inc © 2022. All rights reserved
+                        Takon Inc © 2023. All rights reserved
                     </div>
                 </div>
             </div>
@@ -341,6 +381,17 @@
             text.select();
             resize();
         }
+
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.style.display = "block";
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src)
+            }
+        };
+
+        new LiteEditor('.js-editor');
     </script>
 </body>
 

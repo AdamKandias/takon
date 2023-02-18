@@ -296,6 +296,18 @@ ul {
     display: none;
 }
 
+.lite-editor{
+    min-height: 100px !important;
+    max-height: 400px !important;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 17px !important;
+    line-height: 20px!important;
+}
+
+.lite-editor-btn-group-wrap-right{
+    display: none;
+    visibility: hidden;
+}
 
 /* Mini device */
 @media (max-width: 576px) {}

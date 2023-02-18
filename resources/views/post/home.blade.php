@@ -138,9 +138,9 @@
                                     </div>
                                     <div class="moreAction col-1"></div>
                                 </div>
-                                <div class="text-truncate-container"><p class="">{{ $post->question }}</p></div>
+                                <div class="text-truncate-container"><p class="">{!! $post->question !!}</p></div>
                                 <div class="bottomContent my-2">
-                                    <span class="bottomContent1">Belum terjawab <span
+                                    <span class="bottomContent1">{{ $post->answer ? "Sudah terjawab" : "Belum terjawab" }} <span
                                             class="dot mx-1">•</span></span>
                                     <span class="seeMore">Lihat</span>
                                 </div>
@@ -213,10 +213,10 @@
 
                     <div class="infoProfile">
                         <div class="infoProfile1 px-3 py-2">
-                            <span class="me-1">{{ $totalPosts }}</span>Mengajukan Pertanyaan
+                            <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
                         </div>
                         <div class="infoProfile2 px-3 py-2">
-                            <span class="me-1">0</span>Memberikan Jawaban
+                            <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnswerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,6 @@ Route::get('/home', [PostController::class, "index"])->name("home")->middleware(
 Route::get('/ask', [PostController::class, "create"])->name("ask")->middleware("auth");
 Route::post('/ask', [PostController::class, "store"])->name("post.store")->middleware("auth");
 Route::get('/question/{post}', [PostController::class, "show"])->name("post.show")->middleware("auth");
+
+// Answer Route
+Route::post('/answer', [AnswerController::class, "store"])->name("answer.store")->middleware("auth");

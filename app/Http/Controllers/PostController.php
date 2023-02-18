@@ -13,9 +13,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->simplePaginate(5);
-        $totalPosts = Post::where('user_id', Auth::user()->id)->count();
         // $totalAnswers = Answers::where('user_id', Auth::user()->id)->count();
-        return view('post.home', ["topRank" => User::topRank(), "posts" =>  $posts, "totalPosts" => $totalPosts]);
+        return view('post.home', ["topRank" => User::topRank(), "posts" =>  $posts]);
     }
 
     public function create()
@@ -33,16 +32,19 @@ class PostController extends Controller
             return redirect()->back()->with("status", "Poin anda tidak cukup!");
         }
 
-        $request->validate([
+        $validatedData = $request->validate([
             "question" => "required",
+            "image" => "image|max:1024",
             "mapel_id" => "required",
         ]);
 
-        Post::create([
-            "question" => $request->question,
-            "mapel_id" => $request->mapel_id,
-            "user_id" => Auth::user()->id,
-        ]);
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-image');
+        }
+
+        $validatedData['user_id'] = Auth::user()->id;
+
+        Post::create($validatedData);
 
         User::pointDecrease();
 

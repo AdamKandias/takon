@@ -198,8 +198,8 @@
                                 <a class="editProfile my-2 d-none" href="#">Edit Profile</a>
                             </div>
                             <div class="d-flex infoAkun my-4 gap-4 justify-content-center">
-                                <div><span class="fw-semibold">0</span> Pertanyaan</div>
-                                <div><span class="fw-semibold">0</span> Menjawab</div>
+                                <div><span class="fw-semibold">{{ Auth::user()->posts->count() }}</span> Pertanyaan</div>
+                                <div><span class="fw-semibold">{{ Auth::user()->answers->count() }}</span> Menjawab</div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center gap-4">
                                 <div class="role role-{{ Auth::user()->role->id }} px-4 py-2">

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->char("id", 36)->nullable(false);
             $table->primary("id");
             $table->longText("answer")->nullable(false);
-            $table->string("image", 100)->nullable(true);
+            $table->string("image", 60)->nullable(true);
             $table->foreignUuid("post_id")->nullable(false);
             $table->foreign("post_id")->references("id")->on("posts");
             $table->foreignId("user_id")->nullable(false);

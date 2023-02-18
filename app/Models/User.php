@@ -34,6 +34,12 @@ class User extends Authenticatable
         return;
     }
 
+    public static function pointIncrease()
+    {
+        DB::table('users')->where('id', Auth::user()->id)->increment('point', 10);
+        return;
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
@@ -47,6 +53,11 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
     }
 
     public static function topRank()

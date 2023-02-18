@@ -11,6 +11,8 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/font.css') }}">
     <link rel="stylesheet" href="{{ asset('css/post/form-asking.css') }}">
+    <script src="https://unpkg.com/lite-editor@1.6.39/js/lite-editor.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/lite-editor@1.6.39/css/lite-editor.css">
 </head>
 
 <body onload="init();">
@@ -104,20 +106,23 @@
                             </div>
                         @endif
                         @if (Session::has('status'))
-                        <div class="alert alert-danger text-center" role="alert">
-                            {{ Session::get('status') }}
-                        </div>
-                    @endif
-                        <form action="{{ route('post.store') }}" class="form-ask my-4" method="POST">
+                            <div class="alert alert-danger text-center" role="alert">
+                                {{ Session::get('status') }}
+                            </div>
+                        @endif
+                        <form action="{{ route('post.store') }}" class="form-ask my-4" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
-                            <textarea rows="5" class="form-control py-3 px-3 {{ ($errors->has('question')) ? "is-invalid" : "" }}"
-                                id="text" required name="question" placeholder="Tulis Pertanyaan mu disini" style="background-color: #e9f8f8;">{{ old('question') }}</textarea>
+                            <textarea rows="5" class="form-control js-editor lite-editor py-3 px-3 {{ $errors->has('question') ? 'is-invalid' : '' }}"
+                                id="text" name="question" placeholder="Tulis Pertanyaan mu disini" style="background-color: #e9f8f8;">{{ old('question') }}</textarea>
+                            <img id="output" class="img-fluid mb-4" style="display: none" />
+                            <input type="file" name="image" class="form-control" onchange="loadFile(event)">
                             <div class="myrow align-items-end mb-4">
                                 <div class="col">
                                     <span style="font-size: 12px; color: #858C90;">Harap memilih mapel sesuai dengan
                                         pertanyaan</span>
                                     <select name="mapel_id"
-                                        class="form-select myselect mt-1 {{ ($errors->has('mapel_id')) ? "is-invalid" : "" }}"
+                                        class="form-select myselect mt-1 {{ $errors->has('mapel_id') ? 'is-invalid' : '' }}"
                                         aria-label="Default select example">
                                         @foreach ($mapel as $data)
                                             <option {{ old('mapel_id') == $data->id ? 'selected' : '' }}
@@ -189,16 +194,16 @@
                         <img src="{{ asset('storage/' . Auth::user()->image) }}" class="avatarProfile">
                         <div class="text-center">
                             <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
-                            <span class="me-1">{{ Auth::user()->point }} poin</span>
+                            <span class="me-1">{{ Auth::user()->point }} Poin</span>
                         </div>
                     </div>
 
                     <div class="infoProfile">
                         <div class="infoProfile1 px-3 py-2">
-                            <span class="me-1">0</span>Mengajukan Pertanyaan
+                            <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
                         </div>
                         <div class="infoProfile2 px-3 py-2">
-                            <span class="me-1">0</span>Memberikan Jawaban
+                            <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
                         </div>
                     </div>
                 </div>
@@ -259,6 +264,17 @@
             text.select();
             resize();
         }
+
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.style.display = "block";
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src)
+            }
+        };
+
+        new LiteEditor('.js-editor');
     </script>
 </body>
 
