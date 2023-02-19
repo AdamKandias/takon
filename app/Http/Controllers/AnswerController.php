@@ -38,6 +38,8 @@ class AnswerController extends Controller
 
         User::pointIncrease();
 
+        User::roleSynchronization();
+
         return redirect()->route("post.show", $validatedData['post_id'])->with("status-success", "Jawaban berhasil terkirim!");
     }
 }

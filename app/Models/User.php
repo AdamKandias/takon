@@ -40,6 +40,31 @@ class User extends Authenticatable
         return;
     }
 
+    public static function roleSynchronization()
+    {
+        $user = User::find(Auth::user()->id);
+        $currentPoint = $user->point;
+        $currentRole = $user->role->id;
+        $correctRole = 1;
+
+        $roles = Role::orderBy('id', 'desc')->get();
+
+        foreach ($roles as $role) {
+            if ($currentPoint >= $role->minimum_point) {
+                $correctRole = $role->id;
+                break;
+            }
+        }
+
+        if ($currentRole == $correctRole) {
+            return;
+        }
+
+        $user->role_id = $correctRole;
+        $user->save();
+        return;
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

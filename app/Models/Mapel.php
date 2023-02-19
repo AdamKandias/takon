@@ -14,4 +14,9 @@ class Mapel extends Model
     public static function fetchAll(){
        return Mapel::all();
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

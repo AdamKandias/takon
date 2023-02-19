@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="mapel.html" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route("mapel") }}" class="d-flex text-decoration-none text-dark">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/note.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -151,7 +151,7 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="mapel.html">
+                                    <a href="{{ route("mapel") }}">
                                         <img src="{{ asset('img/note.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
                                     </a>

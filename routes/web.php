@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\MapelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +37,6 @@ Route::get('/question/{post}', [PostController::class, "show"])->name("post.show
 
 // Answer Route
 Route::post('/answer', [AnswerController::class, "store"])->name("answer.store")->middleware("auth");
+
+// Mapel Route
+Route::get("/mapel", [MapelController::class, "index"])->name("mapel")->middleware("auth");

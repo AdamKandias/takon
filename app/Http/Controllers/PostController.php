@@ -13,7 +13,6 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->simplePaginate(5);
-        // $totalAnswers = Answers::where('user_id', Auth::user()->id)->count();
         return view('post.home', ["topRank" => User::topRank(), "posts" =>  $posts]);
     }
 
@@ -47,6 +46,8 @@ class PostController extends Controller
         Post::create($validatedData);
 
         User::pointDecrease();
+
+        User::roleSynchronization();
 
         return redirect()->route("home")->with("status", "Pertanyaan berhasil diposting!");
     }
