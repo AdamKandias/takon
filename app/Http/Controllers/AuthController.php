@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function auth(Request $request)
     {
         $request->validate([
-            'nisn' => 'required|max:10',
+            'nisn' => 'required|size:10',
         ]);
 
         $user = User::where("nisn", $request->nisn)->where("birthdate", implode('-', array_reverse(explode('-', $request->birthdate))))->first();
@@ -26,6 +26,10 @@ class AuthController extends Controller
                     if(password_verify($request->password, $user->password)){
                         if (Auth::loginUsingId($user->id)) {
                             $request->session()->regenerate();
+
+                            if ($user->status_id == 2) {
+                                return redirect()->intended('dashboard');
+                            }
                             
                             return redirect()->intended('home');
                         }

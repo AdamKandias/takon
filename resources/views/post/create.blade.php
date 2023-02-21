@@ -202,8 +202,11 @@
                         <div class="infoProfile1 px-3 py-2">
                             <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
                         </div>
-                        <div class="infoProfile2 px-3 py-2">
+                        <div class="px-3 py-2">
                             <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
+                        </div>
+                        <div class="px-3 py-2">
+                            <span class="me-1">{{ Auth::user()->comments->count() }}</span>Memberikan Komentar
                         </div>
                     </div>
                 </div>

@@ -129,6 +129,13 @@ ul {
     font-family: br-cobane;
 }
 
+.img-comment{
+    aspect-ratio: 1.5/1;
+    border-radius: 10px;
+    width: 100%;
+    /* height: 20rem; */
+    object-fit: cover;
+}
 .input-comentar {
     resize: none;
     border: 0 none;
@@ -136,6 +143,13 @@ ul {
     outline: none;
     width: 100%;
 
+}
+.img-post-comment{
+    border-radius: 5px;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    margin: auto;
 }
 
 .navBottom>div {

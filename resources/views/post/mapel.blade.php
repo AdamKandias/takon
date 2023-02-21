@@ -116,67 +116,27 @@
                             <ul class="dropdown-menu">
                                 @foreach ($allMapel as $mapel)
                                     <li><a class="dropdown-item {{ $currentMapel == $mapel->mapel ? 'active' : '' }}"
-                                            href="{{ url('mapel?mapel=' . Str::replaceFirst(' ', '-', Str::lower($mapel->mapel))) }}">{{ $mapel->mapel }}</a>
+                                            href="{{ route('mapel', ["mapel"=> Str::replaceFirst(' ', '-', Str::lower($mapel->mapel))]) }}">{{ $mapel->mapel }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
-                        <div class="col">
-                            <div class="dropdown">
-                                <div class="btn sorter p-0 float-end" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside" aria-expanded="false">
-                                    <div class="float-end btn-sorter d-flex align-items-center">
-                                        <div>Urutkan berdasarkan</div> <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="17" viewBox="0 0 25 25">
-                                            <path fill="#000"
-                                                d="M16.682 19.674c.01-.012.014-.028.024-.04l6.982-7.714c.39-.434.39-1.138 0-1.572-.004-.004-.008-.006-.012-.008a.936.936 0 0 0-.712-.34H8.998a.948.948 0 0 0-.722.352l-.004-.004a1.202 1.202 0 0 0 0 1.572l6.998 7.754a.928.928 0 0 0 1.412 0z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <ul class="p px-3 py-2 dropdown-menu">
-                                    <li class="border-listshort">
-                                        <ul>
-                                            <li class="margin-listdown">
-                                                <div class="form-check d-flex align-items-center gap-2"> <input
-                                                        class="form-check-input mt-0" type="radio"
-                                                        name="exampleRadios" id="checkTerbaru" value="option1"
-                                                        checked>
-                                                    <label class="form-check-label col" for="checkTerbaru"> Terbaru
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="margin-listdown">
-                                                <div class="form-check d-flex align-items-center gap-2"> <input
-                                                        class="form-check-input mt-0" type="radio"
-                                                        name="exampleRadios" id="checkTerlama" value="option2">
-                                                    <label class="form-check-label col" for="checkTerlama"> Terlama
-                                                    </label>
-                                                </div>
-                                            </li>
-                                        </ul>
+                        <div class="dropdown col">
+                            <button class="btn btn-primary btn-sm dropdown-toggle title-mapel" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ $filter }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item {{ $filter == "Semua" ? 'active' : '' }}"
+                                            href="{{ route("mapel", ["mapel" => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), "filter" => "semua"]) }}">Semua</a>
                                     </li>
-                                    <li>
-                                        <ul>
-                                            <li class="margin-listdown">
-                                                <div class="form-check d-flex align-items-center gap-2"> <input
-                                                        class="form-check-input mt-0" type="radio"
-                                                        name="exampleRadios" id="checkTerjawab" value="option3">
-                                                    <label class="form-check-label col" for="checkTerjawab"> Terjawab
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="margin-listdown">
-                                                <div class="form-check d-flex align-items-center gap-2"> <input
-                                                        class="form-check-input mt-0" type="radio"
-                                                        name="exampleRadios" id="checkBelumTerjawab" value="option4">
-                                                    <label class="form-check-label col" for="checkBelumTerjawab">
-                                                        Belum Terjawab </label>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                    <li><a class="dropdown-item {{ $filter == "Terjawab" ? 'active' : '' }}"
+                                            href="{{ route("mapel", ["mapel" => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), "filter" => "terjawab"]) }}">Terjawab</a>
                                     </li>
-                                </ul>
-                            </div>
+                                    <li><a class="dropdown-item {{ $filter == "Belum Terjawab" ? 'active' : '' }}"
+                                            href="{{ route("mapel", ["mapel" => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), "filter" => "belum-terjawab"]) }}">Belum Terjawab</a>
+                                    </li>
+                            </ul>
                         </div>
                     </div>
 
@@ -185,7 +145,7 @@
                             {{ Session::get('status') }}
                         </div>
                     @else
-                        @if (!empty($posts->items()))
+                        @if (!empty($posts))
                             @foreach ($posts as $post)
                                 <a class="text-decoration-none text-dark row g-0"
                                     href="{{ route('post.show', $post->id) }}">
@@ -289,8 +249,11 @@
                         <div class="infoProfile1 px-3 py-2">
                             <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
                         </div>
-                        <div class="infoProfile2 px-3 py-2">
+                        <div class="px-3 py-2">
                             <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
+                        </div>
+                        <div class="px-3 py-2">
+                            <span class="me-1">{{ Auth::user()->comments->count() }}</span>Memberikan Komentar
                         </div>
                     </div>
                 </div>

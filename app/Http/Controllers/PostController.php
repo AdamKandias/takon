@@ -12,16 +12,12 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(5);
+        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(10);
         return view('post.home', ["topRank" => User::topRank(), "posts" =>  $posts]);
     }
 
     public function create()
     {
-        if (Auth::user()->password == null) {
-            return redirect()->route("profile")->with("passwordStatus", "Harap membuat password terlebih dahulu!");
-        }
-
         return view('post.create', ["mapel" => Mapel::fetchAll()]);
     }
 

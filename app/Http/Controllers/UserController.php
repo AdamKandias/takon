@@ -57,4 +57,9 @@ class UserController extends Controller
 
         return redirect()->route('profile')->with("status", "Foto profil berhasil diubah!");
     }
+
+    public function dashboard()
+    {
+        return view("admin.dashboard");
+    }
 }

@@ -20,7 +20,10 @@
       aria-label="Search">
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="#">Sign out</a>
+        <form action="{{ route("logout") }}" method="post">
+          @csrf
+          <button type="submit" class="nav-link px-3" href="#">Sign out</button>
+        </form>
       </div>
     </div>
   </header>
@@ -72,6 +75,7 @@
       </nav>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <h1>Halo Admin {{ Auth::user()->name }}</h1>
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Dashboard</h1>

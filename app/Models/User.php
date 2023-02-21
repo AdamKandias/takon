@@ -47,7 +47,7 @@ class User extends Authenticatable
         $currentRole = $user->role->id;
         $correctRole = 1;
 
-        $roles = Role::orderBy('id', 'desc')->get();
+        $roles = Role::all()->latest()->get();
 
         foreach ($roles as $role) {
             if ($currentPoint >= $role->minimum_point) {
@@ -83,6 +83,11 @@ class User extends Authenticatable
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public static function topRank()
