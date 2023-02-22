@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('post_likes', function (Blueprint $table) {
             $table->foreignUuid("post_id");
             $table->foreign("post_id")->references("id")->on("posts");
-            $table->foreignId("user_id");
+            $table->foreignUuid("user_id");
             $table->foreign("user_id")->references("id")->on("users");
             $table->primary(['post_id', 'user_id']);
         });

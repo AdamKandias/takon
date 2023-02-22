@@ -62,4 +62,14 @@ class UserController extends Controller
     {
         return view("admin.dashboard");
     }
+
+    public function rank()
+    {
+        return view("user.rank", ["rank" => User::rank()]);
+    }
+
+    public function show(User $user)
+    {
+        return view("user.show-profile", ["user" => $user]);
+    }
 }

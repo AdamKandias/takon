@@ -25,10 +25,12 @@ Route::post('/', [AuthController::class, "auth"])->name("auth")->middleware("gue
 Route::post('/logout', [AuthController::class, "logout"])->name("logout")->middleware("auth");
 
 // User Route
+Route::get("/profile/{user}", [UserController::class, "show"])->name("user.show")->middleware("auth");
 Route::view('/profile', 'user.profile')->name("profile")->middleware("auth");
 Route::post("/password", [UserController::class, "createPassword"])->name("createPassword")->middleware("auth");
 Route::put("/password", [UserController::class, "editPassword"])->name("editPassword")->middleware("auth");
 Route::put("/image", [UserController::class, "editImage"])->name("editImage")->middleware("auth", "hasPassword");
+Route::get("/rank", [UserController::class, "rank"])->name("rank")->middleware("auth");
 
 // Admin Route
 Route::get('/dashboard', [UserController::class, "dashboard"])->name("dashboard")->middleware("auth", "onlyAdmin");

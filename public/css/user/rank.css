@@ -1,0 +1,21 @@
+
+.rankProfile img {
+    border: 1px solid;
+    height: 35px;
+    width: 35px;
+    border-radius: 200px;
+}
+
+.rankName span {
+    font-family: sf-pro;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.rankPoin {
+    color: #34B3F1;
+}
+
+.listRank:hover {
+    color: #34B3F1;
+}

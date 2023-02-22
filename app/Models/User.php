@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
     protected $guarded = [
         'id',
@@ -27,6 +29,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    protected $keyType = 'string';
 
     public static function pointDecrease()
     {
@@ -65,6 +69,16 @@ class User extends Authenticatable
         return;
     }
 
+    public static function topRank()
+    {
+        return User::orderBy("point", "desc")->where("status_id", 1)->take(5)->get();
+    }
+
+    public static function rank()
+    {
+        return User::orderBy("point", "desc")->where("status_id", 1)->paginate(10);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
@@ -88,10 +102,5 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
-    }
-
-    public static function topRank()
-    {
-        return User::orderBy("point", "desc")->take(5)->get();
     }
 }

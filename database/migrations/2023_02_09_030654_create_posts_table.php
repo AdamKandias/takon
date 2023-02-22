@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("image", 60)->nullable(true);
             $table->unsignedTinyInteger("mapel_id")->nullable(false);
             $table->foreign("mapel_id")->references("id")->on("mapel");
-            $table->foreignId("user_id")->nullable(false);
+            $table->foreignUuid("user_id")->nullable(false);
             $table->foreign("user_id")->references("id")->on("users");
             $table->timestamps();
         });

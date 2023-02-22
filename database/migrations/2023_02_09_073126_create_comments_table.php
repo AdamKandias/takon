@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("image", 100)->nullable(true);
             $table->foreignUuid("answer_id")->nullable(false);
             $table->foreign("answer_id")->references("id")->on("answers");
-            $table->foreignId("user_id")->nullable(false);
+            $table->foreignUuid("user_id")->nullable(false);
             $table->foreign("user_id")->references("id")->on("users");
             $table->timestamps();
         });

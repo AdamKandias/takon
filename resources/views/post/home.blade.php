@@ -126,7 +126,7 @@
                         </div>
                     @endif
                     @foreach ($posts as $post)
-                        <a class="text-decoration-none text-dark row g-0" href="{{ route('post.show', $post->id) }}">
+                        <a class="text-decoration-none text-reset row g-0" href="{{ route('post.show', $post->id) }}">
                             <div class="content px-4 py-2">
                                 <div class="headerContent d-flex py-2">
                                     <img src="{{ asset('storage/' . $post->user->image) }}" class="avatar me-2">
@@ -138,10 +138,13 @@
                                     </div>
                                     <div class="moreAction col-1"></div>
                                 </div>
-                                <div class="text-truncate-container"><p class="">{!! $post->question !!}</p></div>
+                                <div class="text-truncate-container">
+                                    <p class="">{!! $post->question !!}</p>
+                                </div>
                                 <div class="bottomContent my-2">
-                                    <span class="bottomContent1">{{ $post->answer ? "Sudah terjawab" : "Belum terjawab" }} <span
-                                            class="dot mx-1">•</span></span>
+                                    <span
+                                        class="bottomContent1">{{ $post->answer ? 'Sudah terjawab' : 'Belum terjawab' }}
+                                        <span class="dot mx-1">•</span></span>
                                     <span class="seeMore">Lihat</span>
                                 </div>
                             </div>
@@ -164,7 +167,7 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="{{ route("mapel") }}">
+                                    <a href="{{ route('mapel') }}">
                                         <img src="{{ asset('img/note.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
                                     </a>
@@ -203,13 +206,15 @@
                     </div>
                 </div>
                 <div class="myprofile">
-                    <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" class="big-avatar">
-                        <div class="text-center">
-                            <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
-                            <span class="me-1">{{ Auth::user()->point }} Poin</span>
+                    <a href="{{ route('profile') }}" class="text-decoration-none text-dark">
+                        <div class="row g-0 py-3 justify-content-center align-items-center">
+                            <img src="{{ asset('storage/' . Auth::user()->image) }}" class="big-avatar">
+                            <div class="text-center">
+                                <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
+                                <span class="me-1">{{ Auth::user()->point }} Poin</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
 
                     <div class="infoProfile">
                         <div class="infoProfile1 px-3 py-2">
@@ -232,20 +237,26 @@
                         </div>
                     </div>
                     @foreach ($topRank as $user)
-                        <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
-                            <div class="col-2 me-1">
-                                <div class="rankProfile">
-                                    <img src="{{ asset('storage/' . $user->image) }}">
+                        <a class="text-reset text-decoration-none" href="{{ route('user.show', $user->id) }}">
+                            <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
+                                <div class="col-2 me-1">
+                                    <div class="rankProfile">
+                                        <img src="{{ asset('storage/' . $user->image) }}">
+                                    </div>
+                                </div>
+                                <div class="col d-flex justify-content-between">
+                                    <div class="rankName d-inline-block text-truncate" style="max-width: 140px">
+                                        <span>{{ $user->name }}</span>
+                                    </div>
+                                    <div class="rankPoin"><span>{{ $user->point }} Poin</span></div>
                                 </div>
                             </div>
-                            <div class="col d-flex justify-content-between">
-                                <div class="rankName d-inline-block text-truncate" style="max-width: 140px"><span>{{ $user->name }}</span></div>
-                                <div class="rankPoin"><span>{{ $user->point }} Poin</span></div>
-                            </div>
-                        </div>
+                        </a>
                     @endforeach
-                    <div class="d-flex justify-content-center align-items-center moreActionList py-3"><span>Lihat
-                            lainnya</span></div>
+                    <a class="text-decoration-none text-reset" href="{{ route('rank') }}">
+                        <div class="d-flex justify-content-center align-items-center moreActionList py-3"><span>Lihat
+                                lainnya</span></div>
+                    </a>
                 </div>
                 <div class="footer my-5">
                     <div class="d-flex justify-contentc-center">

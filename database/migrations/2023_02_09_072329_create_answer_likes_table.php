@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('answer_likes', function (Blueprint $table) {
             $table->foreignUuid("answer_id");
             $table->foreign("answer_id")->references("id")->on("answers");
-            $table->foreignId("user_id");
+            $table->foreignUuid("user_id");
             $table->foreign("user_id")->references("id")->on("users");
             $table->primary(['answer_id', 'user_id']);
         });

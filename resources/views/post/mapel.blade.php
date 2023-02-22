@@ -116,7 +116,7 @@
                             <ul class="dropdown-menu">
                                 @foreach ($allMapel as $mapel)
                                     <li><a class="dropdown-item {{ $currentMapel == $mapel->mapel ? 'active' : '' }}"
-                                            href="{{ route('mapel', ["mapel"=> Str::replaceFirst(' ', '-', Str::lower($mapel->mapel))]) }}">{{ $mapel->mapel }}</a>
+                                            href="{{ route('mapel', ['mapel' => Str::replaceFirst(' ', '-', Str::lower($mapel->mapel))]) }}">{{ $mapel->mapel }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -127,15 +127,16 @@
                                 {{ $filter }}
                             </button>
                             <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item {{ $filter == "Semua" ? 'active' : '' }}"
-                                            href="{{ route("mapel", ["mapel" => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), "filter" => "semua"]) }}">Semua</a>
-                                    </li>
-                                    <li><a class="dropdown-item {{ $filter == "Terjawab" ? 'active' : '' }}"
-                                            href="{{ route("mapel", ["mapel" => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), "filter" => "terjawab"]) }}">Terjawab</a>
-                                    </li>
-                                    <li><a class="dropdown-item {{ $filter == "Belum Terjawab" ? 'active' : '' }}"
-                                            href="{{ route("mapel", ["mapel" => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), "filter" => "belum-terjawab"]) }}">Belum Terjawab</a>
-                                    </li>
+                                <li><a class="dropdown-item {{ $filter == 'Semua' ? 'active' : '' }}"
+                                        href="{{ route('mapel', ['mapel' => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), 'filter' => 'semua']) }}">Semua</a>
+                                </li>
+                                <li><a class="dropdown-item {{ $filter == 'Terjawab' ? 'active' : '' }}"
+                                        href="{{ route('mapel', ['mapel' => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), 'filter' => 'terjawab']) }}">Terjawab</a>
+                                </li>
+                                <li><a class="dropdown-item {{ $filter == 'Belum Terjawab' ? 'active' : '' }}"
+                                        href="{{ route('mapel', ['mapel' => Str::replaceFirst(' ', '-', Str::lower($currentMapel)), 'filter' => 'belum-terjawab']) }}">Belum
+                                        Terjawab</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -185,44 +186,44 @@
                         {{ $posts->links() }}
                     </div>
                 @endif
-                    <nav class="navBottom fixed-bottom bg-light">
-                        <div>
-                            <ul class="d-flex m-0">
-                                <li>
-                                    <div class="iconNavBottom">
-                                        <a href="{{ route('home') }}">
-                                            <img src="{{ asset('img/home.svg') }}" width="30"
-                                                height="30" viewBox="0 0 24 24">
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="iconNavBottom">
-                                        <a href="{{ route("mapel") }}">
-                                            <img src="{{ asset('img/noteColor.svg') }}" width="30"
-                                                height="30" viewBox="0 0 24 24">
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="iconNavBottom">
-                                        <a href="notification.html">
-                                            <img src="{{ asset('img/notification.svg') }}" width="30"
-                                                height="30" viewBox="0 0 24 24">
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="iconNavBottom">
-                                        <a href="{{ route('profile') }}">
-                                            <img src="{{ asset('img/user.svg') }}" width="30" height="30"
-                                                viewBox="0 0 24 24">
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+                <nav class="navBottom fixed-bottom bg-light">
+                    <div>
+                        <ul class="d-flex m-0">
+                            <li>
+                                <div class="iconNavBottom">
+                                    <a href="{{ route('home') }}">
+                                        <img src="{{ asset('img/home.svg') }}" width="30" height="30"
+                                            viewBox="0 0 24 24">
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="iconNavBottom">
+                                    <a href="{{ route('mapel') }}">
+                                        <img src="{{ asset('img/noteColor.svg') }}" width="30" height="30"
+                                            viewBox="0 0 24 24">
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="iconNavBottom">
+                                    <a href="notification.html">
+                                        <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
+                                            viewBox="0 0 24 24">
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="iconNavBottom">
+                                    <a href="{{ route('profile') }}">
+                                        <img src="{{ asset('img/user.svg') }}" width="30" height="30"
+                                            viewBox="0 0 24 24">
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
 
             </div>
 
@@ -266,22 +267,26 @@
                         </div>
                     </div>
                     @foreach ($topRank as $user)
-                        <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
-                            <div class="col-2 me-1">
-                                <div class="rankProfile">
-                                    <img src="{{ asset('storage/' . $user->image) }}">
+                        <a class="text-reset text-decoration-none" href="{{ route('user.show', $user->id) }}">
+                            <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
+                                <div class="col-2 me-1">
+                                    <div class="rankProfile">
+                                        <img src="{{ asset('storage/' . $user->image) }}">
+                                    </div>
+                                </div>
+                                <div class="col d-flex justify-content-between">
+                                    <div class="rankName d-inline-block text-truncate" style="max-width: 140px">
+                                        <span>{{ $user->name }}</span>
+                                    </div>
+                                    <div class="rankPoin"><span>{{ $user->point }} Poin</span></div>
                                 </div>
                             </div>
-                            <div class="col d-flex justify-content-between">
-                                <div class="rankName d-inline-block text-truncate" style="max-width: 140px">
-                                    <span>{{ $user->name }}</span>
-                                </div>
-                                <div class="rankPoin"><span>{{ $user->point }} Poin</span></div>
-                            </div>
-                        </div>
+                        </a>
                     @endforeach
-                    <div class="d-flex justify-content-center align-items-center moreActionList py-3"><span>Lihat
-                            lainnya</span></div>
+                    <a href="{{ route('rank') }}">
+                        <div class="d-flex justify-content-center align-items-center moreActionList py-3"><span>Lihat
+                                lainnya</span></div>
+                    </a>
                 </div>
                 <div class="footer my-5">
                     <div class="d-flex justify-contentc-center">

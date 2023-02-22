@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('comment_reports', function (Blueprint $table) {
             $table->foreignUuid("comment_id");
             $table->foreign("comment_id")->references("id")->on("comments");
-            $table->foreignId("user_id");
+            $table->foreignUuid("user_id");
             $table->foreign("user_id")->references("id")->on("users");
             $table->primary(['comment_id', 'user_id']);
             $table->string("description", 100)->nullable(false);
