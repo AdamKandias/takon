@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,12 @@ Route::get('/home', [PostController::class, "index"])->name("home")->middleware(
 Route::get('/ask', [PostController::class, "create"])->name("ask")->middleware("auth", "hasPassword");
 Route::post('/ask', [PostController::class, "store"])->name("post.store")->middleware("auth", "hasPassword");
 Route::get('/question/{post}', [PostController::class, "show"])->name("post.show")->middleware("auth");
+
+// Following Route
+Route::get('/following', [FollowController::class, "following"])->name("following")->middleware("auth");
+Route::get('/follower', [FollowController::class, "follower"])->name("follower")->middleware("auth");
+Route::post('/following/{user}', [FollowController::class, "follow"])->name("follow")->middleware("auth");
+Route::delete('/following/{user}', [FollowController::class, "unfollow"])->name("unfollow")->middleware("auth");
 
 // Answer Route
 Route::post('/answer', [AnswerController::class, "store"])->name("answer.store")->middleware("auth", "hasPassword");

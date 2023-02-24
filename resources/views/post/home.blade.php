@@ -38,7 +38,7 @@
                     <ul>
 
                         <li class="row g-0 align-items-center">
-                            <a href="{{ route('home') }}" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('home') }}" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/homeColor.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -49,7 +49,7 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="{{ route('mapel') }}" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('mapel') }}" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/note.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -60,7 +60,7 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-dark">
+                            <a href="notification.html" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -71,7 +71,7 @@
                             </a>
                         </li>
                         <li class=" row g-0 align-items-center">
-                            <a href="{{ route('profile') }}" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('profile') }}" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/user.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -107,7 +107,7 @@
 
                 </div>
                 <div class="contents">
-                    <div class="heroContent px-4 py-5">
+                    <div class="heroContent px-4 py-5 border-bottom">
                         <div class="mb-4">
                             <div class="heroitem1 d-flex">
                                 <div class="iconItem"></div>
@@ -206,7 +206,7 @@
                     </div>
                 </div>
                 <div class="myprofile">
-                    <a href="{{ route('profile') }}" class="text-decoration-none text-dark">
+                    <a href="{{ route('profile') }}" class="text-decoration-none text-reset">
                         <div class="row g-0 py-3 justify-content-center align-items-center">
                             <img src="{{ asset('storage/' . Auth::user()->image) }}" class="big-avatar">
                             <div class="text-center">

@@ -39,7 +39,7 @@
                     <ul>
 
                         <li class="row g-0 align-items-center">
-                            <a href="{{ route('home') }}" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('home') }}" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/home.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -50,7 +50,7 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="{{ route('mapel') }}" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('mapel') }}" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/note.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -61,7 +61,7 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-dark">
+                            <a href="notification.html" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -72,7 +72,7 @@
                             </a>
                         </li>
                         <li class=" row g-0 align-items-center">
-                            <a href="{{ route('profile') }}" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('profile') }}" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/userColor.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -93,12 +93,6 @@
                     <div class="namePage col-4 d-flex justify-content-center align-items-center">
                         Profile
                     </div>
-                    <div class="box-logout col-4 d-flex justify-content-end align-items-center">
-                        <form action="{{ route('logout') }}" method="POST" class="text-center">
-                            @csrf
-                            <button class="mybtn-logout rounded-pill me-2" type="submit">Logout</button>
-                        </form>
-                    </div>
                 </div>
                 <div class="contents">
                     <div class="profileTop justify-content-center">
@@ -109,23 +103,35 @@
                         <div class="infoContainer">
                             <div class="d-flex gap-2 justify-content-center align-items-center">
                                 <span class="nameProfile">{{ $user->name }}</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#323C45"
-                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                    <path fill-rule="evenodd"
-                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                </svg>
-                                <a class="editProfile my-2 d-none" href="#">{{ $user->class->class }}</a>
                             </div>
-                            <div class="d-flex infoAkun my-4 gap-4 justify-content-center">
-                                <div><span class="fw-semibold">{{ $user->posts->count() }}</span> Pertanyaan</div>
-                                <div><span class="fw-semibold">{{ $user->answers->count() }}</span> Menjawab</div>
-                            </div>
-                            <div class="d-flex justify-content-center align-items-center gap-4">
+                            <div class="d-flex gap-2 justify-content-center align-items-center">
                                 <div class="role role-{{ $user->role->id }} px-4 py-2">
                                     {{ $user->role->role }}</div>
                                 <div class="">{{ $user->point }} Poin</div>
+                            </div>
+                            <div class="d-flex infoAkun my-4 gap-4 justify-content-center">
+                                <div><span class="fw-semibold">{{ $user->posts->count() }}</span> Pertanyaan
+                                </div>
+                                <div><span class="fw-semibold">{{ $user->answers->count() }}</span> Menjawab
+                                </div>
+                                <div><span class="fw-semibold">{{ $user->comments->count() }}</span> Komentar
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-4">
+                                <div> Follower: {{ $user->followers()->count() }}</div>
+                                <div> Following: {{ $user->follows()->count() }}</div>
+                                @if ($followed)
+                                    <form action="{{ route('unfollow', $user->id) }}" method="POST">
+                                        @method("DELETE")
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Unfollow</button>
+                                    </form>
+                                @else
+                                <form action="{{ route('follow', $user->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-primary">Follow</button>
+                                </form>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -133,7 +139,54 @@
                     <div class="personInformation">
                         <p class="fs-4 fw-semibold text-center">Person Information</p>
                         <div class="d-flex justify-content-center data">
-
+                            <ul>
+                                <li>
+                                    <div class="rowdata d-flex align-items-center">
+                                        <svg version="1.0" width="24" height="24"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.000000 512.000000"
+                                            preserveAspectRatio="xMidYMid meet">
+                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                                fill="#000000" stroke="none">
+                                                <path
+                                                    d="M2380 4945 c-252 -43 -500 -180 -660 -365 -391 -455 -369 -1111 50
+                                            -1530 418 -418 1076 -440 1527 -52 140 120 268 315 326 493 169 518 -61 1086
+                                            -541 1337 -220 115 -471 156 -702 117z m303 -316 c429 -66 730 -472 668 -899
+                                            -84 -571 -719 -871 -1208 -570 -280 172 -430 506 -369 822 84 432 479 713 909
+                                            647z" />
+                                                <path
+                                                    d="M1596 2389 c-480 -63 -897 -408 -1050 -869 -59 -180 -61 -201 -61
+                                            -752 0 -496 0 -507 21 -534 11 -15 33 -37 48 -48 l27 -21 1979 0 1979 0 27 21
+                                            c15 11 37 33 48 48 21 27 21 38 21 534 0 453 -2 516 -18 592 -111 519 -481
+                                            892 -1007 1016 -69 16 -156 18 -1010 20 -514 1 -966 -2 -1004 -7z m1993 -337
+                                            c287 -76 516 -268 642 -537 77 -164 82 -200 86 -642 l4 -393 -1761 0 -1761 0
+                                            4 393 c3 364 5 398 25 476 101 384 421 668 817 724 17 2 442 4 945 3 913 -2
+                                            915 -2 999 -24z" />
+                                            </g>
+                                        </svg>
+                                        <span class="labeldata">Nama Lengkap : <span
+                                                class="text-dark valueData">{{ $user->name }}</span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="rowdata d-flex align-items-center">
+                                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 512.000000 512.000000"
+                                            preserveAspectRatio="xMidYMid meet">
+                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                                fill="#000000" stroke="none">
+                                                <path
+                                                    d="M610 4304 c-197 -52 -363 -210 -424 -404 l-26 -81 0 -1259 0 -1259 26 -81 c48 -153 166 -290 309 -360 130 -64 -5 -60 2065 -60 2070 0 1935 -4 2065 60 136 66 257 202 306 346 l24 69 0 1285 0 1285 -24 69 c-65 188 -232 341 -426 391 -87 22 -3810 22 -3895 -1z m3862 -342 c70 -34 105 -71 141 -150 l22 -47 0 -1205 0 -1205 -26 -55 c-33 -70 -79 -116 -149 -149 l-55 -26 -1845 0 -1845 0 -47 22 c-79 36 -116 71 -150 141 l-33 67 -3 1160 c-2 705 1 1184 7 1222 22 141 106 230 240 253 25 4 863 7 1861 6 l1815 -1 67 -33z" />
+                                                <path
+                                                    d="M872 3500 c-48 -30 -72 -75 -72 -140 0 -65 24 -110 72 -140 33 -20 54 -20 1688 -20 1634 0 1655 0 1688 20 48 30 72 75 72 140 0 65 -24 110 -72 140 -33 20 -54 20 -1688 20 -1634 0 -1655 0 -1688 -20z" />
+                                                <path
+                                                    d="M872 1740 c-48 -30 -72 -75 -72 -140 0 -65 24 -110 72 -140 31 -19 51 -20 408 -20 357 0 377 1 408 20 48 30 72 75 72 140 0 65 -24 110 -72 140 -31 19 -51 20 -408 20 -357 0 -377 -1 -408 -20z" />
+                                            </g>
+                                        </svg>
+                                        <span class="labeldata">Kelas : <span
+                                                class="text-dark valueData">{{ $user->class->class }}</span></span>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -182,16 +235,6 @@
 
     <!-- BOOTSTRAP JS -->
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script>
-        var loadFile = function(event) {
-            var output = document.getElementById('output');
-            output.style.display = "block";
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src)
-            }
-        };
-    </script>
 </body>
 
 </html>

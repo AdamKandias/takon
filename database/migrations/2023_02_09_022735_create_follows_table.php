@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignUuid("followed_user_id");
             $table->foreign("followed_user_id")->references("id")->on("users");
             $table->primary(['following_user_id', 'followed_user_id']);
+            $table->timestamps();
         });
     }
 

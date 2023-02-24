@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Follow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -70,6 +71,6 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view("user.show-profile", ["user" => $user]);
+        return view("user.show-profile", ["user" => $user, "followed" => Auth::user()->follows->contains('id', $user->id)]);
     }
 }
