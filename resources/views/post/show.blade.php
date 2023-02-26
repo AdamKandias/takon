@@ -107,12 +107,26 @@
                             <span class="dot">•</span>
                             <span class="dateUpload">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
-                        <a class="text-decoration-none text-reset" href="{{ route('mapel', ["mapel" => $post->mapel->mapel]) }}">
-                        <span style="width: fit-content" class="mapelCnt">{{ $post->mapel->mapel }}</span>
+                        <a class="text-decoration-none text-reset"
+                            href="{{ route('mapel', ['mapel' => $post->mapel->mapel]) }}">
+                            <span style="width: fit-content" class="mapelCnt">{{ $post->mapel->mapel }}</span>
                         </a>
                     </div>
-                    <a class="float-end" href="">Like 0</a>
-                    <div class="moreAction col-1"></div>
+                    <div class="moreAction d-flex col-1">
+                        @if ($post->like->contains('user_id', Auth::user()->id))
+                            <form action="{{ route('post.unlike', $post->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-outline-primary text-primary">👎
+                                    {{ $post->like->count() }}</button>
+                            </form>
+                        @else
+                            <form action="{{ route('post.like', $post->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-sm btn-primary">👍 {{ $post->like->count() }}</button>
+                            </form>
+                        @endif
+                    </div>
                 </div>
                 <div class="pertanyaan mb-3 mt-3">
                     {!! $post->question !!}
@@ -151,7 +165,21 @@
                     </div>
                     <span class="mapelCnt" style="color: #e628e9;">{{ $post->answer->user->role->role }}</span>
                 </div>
-                <div class="moreAction col-1"></div>
+                <div class="moreAction col-1">
+                    @if ($post->answer->like->contains('user_id', Auth::user()->id))
+                        <form action="{{ route('answer.unlike', $post->answer->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-outline-primary text-primary">👎
+                                {{ $post->answer->like->count() }}</button>
+                        </form>
+                    @else
+                        <form action="{{ route('answer.like', $post->answer->id) }}" method="POST">
+                            @csrf
+                            <button class="btn btn-sm btn-primary">👍 {{ $post->answer->like->count() }}</button>
+                        </form>
+                    @endif
+                </div>
             </div>
             <div class="jawaban mb-2">
                 {!! $post->answer->answer !!}
@@ -215,7 +243,22 @@
                         </div>
                         <span class="mapelCnt" style="color: #e628e9;">{{ $comment->user->role->role }}</span>
                     </div>
-                    <div class="moreAction col-1"></div>
+                    <div class="moreAction col-1">
+                        @if ($comment->like->contains('user_id', Auth::user()->id))
+                            <form action="{{ route('comment.unlike', $comment->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-outline-primary text-primary">👎
+                                    {{ $comment->like->count() }}</button>
+                            </form>
+                        @else
+                            <form action="{{ route('comment.like', $comment->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-sm btn-primary">👍
+                                    {{ $comment->like->count() }}</button>
+                            </form>
+                        @endif
+                    </div>
                 </div>
                 <div class="d-flex g-0 p-0 m-0">
                     <div class="col-1"></div>
@@ -223,8 +266,6 @@
                         {!! $comment->comment !!}
                         @if ($comment->image)
                             <img class="img-comment" src="{{ asset('storage/' . $comment->image) }}">
-                            {{-- <div class="box-img-comment">
-                                            </div> --}}
                         @endif
                     </div>
                 </div>

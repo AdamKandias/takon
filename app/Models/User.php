@@ -51,7 +51,7 @@ class User extends Authenticatable
         $currentRole = $user->role->id;
         $correctRole = 1;
 
-        $roles = Role::all()->latest()->get();
+        $roles = Role::orderBy("id", "desc")->get();
 
         foreach ($roles as $role) {
             if ($currentPoint >= $role->minimum_point) {
@@ -117,5 +117,14 @@ class User extends Authenticatable
     public function following(User $user)
     {
         return $this->follows()->save($user);
+    }
+
+    public function likesCount()
+    {
+        $postsLikes = PostLike::where("user_id", Auth::user()->id)->count();
+        $answersLikes = AnswerLike::where("user_id", Auth::user()->id)->count();
+        $commentsLikes = CommentLike::where("user_id", Auth::user()->id)->count();
+
+        return $postsLikes + $answersLikes + $commentsLikes;
     }
 }

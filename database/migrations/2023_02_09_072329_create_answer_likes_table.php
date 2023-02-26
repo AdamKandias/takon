@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignUuid("user_id");
             $table->foreign("user_id")->references("id")->on("users");
             $table->primary(['answer_id', 'user_id']);
+            $table->timestamps();
         });
     }
 

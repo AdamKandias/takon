@@ -218,6 +218,9 @@
                                 <a class="text-decoration-none text-reset" href="{{ route('following') }}">
                                     <div> Following: {{ Auth()->user()->follows()->count() }}</div>
                                 </a>
+                                <a class="text-decoration-none text-reset" href="{{ route('likes') }}">
+                                    <div> Disukai: {{ Auth()->user()->likesCount() }}</div>
+                                </a>
                             </div>
                         </div>
                     </div>

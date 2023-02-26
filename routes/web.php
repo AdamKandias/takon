@@ -4,10 +4,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\AnswerLikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PostLikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,10 +49,10 @@ Route::get('/question', [PostController::class, "userPost"])->name("userPost")->
 Route::get('/question/{post}', [PostController::class, "show"])->name("post.show")->middleware("auth");
 
 // Following Route
-Route::get('/following', [FollowController::class, "following"])->name("following")->middleware("auth");
-Route::get('/follower', [FollowController::class, "follower"])->name("follower")->middleware("auth");
-Route::post('/following/{user}', [FollowController::class, "follow"])->name("follow")->middleware("auth");
-Route::delete('/following/{user}', [FollowController::class, "unfollow"])->name("unfollow")->middleware("auth");
+Route::get('/following', [FollowController::class, "following"])->name("following")->middleware("auth", "hasPassword");
+Route::get('/follower', [FollowController::class, "follower"])->name("follower")->middleware("auth", "hasPassword");
+Route::post('/following/{user}', [FollowController::class, "follow"])->name("follow")->middleware("auth", "hasPassword");
+Route::delete('/following/{user}', [FollowController::class, "unfollow"])->name("unfollow")->middleware("auth", "hasPassword");
 
 // Friend Route
 Route::get('/friends', [FriendController::class, "friends"])->name("friends")->middleware("auth");
@@ -63,3 +67,18 @@ Route::post('/comment', [CommentController::class, "store"])->name("comment.stor
 
 // Mapel Route
 Route::get("/mapel", [MapelController::class, "index"])->name("mapel")->middleware("auth");
+
+// Likes Route
+Route::get("/likes", [LikeController::class, "index"])->name("likes")->middleware("auth");
+
+// Post Like Route
+Route::post('/question/{post}/post-like', [PostLikeController::class, "store"])->name("post.like")->middleware("auth", "hasPassword");
+Route::delete('/question/{post}/post-like', [PostLikeController::class, "destroy"])->name("post.unlike")->middleware("auth", "hasPassword");
+
+// Answer Like Route
+Route::post('/question/{answer}/answer-like', [AnswerLikeController::class, "store"])->name("answer.like")->middleware("auth", "hasPassword");
+Route::delete('/question/{answer}/answer-like', [AnswerLikeController::class, "destroy"])->name("answer.unlike")->middleware("auth", "hasPassword");
+
+// Comment Like Route
+Route::post('/question/{comment}/comment-like', [CommentLikeController::class, "store"])->name("comment.like")->middleware("auth", "hasPassword");
+Route::delete('/question/{comment}/comment-like', [CommentLikeController::class, "destroy"])->name("comment.unlike")->middleware("auth", "hasPassword");
