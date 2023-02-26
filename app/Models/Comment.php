@@ -27,4 +27,9 @@ class Comment extends Model
     {
         return $this->hasMany(CommentLike::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(CommentReport::class);
+    }
 }

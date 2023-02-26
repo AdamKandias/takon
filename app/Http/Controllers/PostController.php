@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mapel;
 use App\Models\Post;
+use App\Models\PostReport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(10);
+        $reports = PostReport::all("post_id")->pluck("post_id");
+        // dd($reports);
+        $posts = Post::with("reports")->orderBy('created_at', 'desc')->simplePaginate(10);
         return view('post.home', ["topRank" => User::topRank(), "posts" =>  $posts]);
     }
 

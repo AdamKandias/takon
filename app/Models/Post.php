@@ -30,4 +30,9 @@ class Post extends Model
     {
         return $this->hasMany(PostLike::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(PostReport::class);
+    }
 }

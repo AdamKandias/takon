@@ -32,4 +32,9 @@ class Answer extends Model
     {
         return $this->hasMany(AnswerLike::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(AnswerReport::class);
+    }
 }

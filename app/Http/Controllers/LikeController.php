@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnswerLike;
-use App\Models\Comment;
 use App\Models\CommentLike;
 use App\Models\PostLike;
 use Illuminate\Support\Facades\Auth;

@@ -5,13 +5,16 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AnswerLikeController;
+use App\Http\Controllers\AnswerReportController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentLikeController;
+use App\Http\Controllers\CommentReportController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\PostReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,3 +85,15 @@ Route::delete('/question/{answer}/answer-like', [AnswerLikeController::class, "d
 // Comment Like Route
 Route::post('/question/{comment}/comment-like', [CommentLikeController::class, "store"])->name("comment.like")->middleware("auth", "hasPassword");
 Route::delete('/question/{comment}/comment-like', [CommentLikeController::class, "destroy"])->name("comment.unlike")->middleware("auth", "hasPassword");
+
+// Post Report Route
+Route::post('/question/{post}/post-report', [PostReportController::class, "store"])->name("post.report")->middleware("auth", "hasPassword");
+Route::delete('/question/{post}/post-report', [PostReportController::class, "destroy"])->name("post.unreport")->middleware("auth", "hasPassword");
+
+// Answer Report Route
+Route::post('/question/{answer}/answer-report', [AnswerReportController::class, "store"])->name("answer.report")->middleware("auth", "hasPassword");
+Route::delete('/question/{answer}/answer-report', [AnswerReportController::class, "destroy"])->name("answer.unreport")->middleware("auth", "hasPassword");
+
+// Comment Report Route
+Route::post('/question/{comment}/comment-report', [CommentReportController::class, "store"])->name("comment.report")->middleware("auth", "hasPassword");
+Route::delete('/question/{comment}/comment-report', [CommentReportController::class, "destroy"])->name("comment.unreport")->middleware("auth", "hasPassword");
