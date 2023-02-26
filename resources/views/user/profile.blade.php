@@ -195,14 +195,29 @@
                                 <div class="">{{ Auth::user()->point }} Poin</div>
                             </div>
                             <div class="d-flex infoAkun my-4 gap-4 justify-content-center">
-                                <div><span class="fw-semibold">{{ Auth::user()->posts->count() }}</span> Pertanyaan
-                                </div>
-                                <div><span class="fw-semibold">{{ Auth::user()->answers->count() }}</span> Menjawab
-                                </div>
+                                <a class="text-decoration-none text-primary" href="{{ route('userPost') }}">
+                                    <div><span class="fw-semibold">{{ Auth::user()->posts->count() }}</span>
+                                        Pertanyaan
+                                    </div>
+                                </a>
+                                <a class="text-decoration-none text-primary" href="{{ route('userAnswer') }}">
+                                    <div><span class="fw-semibold">{{ Auth::user()->answers->count() }}</span>
+                                        Menjawab
+                                    </div>
+                                </a>
+                                <a class="text-decoration-none text-primary" href="{{ route('userComment') }}">
+                                    <div><span class="fw-semibold">{{ Auth::user()->comments->count() }}</span>
+                                        Komentar
+                                    </div>
+                                </a>
                             </div>
                             <div class="d-flex justify-content-center align-items-center gap-4">
-                                <a class="text-decoration-none text-reset" href="{{ route('follower') }}"><div> Follower: {{ Auth()->user()->followers()->count() }}</div></a>
-                                <a class="text-decoration-none text-reset" href="{{ route('following') }}"><div> Following: {{ Auth()->user()->follows()->count() }}</div></a>
+                                <a class="text-decoration-none text-reset" href="{{ route('follower') }}">
+                                    <div> Follower: {{ Auth()->user()->followers()->count() }}</div>
+                                </a>
+                                <a class="text-decoration-none text-reset" href="{{ route('following') }}">
+                                    <div> Following: {{ Auth()->user()->follows()->count() }}</div>
+                                </a>
                             </div>
                         </div>
                     </div>

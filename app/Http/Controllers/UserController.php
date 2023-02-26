@@ -71,6 +71,9 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        if (Auth::user()->id == $user->id) {
+            return redirect()->route("profile");
+        }
         return view("user.show-profile", ["user" => $user, "followed" => Auth::user()->follows->contains('id', $user->id)]);
     }
 }

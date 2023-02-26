@@ -52,4 +52,9 @@ class PostController extends Controller
     {
         return view("post.show", ["post" => $post]);
     }
+
+    public function userPost()
+    {
+        return view("post.question", ["posts" => Post::where("user_id", Auth::user()->id)->latest()->simplePaginate(10), "topRank" => User::topRank()]);
+    }
 }

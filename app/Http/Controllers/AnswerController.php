@@ -42,4 +42,9 @@ class AnswerController extends Controller
 
         return redirect()->route("post.show", $validatedData['post_id'])->with("status-success", "Jawaban berhasil terkirim!");
     }
+
+    public function userAnswer()
+    {
+        return view("post.answer", ["answers" => Answer::where("user_id", Auth::user()->id)->latest()->simplePaginate(10), "topRank" => User::topRank()]);
+    }
 }

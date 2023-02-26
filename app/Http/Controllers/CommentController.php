@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,5 +33,10 @@ class CommentController extends Controller
         Comment::create($validatedData);
 
         return redirect()->back()->with("status-success", "Comment berhasil diposting!");
+    }
+
+    public function userComment()
+    {
+        return view("post.comment", ["comments" => Comment::where("user_id", Auth::user()->id)->latest()->simplePaginate(10), "topRank" => User::topRank()]);
     }
 }

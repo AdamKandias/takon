@@ -202,15 +202,26 @@
                     </a>
 
                     <div class="infoProfile">
-                        <div class="infoProfile1 px-3 py-2">
-                            <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
-                        </div>
-                        <div class="px-3 py-2">
-                            <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
-                        </div>
-                        <div class="px-3 py-2">
-                            <span class="me-1">{{ Auth::user()->comments->count() }}</span>Memberikan Komentar
-                        </div>
+                        <a class="text-decoration-none text-primary" href="{{ route('userPost') }}">
+                            <div class="infoProfile1 px-3 py-2">
+                                <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
+                            </div>
+                        </a>
+                        <a class="text-decoration-none text-primary" href="{{ route('userAnswer') }}">
+                            <div class="px-3 py-2">
+                                <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
+                            </div>
+                        </a>
+                        <a class="text-decoration-none text-primary" href="{{ route('userComment') }}">
+                            <div class="px-3 py-2">
+                                <span class="me-1">{{ Auth::user()->comments->count() }}</span>Memberikan Komentar
+                            </div>
+                        </a>
+                        <a class="text-decoration-none text-primary" href="{{ route('friends') }}">
+                            <div class="px-3 py-2">
+                                <span class="me-1"></span> Lihat Postingan Teman
+                            </div>
+                        </a>
                     </div>
                 </div>
 
@@ -221,7 +232,7 @@
                             <img src="{{ asset('img/trophy.png') }}">
                         </div>
                     </div>
-                    {{-- @foreach ($topRank as $user)
+                    @foreach ($topRank as $user)
                         <a class="text-reset text-decoration-none" href="{{ route('user.show', $user->id) }}">
                             <div class="d-flex justify-content-center align-items-center listRank px-4 pb-4">
                                 <div class="col-2 me-1">
@@ -242,7 +253,7 @@
                         <div class="d-flex justify-content-center align-items-center moreActionList py-3"><span>Lihat
                                 lainnya</span></div>
                     </a>
-                </div> --}}
+                </div>
                     <div class="footer my-5">
                         <div class="d-flex justify-contentc-center">
                             <div class="px-1 footerText">About</div>

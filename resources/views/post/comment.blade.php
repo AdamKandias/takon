@@ -40,7 +40,7 @@
                         <li class="row g-0 align-items-center">
                             <a href="{{ route('home') }}" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
-                                    <img src="{{ asset('img/homeColor.svg') }}" width="30" height="30"
+                                    <img src="{{ asset('img/home.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
                                 </div>
                                 <div class="nameNav col">
@@ -89,7 +89,7 @@
             <div class="mid">
                 <div class="topbar px-3 sticky-top gap-2 d-flex justify-content-center align-items-center">
                     <div class="namePage">
-                        Home
+                        Daftar Komentarmu
                     </div>
 
                     <div class="imgLogo logoPhone">
@@ -107,52 +107,39 @@
 
                 </div>
                 <div class="contents">
-                    <div class="heroContent px-4 py-5 border-bottom">
-                        <div class="mb-4">
-                            <div class="heroitem1 d-flex">
-                                <div class="iconItem"></div>
-                                <span>Tanyakan pertanyaanmu kapanpun!</span>
-                            </div>
-                            <span class="fs-2 fw-semibold">Punya Pertanyaan?</span>
-                        </div>
-                        <a href="{{ route('ask') }}">
-                            <button class="btn btn-dark btnHero px-4">TANYAKAN SEKARANG</button>
-                        </a>
-                    </div>
-
                     @if (Session::has('status'))
                         <div class="alert alert-success text-center" role="alert">
                             {{ Session::get('status') }}
                         </div>
                     @endif
-                    @foreach ($posts as $post)
-                        <a class="text-decoration-none text-reset row g-0" href="{{ route('post.show', $post->id) }}">
-                            <div class="content px-4 py-2">
-                                <div class="headerContent d-flex py-2">
-                                    <img src="{{ asset('storage/' . $post->user->image) }}" class="avatar me-2">
-                                    <div class="names col row align-items-center g-0">
-                                        <div class="nameCnt">{{ $post->user->name }} <span class="dot">•</span>
-                                            <span class="dateUpload">{{ $post->created_at->diffForHumans() }}</span>
+                    @if (!empty($comments))
+                        @foreach ($comments as $comment)
+                        <a class="text-decoration-none text-reset row g-0"
+                        href="{{ route('post.show', $comment->answer->post->id) }}">
+                        <div class="content px-4 py-2">
+                            <div class="headerContent d-flex py-2">
+                                <img src="{{ asset('storage/' . $comment->user->image) }}" class="avatar me-2">
+                                <div class="names col row align-items-center g-0">
+                                    <div class="nameCnt">{{ $comment->user->name }} <span class="dot">•</span>
+                                        <span
+                                            class="dateUpload">{{ $comment->created_at->diffForHumans() }}</span>
                                         </div>
-                                        <span class="mapelCnt">{{ $post->mapel->mapel }}</span>
-                                    </div>
-                                    <div class="moreAction col-1"></div>
-                                </div>
-                                <div class="text-truncate-container">
-                                    <p class="">{!! $post->question !!}</p>
-                                </div>
-                                <div class="bottomContent my-2">
-                                    <span
-                                        class="bottomContent1">{{ $post->answer ? 'Sudah terjawab' : 'Belum terjawab' }}
-                                        <span class="dot mx-1">•</span></span>
-                                    <span class="seeMore">Lihat</span>
+                                        <div class="text-truncate-container">
+                                            <p class="">{!! $comment->comment !!}</p>
+                                        </div>
                                 </div>
                             </div>
-                        </a>
-                    @endforeach
+                        </div>
+                    </a>
+                        @endforeach
+                    @else
+                        <div class="alert alert-warning text-center" role="alert">
+                            Anda tidak memiliki komentar
+                        </div>
+                    @endif
                 </div>
                 <div class="mx-auto d-flex justify-content-center mt-4 mb-2">
-                    {{ $posts->links() }}
+                    {{ $comments->links() }}
                 </div>
                 <nav class="navBottom fixed-bottom bg-light">
                     <div>
@@ -160,7 +147,7 @@
                             <li>
                                 <div class="iconNavBottom">
                                     <a href="{{ route('home') }}">
-                                        <img src="{{ asset('img/homeColor.svg') }}" width="30" height="30"
+                                        <img src="{{ asset('img/home.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
                                     </a>
                                 </div>

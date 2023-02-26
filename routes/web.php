@@ -7,6 +7,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\FriendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,7 @@ Route::get('/dashboard', [UserController::class, "dashboard"])->name("dashboard"
 Route::get('/home', [PostController::class, "index"])->name("home")->middleware("auth");
 Route::get('/ask', [PostController::class, "create"])->name("ask")->middleware("auth", "hasPassword");
 Route::post('/ask', [PostController::class, "store"])->name("post.store")->middleware("auth", "hasPassword");
+Route::get('/question', [PostController::class, "userPost"])->name("userPost")->middleware("auth");
 Route::get('/question/{post}', [PostController::class, "show"])->name("post.show")->middleware("auth");
 
 // Following Route
@@ -48,10 +50,15 @@ Route::get('/follower', [FollowController::class, "follower"])->name("follower")
 Route::post('/following/{user}', [FollowController::class, "follow"])->name("follow")->middleware("auth");
 Route::delete('/following/{user}', [FollowController::class, "unfollow"])->name("unfollow")->middleware("auth");
 
-// Answer Route
-Route::post('/answer', [AnswerController::class, "store"])->name("answer.store")->middleware("auth", "hasPassword");
+// Friend Route
+Route::get('/friends', [FriendController::class, "friends"])->name("friends")->middleware("auth");
 
 // Answer Route
+Route::get('/answer', [AnswerController::class, "userAnswer"])->name("userAnswer")->middleware("auth");
+Route::post('/answer', [AnswerController::class, "store"])->name("answer.store")->middleware("auth", "hasPassword");
+
+// Comment Route
+Route::get('/comment', [CommentController::class, "userComment"])->name("userComment")->middleware("auth");
 Route::post('/comment', [CommentController::class, "store"])->name("comment.store")->middleware("auth", "hasPassword");
 
 // Mapel Route

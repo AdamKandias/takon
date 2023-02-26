@@ -249,15 +249,26 @@
                     </a>
 
                     <div class="infoProfile">
-                        <div class="infoProfile1 px-3 py-2">
-                            <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
-                        </div>
-                        <div class="px-3 py-2">
-                            <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
-                        </div>
-                        <div class="px-3 py-2">
-                            <span class="me-1">{{ Auth::user()->comments->count() }}</span>Memberikan Komentar
-                        </div>
+                        <a class="text-decoration-none text-primary" href="{{ route('userPost') }}">
+                            <div class="infoProfile1 px-3 py-2">
+                                <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
+                            </div>
+                        </a>
+                        <a class="text-decoration-none text-primary" href="{{ route('userAnswer') }}">
+                            <div class="px-3 py-2">
+                                <span class="me-1">{{ Auth::user()->answers->count() }}</span>Memberikan Jawaban
+                            </div>
+                        </a>
+                        <a class="text-decoration-none text-primary" href="{{ route('userComment') }}">
+                            <div class="px-3 py-2">
+                                <span class="me-1">{{ Auth::user()->comments->count() }}</span>Memberikan Komentar
+                            </div>
+                        </a>
+                        <a class="text-decoration-none text-primary" href="{{ route('friends') }}">
+                            <div class="px-3 py-2">
+                                <span class="me-1"></span> Lihat Postingan Teman
+                            </div>
+                        </a>
                     </div>
                 </div>
 
