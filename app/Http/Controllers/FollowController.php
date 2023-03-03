@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Follow;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
@@ -23,6 +24,9 @@ class FollowController extends Controller
         if (Auth::user()->id == $user->id) {
             return redirect()->back()->with("status", "Tidak bisa memfollow akun sendiri!");
         }
+
+        Notification::create(["body" => Auth::user()->name . " telah mengikuti anda!", "category" => "follow", "link_id" => Auth::user()->id, "user_id" => $user->id]);
+        
         Auth::user()->following($user);
         return redirect()->back();
     }

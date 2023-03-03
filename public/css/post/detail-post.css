@@ -112,8 +112,7 @@ ul {
 }
 
 .pertanyaan {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 20px;
     font-family: br-cobane;
 }
 
@@ -149,7 +148,6 @@ ul {
     height: 100px;
     width: 100px;
     object-fit: cover;
-    margin: auto;
 }
 
 .navBottom>div {

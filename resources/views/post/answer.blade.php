@@ -60,11 +60,16 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-reset">
+                            <a href="{{ route('notification') }}"
+                                class="d-flex text-decoration-none text-reset position-relative">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
                                 </div>
+                                @if (Auth::user()->unreadNotifications->count())
+                                    <span
+                                        class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                @endif
                                 <div class="nameNav col">
                                     Notification
                                 </div>
@@ -101,8 +106,7 @@
                         <div class="col-1 iconSB d-flex justify-content-center">
                             <img src="{{ asset('img/search.png') }}">
                         </div>
-                        <input type="text" class="col inputSB inputSB-mid"
-                            placeholder="Cari pertanyaan atau jawaban">
+                        <input type="text" class="col inputSB inputSB-mid" placeholder="Cari jawabanmu disini">
                     </div>
 
                 </div>
@@ -114,25 +118,26 @@
                     @endif
                     @if (!empty($answers))
                         @foreach ($answers as $answer)
-                        <a class="text-decoration-none text-reset row g-0"
-                        href="{{ route('post.show', $answer->post->id) }}">
-                        <div class="content px-4 py-2">
-                            <div class="headerContent d-flex py-2">
-                                <img src="{{ asset('storage/' . $answer->user->image) }}" class="avatar me-2">
-                                <div class="names col row align-items-center g-0">
-                                    <div class="nameCnt">{{ $answer->user->name }} <span class="dot">•</span>
-                                        <span
-                                            class="dateUpload">{{ $answer->created_at->diffForHumans() }}</span>
+                            <a class="text-decoration-none text-reset row g-0"
+                                href="{{ route('post.show', $answer->post->id) }}">
+                                <div class="content px-4 py-2">
+                                    <div class="headerContent d-flex py-2">
+                                        <img src="{{ asset('storage/' . $answer->user->image) }}" class="avatar me-2">
+                                        <div class="names col row align-items-center g-0">
+                                            <div class="nameCnt">{{ $answer->user->name }} <span
+                                                    class="dot">•</span>
+                                                <span
+                                                    class="dateUpload">{{ $answer->created_at->diffForHumans() }}</span>
+                                            </div>
+                                            <span class="mapelCnt">{{ $answer->post->mapel->mapel }}</span>
+                                        </div>
+                                        <div class="moreAction col-1"></div>
                                     </div>
-                                    <span class="mapelCnt">{{ $answer->post->mapel->mapel }}</span>
+                                    <div class="text-truncate-container">
+                                        <p class="">{!! $answer->answer !!}</p>
+                                    </div>
                                 </div>
-                                <div class="moreAction col-1"></div>
-                            </div>
-                            <div class="text-truncate-container">
-                                <p class="">{!! $answer->answer !!}</p>
-                            </div>
-                        </div>
-                    </a>
+                            </a>
                         @endforeach
                     @else
                         <div class="alert alert-warning text-center" role="alert">
@@ -164,9 +169,13 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="notification.html">
+                                    <a href="{{ route('notification') }}" class="position-relative">
                                         <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
+                                        @if (Auth::user()->unreadNotifications->count())
+                                            <span
+                                                class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                        @endif
                                     </a>
                                 </div>
                             </li>
@@ -191,7 +200,7 @@
                         <div class="col-1 iconSB d-flex justify-content-center">
                             <img src="{{ asset('img/search.png') }}">
                         </div>
-                        <input type="text" class="col inputSB" placeholder="Cari pertanyaan atau jawaban">
+                        <input type="text" class="col inputSB" placeholder="Cari jawabanmu disini">
                     </div>
                 </div>
                 <div class="myprofile">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,11 +35,13 @@ class AnswerController extends Controller
         $validatedData['post_id'] = $request->post_id;
         $validatedData['user_id'] = Auth::user()->id;
 
-        Answer::create($validatedData);
+        $answer = Answer::create($validatedData);
 
         User::pointIncrease();
 
         User::roleSynchronization();
+
+        Notification::create(["body" => "Pertanyaan anda telah dijawab oleh " . $answer->user->name, "category" => "answer", "link_id" => $currentPost->id, "user_id" => $currentPost->user_id]);
 
         return redirect()->route("post.show", $validatedData['post_id'])->with("status-success", "Jawaban berhasil terkirim!");
     }

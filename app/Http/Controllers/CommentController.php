@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\Comment;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,9 @@ class CommentController extends Controller
         $validatedData['answer_id'] = $currentAnswer->id;
         $validatedData['user_id'] = Auth::user()->id;
 
-        Comment::create($validatedData);
+        $comment = Comment::create($validatedData);
+
+        Notification::create(["body" => "Jawaban anda telah dikomentari oleh " . $comment->user->name, "category" => "comment", "link_id" => $currentAnswer->post->id, "user_id" => $currentAnswer->user_id]);
 
         return redirect()->back()->with("status-success", "Comment berhasil diposting!");
     }

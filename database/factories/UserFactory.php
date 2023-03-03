@@ -35,8 +35,8 @@ class UserFactory extends Factory
         return [
             'id' => fake()->uuid(),
             'name' => fake()->name(),
-            'nisn' => fake()->unique()->numberBetween(0000000001, 9999999999),
-            'birthdate' => fake()->dateTimeBetween("01-01-2003"),
+            'nisn' => fake()->unique()->numberBetween(1111111111, 9999999999),
+            'birthdate' => fake()->dateTimeBetween("01-01-2003", "31-12-2007"),
             'point' => $randomPoint,
             'image' => "user-image/avatar" . fake()->numberBetween(1, 3) . ".png",
             'status_id' => 1,

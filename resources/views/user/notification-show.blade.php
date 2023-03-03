@@ -94,36 +94,39 @@
             <div class="mid">
                 <div class="topbar sticky-top d-flex justify-content-center align-items-center">
                     <div class="namePage">
-                        Notifikasi
+                        Detail Notifikasi
                     </div>
                 </div>
                 <div class="contents">
-                    @if (Session::has('status'))
-                        <div class="alert alert-success text-center my-0" role="alert">
-                            {{ Session::get('status') }}
+                    <a class="text-reset text-decoration-none" href="{{ $notification->category == "follow" ? route('user.show', $notification->link_id) : route('post.show', $notification->link_id) }}">
+                        <div class="notif d-flex px-3 py-4">
+                            <div class="col">
+                                <div class="contentNotif">{{ $notification->body }}</div>
+                                <span class="dateUpload">{{ $notification->created_at->diffForHumans() }}</span>
+                            </div>
                         </div>
-                    @endif
-                    @if (!Auth::user()->password)
-                        <a class="text-decoration-none" href="{{ route('profile') }}">
-                            <div class="notif d-flex px-3 py-2 bg-danger text-white">
-                                <div class="col">
-                                    <div class="contentNotif">Anda belum membuat password, harap membuat password demi
-                                        keamanan akun anda dan untuk menikmati lebih banyak fitur kami!</div>
-                                    <span class="dateUpload">Baru saja</span>
-                                </div>
+                    </a>
+                    <button type="button" class="btn btn-danger d-flex mx-auto btn-sm mt-2" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">
+                        <span>Delete</span>
+                    </button>
+                </div>
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                <form action="{{ route('notification.destroy', $notification->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <span>Yakin akan menghapus notifikasi ini?</span>
+                                    <button type="submit" class="btn btn-danger btn-sm ms-1">Hapus Sekarang</button>
+                                </form>
                             </div>
-                        </a>
-                    @endif
-                    @foreach ($notifications as $notification)
-                        <a class="text-decoration-none text-reset" href="{{ route('notification.show', $notification->id) }}">
-                            <div class="notif d-flex px-3 py-2 {{ $notification->is_read ? '' : 'nonReadNotif' }}">
-                                <div class="col">
-                                    <div class="contentNotif">{{ $notification->body }}</div>
-                                    <span class="dateUpload">{{ $notification->created_at->diffForHumans() }}</span>
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
+                        </div>
+                    </div>
                 </div>
                 <nav class="navBottom fixed-bottom bg-light">
                     <div>
@@ -145,8 +148,8 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="iconNavBottom" class="position-relative">
-                                    <a href="{{ route('notification') }}">
+                                <div class="iconNavBottom">
+                                    <a href="{{ route('notification') }}" class="position-relative">
                                         <img src="{{ asset('img/notificationColor.svg') }}" width="30"
                                             height="30" viewBox="0 0 24 24">
                                         @if (Auth::user()->unreadNotifications->count())
@@ -186,7 +189,8 @@
                     <div class="infoProfile">
                         <a class="text-decoration-none text-primary" href="{{ route('userPost') }}">
                             <div class="infoProfile1 px-3 py-2">
-                                <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan Pertanyaan
+                                <span class="me-1">{{ Auth::user()->posts->count() }}</span>Mengajukan
+                                Pertanyaan
                             </div>
                         </a>
                         <a class="text-decoration-none text-primary" href="{{ route('userAnswer') }}">
@@ -196,7 +200,8 @@
                         </a>
                         <a class="text-decoration-none text-primary" href="{{ route('userComment') }}">
                             <div class="px-3 py-2">
-                                <span class="me-1">{{ Auth::user()->comments->count() }}</span>Memberikan Komentar
+                                <span class="me-1">{{ Auth::user()->comments->count() }}</span>Memberikan
+                                Komentar
                             </div>
                         </a>
                         <a class="text-decoration-none text-primary" href="{{ route('friends') }}">

@@ -61,11 +61,16 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-reset">
+                            <a href="{{ route('notification') }}"
+                                class="d-flex text-decoration-none text-reset position-relative">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
                                 </div>
+                                @if (Auth::user()->unreadNotifications->count())
+                                    <span
+                                        class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                @endif
                                 <div class="nameNav col">
                                     Notification
                                 </div>
@@ -104,12 +109,12 @@
                             <div class="d-flex gap-2 justify-content-center align-items-center">
                                 <span class="nameProfile">{{ $user->name }}</span>
                             </div>
-                            <div class="d-flex gap-2 justify-content-center align-items-center">
+                            <div class="d-flex gap-2 justify-content-center mb-3 mt-1 align-items-center">
                                 <div class="role role-{{ $user->role->id }} px-4 py-2">
                                     {{ $user->role->role }}</div>
                                 <div class="">{{ $user->point }} Poin</div>
                             </div>
-                            <div class="d-flex infoAkun my-4 gap-4 justify-content-center">
+                            <div class="d-flex infoAkun mb-2 gap-4 justify-content-center">
                                 <div><span class="fw-semibold">{{ $user->posts->count() }}</span> Pertanyaan
                                 </div>
                                 <div><span class="fw-semibold">{{ $user->answers->count() }}</span> Menjawab
@@ -122,15 +127,15 @@
                                 <div> Following: {{ $user->follows()->count() }}</div>
                                 @if ($followed)
                                     <form action="{{ route('unfollow', $user->id) }}" method="POST">
-                                        @method("DELETE")
+                                        @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-outline-primary">Unfollow</button>
                                     </form>
                                 @else
-                                <form action="{{ route('follow', $user->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-primary">Follow</button>
-                                </form>
+                                    <form action="{{ route('follow', $user->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-primary">Follow</button>
+                                    </form>
                                 @endif
                             </div>
                         </div>
@@ -211,9 +216,13 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="notification.html">
+                                    <a href="{{ route('notification') }}" class="position-relative">
                                         <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
+                                        @if (Auth::user()->unreadNotifications->count())
+                                            <span
+                                                class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                        @endif
                                     </a>
                                 </div>
                             </li>

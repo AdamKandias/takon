@@ -13,6 +13,7 @@ use App\Http\Controllers\MapelController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\PostReportController;
 use Illuminate\Support\Facades\Route;
@@ -97,3 +98,7 @@ Route::delete('/question/{answer}/answer-report', [AnswerReportController::class
 // Comment Report Route
 Route::post('/question/{comment}/comment-report', [CommentReportController::class, "store"])->name("comment.report")->middleware("auth", "hasPassword");
 Route::delete('/question/{comment}/comment-report', [CommentReportController::class, "destroy"])->name("comment.unreport")->middleware("auth", "hasPassword");
+
+Route::get('/notification', [NotificationController::class, "index"])->name("notification")->middleware("auth");
+Route::get('/notification/{notification}', [NotificationController::class, "show"])->name("notification.show")->middleware("auth");
+Route::delete('/notification/{notification}', [NotificationController::class, "destroy"])->name("notification.destroy")->middleware("auth");

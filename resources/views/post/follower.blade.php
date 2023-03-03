@@ -60,11 +60,16 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-reset">
+                            <a href="{{ route('notification') }}"
+                                class="d-flex text-decoration-none text-reset position-relative">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
                                 </div>
+                                @if (Auth::user()->unreadNotifications->count())
+                                    <span
+                                        class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                @endif
                                 <div class="nameNav col">
                                     Notification
                                 </div>
@@ -101,19 +106,21 @@
                         <div class="col-1 iconSB d-flex justify-content-center">
                             <img src="{{ asset('img/search.png') }}">
                         </div>
-                        <input type="text" class="col inputSB inputSB-mid"
-                            placeholder="Cari pertanyaan atau jawaban">
+                        <input type="text" class="col inputSB inputSB-mid" placeholder="Cari temanmu disini">
                     </div>
 
                 </div>
                 <div class="contents">
                     @foreach ($users as $user)
-                        <a class="text-decoration-none text-reset row g-0" href="{{ route('user.show', $user->userFollowed->id) }}">
+                        <a class="text-decoration-none text-reset row g-0"
+                            href="{{ route('user.show', $user->userFollowed->id) }}">
                             <div class="content px-4 py-2">
                                 <div class="headerContent d-flex py-2">
-                                    <img src="{{ asset('storage/' . $user->userFollowed->image) }}" class="avatar me-2">
+                                    <img src="{{ asset('storage/' . $user->userFollowed->image) }}"
+                                        class="avatar me-2">
                                     <div class="names col row align-items-center g-0">
-                                        <div class="nameCnt">{{ $user->userFollowed->name }} <span class="dot">•</span>
+                                        <div class="nameCnt">{{ $user->userFollowed->name }} <span
+                                                class="dot">•</span>
                                             <span class="dateUpload">{{ $user->userFollowed->class->class }}</span>
                                         </div>
                                         <div class="d-flex gap-2 justify-content-end align-items-center">
@@ -129,7 +136,7 @@
                     @endforeach
                 </div>
                 <div class="mx-auto d-flex justify-content-center mt-4 mb-2">
-                    {{$users->links() }}
+                    {{ $users->links() }}
                 </div>
                 <nav class="navBottom fixed-bottom bg-light">
                     <div>
@@ -152,9 +159,13 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="notification.html">
+                                    <a href="{{ route('notification') }}" class="position-relative">
                                         <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
+                                        @if (Auth::user()->unreadNotifications->count())
+                                            <span
+                                                class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                        @endif
                                     </a>
                                 </div>
                             </li>
@@ -179,7 +190,7 @@
                         <div class="col-1 iconSB d-flex justify-content-center">
                             <img src="{{ asset('img/search.png') }}">
                         </div>
-                        <input type="text" class="col inputSB" placeholder="Cari pertanyaan atau jawaban">
+                        <input type="text" class="col inputSB" placeholder="Cari temanmu disini">
                     </div>
                 </div>
                 <div class="myprofile">

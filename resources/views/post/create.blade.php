@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="{{ route("mapel") }}" class="d-flex text-decoration-none text-reset">
+                            <a href="{{ route('mapel') }}" class="d-flex text-decoration-none text-reset">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/note.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
@@ -62,11 +62,16 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-reset">
+                            <a href="{{ route('notification') }}"
+                                class="d-flex text-decoration-none text-reset position-relative">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
                                 </div>
+                                @if (Auth::user()->unreadNotifications->count())
+                                    <span
+                                        class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                @endif
                                 <div class="nameNav col">
                                     Notification
                                 </div>
@@ -113,9 +118,11 @@
                         <form action="{{ route('post.store') }}" class="form-ask my-4" method="POST"
                             enctype="multipart/form-data">
                             @csrf
-                            <textarea rows="5" class="form-control js-editor lite-editor py-3 px-3 {{ $errors->has('question') ? 'is-invalid' : '' }}"
+                            <textarea rows="5"
+                                class="form-control js-editor lite-editor py-3 px-3 {{ $errors->has('question') ? 'is-invalid' : '' }}"
                                 id="text" name="question" placeholder="Tulis Pertanyaan mu disini" style="background-color: #e9f8f8;">{{ old('question') }}</textarea>
-                            <img id="output" class="img-fluid mb-4" style="display: none" />
+                            <img id="output" class="img-fluid mb-4"
+                                style="display: none; height: 18rem; object-fit: cover; background-position-y: center; width: 100%" />
                             <input type="file" name="image" class="form-control" onchange="loadFile(event)">
                             <div class="myrow align-items-end mb-4">
                                 <div class="col">
@@ -151,7 +158,7 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="{{ route("mapel") }}">
+                                    <a href="{{ route('mapel') }}">
                                         <img src="{{ asset('img/note.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
                                     </a>
@@ -159,9 +166,13 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="notification.html">
+                                    <a href="{{ route('notification') }}" class="position-relative">
                                         <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
+                                        @if (Auth::user()->unreadNotifications->count())
+                                            <span
+                                                class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                        @endif
                                     </a>
                                 </div>
                             </li>
@@ -181,23 +192,15 @@
 
             <!-- --RIGHT-- -->
             <div class="right px-2">
-                <div class="rightTopbar sticky-top align-items-center d-flex">
-                    <div class="d-flex align-items-center SB mx-1">
-                        <div class="col-1 iconSB d-flex justify-content-center mx-2">
-                            <img src="{{ asset('img/search.png') }}">
-                        </div>
-                        <input type="text" class="col inputSB" placeholder="Cari pertanyaan atau jawaban">
-                    </div>
-                </div>
                 <div class="myprofile">
                     <a href="{{ route('profile') }}" class="text-decoration-none text-reset">
-                    <div class="row g-0 py-3 justify-content-center align-items-center">
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" class="avatarProfile">
-                        <div class="text-center">
-                            <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
-                            <span class="me-1">{{ Auth::user()->point }} Poin</span>
+                        <div class="row g-0 py-3 justify-content-center align-items-center">
+                            <img src="{{ asset('storage/' . Auth::user()->image) }}" class="avatarProfile">
+                            <div class="text-center">
+                                <span class="fw-semibold">{{ Auth::user()->name }}</span><br>
+                                <span class="me-1">{{ Auth::user()->point }} Poin</span>
+                            </div>
                         </div>
-                    </div>
                     </a>
 
                     <div class="infoProfile">

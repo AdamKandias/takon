@@ -127,4 +127,14 @@ class User extends Authenticatable
 
         return $postsLikes + $answersLikes + $commentsLikes;
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function unreadNotifications()
+    {
+        return $this->hasMany(Notification::class)->where("is_read", 0);
+    }
 }

@@ -60,11 +60,16 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-reset">
+                            <a href="{{ route('notification') }}"
+                                class="d-flex text-decoration-none text-reset position-relative">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
                                 </div>
+                                @if (Auth::user()->unreadNotifications->count())
+                                    <span
+                                        class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                @endif
                                 <div class="nameNav col">
                                     Notification
                                 </div>
@@ -101,8 +106,7 @@
                         <div class="col-1 iconSB d-flex justify-content-center">
                             <img src="{{ asset('img/search.png') }}">
                         </div>
-                        <input type="text" class="col inputSB inputSB-mid"
-                            placeholder="Cari pertanyaan atau jawaban">
+                        <input type="text" class="col inputSB inputSB-mid" placeholder="Cari temanmu disini">
                     </div>
 
                 </div>
@@ -124,10 +128,12 @@
                                                 class="dot">•</span>
                                             <span class="dateUpload">{{ $user->userFollowing->class->class }}</span>
                                         </div>
-                                        <div class="d-flex gap-2 justify-content-end align-items-center">
-                                            <div class="role role-{{ $user->userFollowing->role->id }} px-4 py-2">
+                                        <div class="d-flex gap-2 align-items-center">
+                                            <div class="role role-{{ $user->userFollowing->role->id }} px-2 py-1"
+                                                style="font-size: .6rem; line-height: inherit">
                                                 {{ $user->userFollowing->role->role }}</div>
-                                            <div class="">{{ $user->userFollowing->point }} Poin</div>
+                                            <div style="font-size: .8rem; font-weight: 600">
+                                                {{ $user->userFollowing->point }} Poin</div>
                                         </div>
                                     </div>
                                     <div class="moreAction col-1"></div>
@@ -160,9 +166,13 @@
                             </li>
                             <li>
                                 <div class="iconNavBottom">
-                                    <a href="notification.html">
+                                    <a href="{{ route('notification') }}" class="position-relative">
                                         <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                             viewBox="0 0 24 24">
+                                        @if (Auth::user()->unreadNotifications->count())
+                                            <span
+                                                class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                        @endif
                                     </a>
                                 </div>
                             </li>
@@ -187,7 +197,7 @@
                         <div class="col-1 iconSB d-flex justify-content-center">
                             <img src="{{ asset('img/search.png') }}">
                         </div>
-                        <input type="text" class="col inputSB" placeholder="Cari pertanyaan atau jawaban">
+                        <input type="text" class="col inputSB" placeholder="Cari temanmu disini">
                     </div>
                 </div>
                 <div class="myprofile">
@@ -254,29 +264,29 @@
                                 lainnya</span></div>
                     </a>
                 </div>
-                    <div class="footer my-5">
-                        <div class="d-flex justify-contentc-center">
-                            <div class="px-1 footerText">About</div>
-                            <div class="px-1 footerText">Terms of Use</div>
-                            <div class="px-1 footerText">Cookie Policy</div>
-                        </div>
-                        <div class="d-flex justify-contentc-center">
-                            <div class="px-1 footerText">Guidelines</div>
-                            <div class="px-1 footerText">Privacy Policy</div>
-                            <div class="px-1 footerText">More...</div>
-                        </div>
-                        <hr>
-                        <div class="footerText">
-                            Takon Inc © 2023. All rights reserved
-                        </div>
+                <div class="footer my-5">
+                    <div class="d-flex justify-contentc-center">
+                        <div class="px-1 footerText">About</div>
+                        <div class="px-1 footerText">Terms of Use</div>
+                        <div class="px-1 footerText">Cookie Policy</div>
+                    </div>
+                    <div class="d-flex justify-contentc-center">
+                        <div class="px-1 footerText">Guidelines</div>
+                        <div class="px-1 footerText">Privacy Policy</div>
+                        <div class="px-1 footerText">More...</div>
+                    </div>
+                    <hr>
+                    <div class="footerText">
+                        Takon Inc © 2023. All rights reserved
                     </div>
                 </div>
-
             </div>
-        </div>
 
-        <!-- BOOTSTRAP JS -->
-        <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+        </div>
+    </div>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>

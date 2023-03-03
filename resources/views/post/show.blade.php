@@ -62,11 +62,16 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('notification') }}"
+                                class="d-flex text-decoration-none text-dark position-relative">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
                                 </div>
+                                @if (Auth::user()->unreadNotifications->count())
+                                    <span
+                                        class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                @endif
                                 <div class="nameNav col">
                                     Notification
                                 </div>
@@ -107,9 +112,9 @@
                             <span class="dot">•</span>
                             <span class="dateUpload">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
-                        <a class="text-decoration-none text-reset"
+                        <a class="text-decoration-none text-reset" style="width: fit-content"
                             href="{{ route('mapel', ['mapel' => $post->mapel->mapel]) }}">
-                            <span style="width: fit-content" class="mapelCnt">{{ $post->mapel->mapel }}</span>
+                            <span style="" class="mapelCnt">{{ $post->mapel->mapel }}</span>
                         </a>
                     </div>
                     <div class="moreAction d-flex gap-1">
@@ -117,13 +122,12 @@
                             <form action="{{ route('post.unlike', $post->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-outline-primary">👎
-                                    {{ $post->like->count() }}</button>
+                                <button class="btn btn-sm btn-primary">👍 {{ $post->like->count() }}</button>
                             </form>
                         @else
                             <form action="{{ route('post.like', $post->id) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-sm btn-primary">👍 {{ $post->like->count() }}</button>
+                                <button class="btn btn-sm btn-outline-primary">👍 {{ $post->like->count() }}</button>
                             </form>
                         @endif
                         @if ($post->reports->contains('user_id', Auth::user()->id))
@@ -213,13 +217,13 @@
                             <form action="{{ route('answer.unlike', $post->answer->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-outline-primary">👎
-                                    {{ $post->answer->like->count() }}</button>
+                                <button class="btn btn-sm btn-primary">👍 {{ $post->answer->like->count() }}</button>
                             </form>
                         @else
                             <form action="{{ route('answer.like', $post->answer->id) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-sm btn-primary">👍 {{ $post->answer->like->count() }}</button>
+                                <button class="btn btn-sm btn-outline-primary">👍
+                                    {{ $post->answer->like->count() }}</button>
                             </form>
                         @endif
                         @if ($post->answer->reports->contains('user_id', Auth::user()->id))
@@ -271,13 +275,13 @@
                 </div>
                 <div class="jawaban mb-2">
                     {!! $post->answer->answer !!}
-                    @if ($post->image)
-                        <img src="{{ asset('storage/' . $post->answer->image) }}">
+                    @if ($post->answer->image)
+                        <img src="{{ asset('storage/' . $post->answer->image) }}" class="img-fluid">
                     @endif
                 </div>
     </div>
     </div>
-    @else
+@else
     <div class="alert alert-danger text-center">
         Jawaban telah dilaporkan!, Sedang diperiksa oleh admin
     </div>
@@ -298,15 +302,17 @@
             <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="" class="avatar">
         </div>
         <div class="d-flex" style="width: 100%;">
-            <form action="{{ route('answer.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('answer.store') }}" style="width: 100%;" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <textarea rows="1" name="answer" class="input-comentar py-2 ms-2 js-editor lite-editor"
                     placeholder="Tambahkan jawaban" aria-label="With textarea" id="text"
-                    style="border-bottom: 1px solid #E6E6E6;"></textarea>
+                    style="border-bottom: 1px solid #E6E6E6; width: 100%"></textarea>
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <img id="output" class="img-fluid mb-4" style="display: none" />
+                <img id="output" class="img-fluid mb-4"
+                    style="display: none; height: 18rem; width: 100%; object-fit: cover;" />
                 <input type="file" name="image" class="form-control" onchange="loadFile(event)">
-                <div class="d-flex align-items-center" style="height: auto;">
+                <div class="d-flex align-items-center mt-3" style="height: auto;">
                     <button type="submit" class="float-end btn btn-dark px-4"
                         style="background-color: #181818; border-radius: 99px; font-size: 13px;">KIRIM</button>
                 </div>
@@ -342,13 +348,12 @@
                                 <form action="{{ route('comment.unlike', $comment->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-outline-primary">👎
-                                        {{ $comment->like->count() }}</button>
+                                    <button class="btn btn-sm btn-primary">👍 {{ $comment->like->count() }}</button>
                                 </form>
                             @else
                                 <form action="{{ route('comment.like', $comment->id) }}" method="POST">
                                     @csrf
-                                    <button class="btn btn-sm btn-primary">👍
+                                    <button class="btn btn-sm btn-outline-primary">👍
                                         {{ $comment->like->count() }}</button>
                                 </form>
                             @endif
@@ -435,10 +440,12 @@
                         style="border-bottom: 1px solid #E6E6E6;"></textarea>
                     <input type="hidden" name="answer_id" value="{{ $post->answer->id }}">
                     <div class="d-flex w-100">
-                        <img id="output" class="img-fluid img-post-comment" style="display: block" />
-                        <input type="file" name="image" class="form-control" onchange="loadFile(event)">
+                        <img id="output" class="img-fluid img-post-comment me-2" style="display: block" />
+                        <div class="d-flex align-items-center">
+                            <input type="file" name="image" class="form-control" onchange="loadFile(event)">
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center" style="height: auto;">
+                    <div class="d-flex align-items-center mt-3 justify-content-end" style="height: auto;">
                         <button type="submit" class="float-end btn btn-dark px-4"
                             style="background-color: #181818; border-radius: 99px; font-size: 13px;">KIRIM</button>
                     </div>
@@ -468,9 +475,13 @@
                 </li>
                 <li>
                     <div class="iconNavBottom">
-                        <a href="notification.html">
+                        <a href="{{ route('notification') }}" class="position-relative">
                             <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                 viewBox="0 0 24 24">
+                            @if (Auth::user()->unreadNotifications->count())
+                                <span
+                                    class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                            @endif
                         </a>
                     </div>
                 </li>
@@ -490,14 +501,6 @@
 
     <!-- --RIGHT-- -->
     <div class="right px-2">
-        <div class="rightTopbar sticky-top align-items-center d-flex">
-            <div class="d-flex align-items-center SB mx-1">
-                <div class="col-1 iconSB d-flex justify-content-center mx-2">
-                    <img src="{{ asset('img/search.png') }}">
-                </div>
-                <input type="text" class="col inputSB" placeholder="Cari pertanyaan atau jawaban">
-            </div>
-        </div>
         <div class="myprofile">
             <a href="{{ route('profile') }}" class="text-decoration-none text-reset">
                 <div class="row g-0 py-3 justify-content-center align-items-center">

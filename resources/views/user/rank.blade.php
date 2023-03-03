@@ -62,11 +62,16 @@
                             </a>
                         </li>
                         <li class="row g-0 align-items-center">
-                            <a href="notification.html" class="d-flex text-decoration-none text-dark">
+                            <a href="{{ route('notification') }}"
+                                class="d-flex text-decoration-none text-dark position-relative">
                                 <div class="iconNav">
                                     <img src="{{ asset('img/notification.svg') }}" width="30" height="30"
                                         viewBox="0 0 24 24">
                                 </div>
+                                @if (Auth::user()->unreadNotifications->count())
+                                    <span
+                                        class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                @endif
                                 <div class="nameNav col">
                                     Notification
                                 </div>
@@ -99,10 +104,12 @@
                     @foreach ($rank as $user)
                         <a class="text-reset text-decoration-none" href="{{ route('user.show', $user->id) }}">
                             <div
-                                class="{{ $user->id == Auth::user()->id ? 'bg-primary' : '' }} d-flex justify-content-center align-items-center listRank px-4 pb-4">
-                                <div class="col-2 me-1">
-                                    <div class="rankProfile">
-                                        Rank {{ $rank->currentPage() * 10 - 10 + $loop->iteration }}
+                                class="{{ $user->id == Auth::user()->id ? 'bg-primary' : '' }} d-flex justify-content-center align-items-center listRank px-4 py-2">
+                                <div class="me-3">
+                                    <div class="rankProfile d-flex align-items-center">
+                                        <span class="me-2">
+                                            Rank {{ $rank->currentPage() * 10 - 10 + $loop->iteration }}
+                                        </span>
                                         <img src="{{ asset('storage/' . $user->image) }}">
                                     </div>
                                 </div>
@@ -139,9 +146,13 @@
                                 </li>
                                 <li>
                                     <div class="iconNavBottom">
-                                        <a href="notification.html">
+                                        <a href="{{ route('notification') }}" class="position-relative">
                                             <img src="{{ asset('img/notification.svg') }}" width="30"
                                                 height="30" viewBox="0 0 24 24">
+                                            @if (Auth::user()->unreadNotifications->count())
+                                                <span
+                                                    class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                            @endif
                                         </a>
                                     </div>
                                 </li>
