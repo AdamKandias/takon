@@ -18,4 +18,21 @@ class Follow extends Model
     {
         return $this->belongsTo(User::class, "following_user_id", "id");
     }
+
+    public function scopeSearchFollowing($query, $search)
+    {
+        if ($search) {
+            $query->whereHas('userFollowing', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            });
+        }
+    }
+    public function scopeSearchFollower($query, $search)
+    {
+        if ($search) {
+            $query->whereHas('userFollowed', function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            });
+        }
+    }
 }

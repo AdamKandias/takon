@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PaginationHelper;
-use App\Models\Answer;
 use App\Models\Mapel;
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class MapelController extends Controller
 {

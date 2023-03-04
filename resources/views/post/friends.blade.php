@@ -103,10 +103,16 @@
                         </a>
                     </div>
                     <div class="d-flex align-items-center SB">
-                        <div class="col-1 iconSB d-flex justify-content-center">
-                            <img src="{{ asset('img/search.png') }}">
-                        </div>
-                        <input type="text" class="col inputSB inputSB-mid" placeholder="Cari pertanyaan disini">
+                        <form class="d-flex" action="" method="GET">
+                            <div class="iconSB d-flex justify-content-center">
+                                <button type="submit" class="border-0">
+                                    <img class="m-0" src="{{ asset('img/search.png') }}">
+                                </button>
+                            </div>
+
+                            <input type="text" class="inputSB inputSB-mid" name="search"
+                                placeholder="Cari pertanyaan disini" value="{{ request('search') }}">
+                        </form>
                     </div>
                 </div>
 
@@ -205,10 +211,16 @@
             <div class="right px-2">
                 <div class="rightTopbar sticky-top align-items-center d-flex">
                     <div class="d-flex align-items-center SB mx-1">
-                        <div class="col-1 iconSB d-flex justify-content-center">
-                            <img src="{{ asset('img/search.png') }}">
-                        </div>
-                        <input type="text" class="col inputSB" placeholder="Cari pertanyaan disini">
+                        <form class="d-flex" action="" method="GET">
+                            <div class="ms-1 iconSB d-flex justify-content-center">
+                                <button type="submit" class="border-0">
+                                    <img class="m-0" src="{{ asset('img/search.png') }}">
+                                </button>
+                            </div>
+
+                            <input type="text" class="col inputSB" name="search"
+                                placeholder="Cari pertanyaan disini" value="{{ request('search') }}">
+                        </form>
                     </div>
                 </div>
                 <div class="myprofile">

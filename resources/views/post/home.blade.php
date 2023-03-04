@@ -103,10 +103,16 @@
                         </a>
                     </div>
                     <div class="d-flex align-items-center SB">
-                        <div class="col-1 iconSB d-flex justify-content-center">
-                            <img src="{{ asset('img/search.png') }}">
-                        </div>
-                        <input type="text" class="col inputSB inputSB-mid" placeholder="Cari pertanyaan disini">
+                        <form class="d-flex" action="" method="GET">
+                            <div class="iconSB d-flex justify-content-center">
+                                <button type="submit" class="border-0">
+                                    <img class="m-0" src="{{ asset('img/search.png') }}">
+                                </button>
+                            </div>
+
+                            <input type="text" class="inputSB inputSB-mid" name="search"
+                                placeholder="Cari pertanyaan disini" value="{{ request('search') }}">
+                        </form>
                     </div>
 
                 </div>
@@ -129,35 +135,41 @@
                             {{ Session::get('status') }}
                         </div>
                     @endif
-                    @foreach ($posts as $post)
-                        @if ($post->reports()->count() < 3)
-                            <a class="text-decoration-none text-reset row g-0"
-                                href="{{ route('post.show', $post->id) }}">
-                                <div class="content px-4 py-2">
-                                    <div class="headerContent d-flex py-2">
-                                        <img src="{{ asset('storage/' . $post->user->image) }}" class="avatar me-2">
-                                        <div class="names col row align-items-center g-0">
-                                            <div class="nameCnt">{{ $post->user->name }} <span class="dot">•</span>
-                                                <span
-                                                    class="dateUpload">{{ $post->created_at->diffForHumans() }}</span>
+                    @if ($posts->isNotEmpty())
+                        @foreach ($posts as $post)
+                            @if ($post->reports()->count() < 3)
+                                <a class="text-decoration-none text-reset row g-0"
+                                    href="{{ route('post.show', $post->id) }}">
+                                    <div class="content px-4 py-2">
+                                        <div class="headerContent d-flex py-2">
+                                            <img src="{{ asset('storage/' . $post->user->image) }}"
+                                                class="avatar me-2">
+                                            <div class="names col row align-items-center g-0">
+                                                <div class="nameCnt">{{ $post->user->name }} <span
+                                                        class="dot">•</span>
+                                                    <span
+                                                        class="dateUpload">{{ $post->created_at->diffForHumans() }}</span>
+                                                </div>
+                                                <span class="mapelCnt">{{ $post->mapel->mapel }}</span>
                                             </div>
-                                            <span class="mapelCnt">{{ $post->mapel->mapel }}</span>
+                                            <div class="moreAction col-1"></div>
                                         </div>
-                                        <div class="moreAction col-1"></div>
+                                        <div class="text-truncate-container">
+                                            <p class="">{!! $post->question !!}</p>
+                                        </div>
+                                        <div class="bottomContent my-2">
+                                            <span
+                                                class="bottomContent1">{{ $post->answer ? 'Sudah terjawab' : 'Belum terjawab' }}
+                                                <span class="dot mx-1">•</span></span>
+                                            <span class="seeMore">Lihat</span>
+                                        </div>
                                     </div>
-                                    <div class="text-truncate-container">
-                                        <p class="">{!! $post->question !!}</p>
-                                    </div>
-                                    <div class="bottomContent my-2">
-                                        <span
-                                            class="bottomContent1">{{ $post->answer ? 'Sudah terjawab' : 'Belum terjawab' }}
-                                            <span class="dot mx-1">•</span></span>
-                                        <span class="seeMore">Lihat</span>
-                                    </div>
-                                </div>
-                            </a>
-                        @endif
-                    @endforeach
+                                </a>
+                            @endif
+                        @endforeach
+                    @else
+                        <p class="text-center my-3 fw-bold">Tidak ada postingan yang ditemukan!</p>
+                    @endif
                 </div>
                 <div class="mx-auto d-flex justify-content-center mt-4 mb-2">
                     {{ $posts->links() }}
@@ -211,10 +223,16 @@
             <div class="right px-2">
                 <div class="rightTopbar sticky-top align-items-center d-flex">
                     <div class="d-flex align-items-center SB mx-1">
-                        <div class="col-1 iconSB d-flex justify-content-center">
-                            <img src="{{ asset('img/search.png') }}">
-                        </div>
-                        <input type="text" class="col inputSB" placeholder="Cari pertanyaan disini">
+                        <form class="d-flex" action="" method="GET">
+                            <div class="ms-1 iconSB d-flex justify-content-center">
+                                <button type="submit" class="border-0">
+                                    <img class="m-0" src="{{ asset('img/search.png') }}">
+                                </button>
+                            </div>
+
+                            <input type="text" class="col inputSB" name="search"
+                                placeholder="Cari pertanyaan disini" value="{{ request('search') }}">
+                        </form>
                     </div>
                 </div>
                 <div class="myprofile">

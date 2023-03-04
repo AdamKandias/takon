@@ -32,4 +32,11 @@ class Comment extends Model
     {
         return $this->hasMany(CommentReport::class);
     }
+
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where('comment', 'like', '%' . $search . '%');
+        }
+    }
 }

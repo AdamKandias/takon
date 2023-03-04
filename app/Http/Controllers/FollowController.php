@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Follow;
 use App\Models\Notification;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
-    public function following()
+    public function following(Request $request)
     {
-        return view("post.following", ["users" => Follow::where("following_user_id", Auth::user()->id)->latest()->paginate(10), "topRank" => User::topRank()]);
+        return view("post.following", ["users" => Follow::where("following_user_id", Auth::user()->id)->searchFollowing($request["search"])->latest()->paginate(10), "topRank" => User::topRank()]);
     }
 
-    public function follower()
+    public function follower(Request $request)
     {
-        return view("post.follower", ["users" => Follow::where("followed_user_id", Auth::user()->id)->latest()->paginate(10), "topRank" => User::topRank()]);
+        return view("post.follower", ["users" => Follow::where("followed_user_id", Auth::user()->id)->searchFollower($request["search"])->latest()->paginate(10), "topRank" => User::topRank()]);
     }
 
     public function follow(User $user)
@@ -26,7 +27,7 @@ class FollowController extends Controller
         }
 
         Notification::create(["body" => Auth::user()->name . " telah mengikuti anda!", "category" => "follow", "link_id" => Auth::user()->id, "user_id" => $user->id]);
-        
+
         Auth::user()->following($user);
         return redirect()->back();
     }

@@ -94,7 +94,7 @@
             <div class="mid">
                 <div class="topbar px-3 sticky-top gap-2 d-flex justify-content-center align-items-center">
                     <div class="namePage">
-                        Home
+                        Pertanyaan {{ $currentMapel }}
                     </div>
 
                     <div class="imgLogo logoPhone">
@@ -183,7 +183,7 @@
                                 @endif
                             @endforeach
                         @else
-                            Tidak ada pertanyaan dengan mapel {{ $currentMapel }}
+                            <p class="text-center my-3 fw-bold">Tidak ada pertanyaan yang ditemukan!</p>
                         @endif
                     @endif
                 </div>
@@ -242,9 +242,13 @@
                 <div class="rightTopbar sticky-top align-items-center d-flex">
                     <div class="d-flex align-items-center SB mx-1">
                         <div class="col-1 iconSB d-flex justify-content-center">
-                            <img src="{{ asset('img/search.png') }}">
+                            <button type="submit" class="border-0">
+                                <img class="m-0" src="{{ asset('img/search.png') }}">
+                            </button>
                         </div>
-                        <input type="text" class="col inputSB" placeholder="Cari pertanyaan disini">
+
+                        <input type="text" class="col inputSB" name="search"
+                            placeholder="Cari pertanyaan disini" value="{{ request('search') }}">
                     </div>
                 </div>
                 <div class="myprofile">

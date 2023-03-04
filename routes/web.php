@@ -49,7 +49,7 @@ Route::get('/dashboard', [UserController::class, "dashboard"])->name("dashboard"
 Route::get('/home', [PostController::class, "index"])->name("home")->middleware("auth");
 Route::get('/ask', [PostController::class, "create"])->name("ask")->middleware("auth", "hasPassword");
 Route::post('/ask', [PostController::class, "store"])->name("post.store")->middleware("auth", "hasPassword");
-Route::get('/question', [PostController::class, "userPost"])->name("userPost")->middleware("auth");
+Route::get('/question', [PostController::class, "userPost"])->name("userPost")->middleware("auth", "hasPassword");
 Route::get('/question/{post}', [PostController::class, "show"])->name("post.show")->middleware("auth");
 
 // Following Route
@@ -59,21 +59,21 @@ Route::post('/following/{user}', [FollowController::class, "follow"])->name("fol
 Route::delete('/following/{user}', [FollowController::class, "unfollow"])->name("unfollow")->middleware("auth", "hasPassword");
 
 // Friend Route
-Route::get('/friends', [FriendController::class, "friends"])->name("friends")->middleware("auth");
+Route::get('/friends', [FriendController::class, "friends"])->name("friends")->middleware("auth", "hasPassword");
 
 // Answer Route
-Route::get('/answer', [AnswerController::class, "userAnswer"])->name("userAnswer")->middleware("auth");
+Route::get('/answer', [AnswerController::class, "userAnswer"])->name("userAnswer")->middleware("auth", "hasPassword");
 Route::post('/answer', [AnswerController::class, "store"])->name("answer.store")->middleware("auth", "hasPassword");
 
 // Comment Route
-Route::get('/comment', [CommentController::class, "userComment"])->name("userComment")->middleware("auth");
+Route::get('/comment', [CommentController::class, "userComment"])->name("userComment")->middleware("auth", "hasPassword");
 Route::post('/comment', [CommentController::class, "store"])->name("comment.store")->middleware("auth", "hasPassword");
 
 // Mapel Route
 Route::get("/mapel", [MapelController::class, "index"])->name("mapel")->middleware("auth");
 
 // Likes Route
-Route::get("/likes", [LikeController::class, "index"])->name("likes")->middleware("auth");
+Route::get("/likes", [LikeController::class, "index"])->name("likes")->middleware("auth", "hasPassword");
 
 // Post Like Route
 Route::post('/question/{post}/post-like', [PostLikeController::class, "store"])->name("post.like")->middleware("auth", "hasPassword");

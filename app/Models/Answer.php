@@ -37,4 +37,11 @@ class Answer extends Model
     {
         return $this->hasMany(AnswerReport::class);
     }
+
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where('answer', 'like', '%' . $search . '%');
+        }
+    }
 }

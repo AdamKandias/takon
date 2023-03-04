@@ -38,8 +38,8 @@ class CommentController extends Controller
         return redirect()->back()->with("status-success", "Comment berhasil diposting!");
     }
 
-    public function userComment()
+    public function userComment(Request $request)
     {
-        return view("post.comment", ["comments" => Comment::where("user_id", Auth::user()->id)->latest()->simplePaginate(10), "topRank" => User::topRank()]);
+        return view("post.comment", ["comments" => Comment::where("user_id", Auth::user()->id)->search($request["search"])->latest()->simplePaginate(10), "topRank" => User::topRank()]);
     }
 }

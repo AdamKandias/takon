@@ -4,19 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Mapel;
 use App\Models\Post;
-use App\Models\PostReport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
-    {
-        $reports = PostReport::all("post_id")->pluck("post_id");
-        // dd($reports);
-        $posts = Post::with("reports")->orderBy('created_at', 'desc')->simplePaginate(10);
-        return view('post.home', ["topRank" => User::topRank(), "posts" =>  $posts]);
+    public function index(Request $request)
+    {   
+        return view('post.home', ["topRank" => User::topRank(), "posts" =>  Post::with("reports")->search($request["search"])->orderBy('created_at', 'desc')->simplePaginate(10)]);
     }
 
     public function create()
@@ -56,8 +52,8 @@ class PostController extends Controller
         return view("post.show", ["post" => $post]);
     }
 
-    public function userPost()
+    public function userPost(Request $request)
     {
-        return view("post.question", ["posts" => Post::where("user_id", Auth::user()->id)->latest()->simplePaginate(10), "topRank" => User::topRank()]);
+        return view("post.question", ["posts" => Post::where("user_id", Auth::user()->id)->search($request["search"])->latest()->simplePaginate(10), "topRank" => User::topRank()]);
     }
 }

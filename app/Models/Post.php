@@ -35,4 +35,11 @@ class Post extends Model
     {
         return $this->hasMany(PostReport::class);
     }
+
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where('question', 'like', '%' . $search . '%');
+        }
+    }
 }
