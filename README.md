@@ -12,6 +12,7 @@
 <li>Friends: Students can see updates from their friends.</li>
 <li>Roles: The more interaction answering questions answered by students then students will get an interesting role in accordance with the points they have.</li>
 <li>Rank: The more points a student has, the more likely he is to enter the rankings.</li>
+<li>Notifications: Users get notifications for every interaction that is carried out, such as if the question has been answered, followed by another user, etc</li>
 </ul>
 
 <h3>How it works</h3>
