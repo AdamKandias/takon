@@ -9,29 +9,21 @@ use Illuminate\Support\Collection;
 
 class PaginationHelper
 {
-    public static function paginate(Collection $results, $showPerPage)
+    public static function paginate($posts, $showPerPage)
     {
         $pageNumber = Paginator::resolveCurrentPage('page');
         
-        $totalPageNumber = $results->count();
-
-        return self::paginator($results->forPage($pageNumber, $showPerPage), $totalPageNumber, $showPerPage, $pageNumber, [
+        $totalPageNumber = $posts->count();
+    
+        return self::paginator($posts->forPage($pageNumber, $showPerPage), $totalPageNumber, $showPerPage, $pageNumber, [
             'path' => Paginator::resolveCurrentPath(),
+            'query' => request()->query(),
             'pageName' => 'page',
         ]);
-
+    
     }
+    
 
-    /**
-     * Create a new length-aware paginator instance.
-     *
-     * @param  \Illuminate\Support\Collection  $items
-     * @param  int  $total
-     * @param  int  $perPage
-     * @param  int  $currentPage
-     * @param  array  $options
-     * @return \Illuminate\Pagination\LengthAwarePaginator
-     */
     protected static function paginator($items, $total, $perPage, $currentPage, $options)
     {
         return Container::getInstance()->makeWith(LengthAwarePaginator::class, compact(

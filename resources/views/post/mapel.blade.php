@@ -189,7 +189,7 @@
                 </div>
                 @if (!Session::has('status'))
                     <div class="mx-auto d-flex justify-content-center mt-4 mb-2">
-                        {{ $posts->links() }}
+                        {{ $posts->appends(['mapel' => $currentMapel, 'filter' => $filter, 'search' => $search])->links() }}
                     </div>
                 @endif
                 <nav class="navBottom fixed-bottom bg-light">
@@ -241,14 +241,18 @@
             <div class="right px-2">
                 <div class="rightTopbar sticky-top align-items-center d-flex">
                     <div class="d-flex align-items-center SB mx-1">
-                        <div class="col-1 iconSB d-flex justify-content-center">
-                            <button type="submit" class="border-0">
-                                <img class="m-0" src="{{ asset('img/search.png') }}">
-                            </button>
-                        </div>
+                        <form class="d-flex" action="" method="GET">
+                            <div class="iconSB d-flex justify-content-center">
+                                <button type="submit" class="border-0">
+                                    <img class="m-0" src="{{ asset('img/search.png') }}">
+                                </button>
+                            </div>
 
-                        <input type="text" class="col inputSB" name="search"
-                            placeholder="Cari pertanyaan disini" value="{{ request('search') }}">
+                            <input type="hidden" name="mapel" value="{{ $currentMapel }}">
+                            <input type="hidden" name="filter" value="{{ $filter }}">
+                            <input type="text" class="inputSB inputSB-mid" name="search"
+                                placeholder="Cari jawabanmu disini" value="{{ request('search') }}">
+                        </form>
                     </div>
                 </div>
                 <div class="myprofile">

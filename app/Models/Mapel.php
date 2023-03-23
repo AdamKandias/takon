@@ -19,4 +19,11 @@ class Mapel extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where('question', 'like', '%' . $search . '%');
+        }
+    }
 }
