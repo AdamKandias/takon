@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -43,7 +44,22 @@ Route::put("/image", [UserController::class, "editImage"])->name("editImage")->m
 Route::get("/rank", [UserController::class, "rank"])->name("rank")->middleware("auth");
 
 // Admin Route
-Route::get('/dashboard', [UserController::class, "dashboard"])->name("dashboard")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard', [AdminController::class, "index"])->name("dashboard")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/user-show/{user}', [AdminController::class, "userShow"])->name("userShow")->middleware("auth", "onlyAdmin");
+Route::post('/dashboard/user-destroy/{user}', [AdminController::class, "userDestroy"])->name("userDestroy")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/reports', [AdminController::class, "reports"])->name("dashboardReports")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/report-show/{linkid}', [AdminController::class, "reportShow"])->name("reportShow")->middleware("auth", "onlyAdmin");
+Route::post('/dashboard/report-destroy/{linkid}', [AdminController::class, "reportDestroy"])->name("reportDestroy")->middleware("auth", "onlyAdmin");
+Route::put('/dashboard/report-update/{linkid}', [AdminController::class, "reportUpdate"])->name("reportUpdate")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/posts', [AdminController::class, "posts"])->name("dashboardPosts")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/post-show/{post}', [AdminController::class, "postShow"])->name("postShow")->middleware("auth", "onlyAdmin");
+Route::post('/dashboard/post-destroy/{post}', [AdminController::class, "postDestroy"])->name("postDestroy")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/answers', [AdminController::class, "answers"])->name("dashboardAnswers")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/answer-show/{answer}', [AdminController::class, "answerShow"])->name("answerShow")->middleware("auth", "onlyAdmin");
+Route::post('/dashboard/answer-destroy/{answer}', [AdminController::class, "answerDestroy"])->name("answerDestroy")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/comments', [AdminController::class, "comments"])->name("dashboardComments")->middleware("auth", "onlyAdmin");
+Route::get('/dashboard/comment-show/{comment}', [AdminController::class, "commentShow"])->name("commentShow")->middleware("auth", "onlyAdmin");
+Route::post('/dashboard/comment-destroy/{comment}', [AdminController::class, "commentDestroy"])->name("commentDestroy")->middleware("auth", "onlyAdmin");
 
 // Post Route
 Route::get('/home', [PostController::class, "index"])->name("home")->middleware("auth");

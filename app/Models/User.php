@@ -4,13 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -29,6 +30,19 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            if (!empty($model->image)) {
+                if (!str_contains($model->image, 'avatar1.png') && !str_contains($model->image, 'avatar2.png') && !str_contains($model->image, 'avatar3.png')) {
+                    Storage::delete($model->image);
+                }
+            }
+        });
+    }
 
     protected $keyType = 'string';
 

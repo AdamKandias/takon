@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +24,14 @@ class AuthController extends Controller
         if (!empty($user)) {
             if ($user->password != null) {
                 if ($request->password != null) {
-                    if(password_verify($request->password, $user->password)){
+                    if (password_verify($request->password, $user->password)) {
                         if (Auth::loginUsingId($user->id)) {
                             $request->session()->regenerate();
 
                             if ($user->status_id == 2) {
                                 return redirect()->intended('dashboard');
                             }
-                            
+
                             return redirect()->intended('home');
                         }
                     } else {
@@ -42,7 +43,7 @@ class AuthController extends Controller
             } else {
                 if (Auth::loginUsingId($user->id)) {
                     $request->session()->regenerate();
-        
+
                     return redirect()->intended('home');
                 }
             }
@@ -59,6 +60,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route("home");
+        return redirect()->route("login");
     }
 }

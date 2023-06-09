@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Answer extends Model
 {
@@ -12,6 +13,17 @@ class Answer extends Model
 
     protected $guarded = ['id'];
     protected $keyType = 'string';
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            if (!empty($model->image)) {
+                Storage::delete($model->image);
+            }
+        });
+    }
 
     public function user()
     {
@@ -22,7 +34,7 @@ class Answer extends Model
     {
         return $this->belongsTo(Post::class);
     }
-    
+
     public function comments()
     {
         return $this->hasMany(Comment::class);

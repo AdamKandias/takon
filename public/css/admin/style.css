@@ -1,0 +1,90 @@
+/* LEFT BAR */
+.left-bar {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-leftbar {
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-profile-admin {
+    margin-right: 1rem;
+    aspect-ratio: 1/1;
+    height: 4rem;
+    border-radius: 999px;
+}
+
+.listbar-leftbar {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.item-nav {
+    display: flex;
+    justify-content: center;
+}
+
+.item-nav>a {
+    text-decoration: none;
+}
+
+.item-nav>a>* {
+    color: white;
+}
+
+/* CONTENT */
+.img-profile-user-modal {
+    aspect-ratio: 1/1;
+    height: 8rem;
+    border-radius: 999px;
+}
+
+.role {
+    border-radius: 20px;
+    color: #fff;
+    line-height: 15px;
+}
+
+.role-8 {
+    background: linear-gradient(91.88deg, #F83C66 4.79%, #A73489 91.31%);
+}
+
+.role-7 {
+    background: linear-gradient(91.88deg, #0ec5fc 4.79%, #A73489 91.31%);
+}
+
+.role-6 {
+    background: linear-gradient(91.88deg, #374efa 4.79%, #A73489 91.31%);
+}
+
+.role-5 {
+    background: linear-gradient(91.88deg, #00ff80c4 4.79%, #A73489 91.31%);
+}
+
+.role-4 {
+    background: linear-gradient(91.88deg, #ffb700 4.79%, #A73489 91.31%);
+}
+
+.role-3 {
+    background: linear-gradient(91.88deg, #fcf871 4.79%, #A73489 91.31%);
+}
+
+.role-2 {
+    background: linear-gradient(91.88deg, #36de7c 4.79%, #A73489 91.31%);
+}
+
+.role-1 {
+    background: linear-gradient(91.88deg, #937e82 4.79%, #A73489 91.31%);
+}

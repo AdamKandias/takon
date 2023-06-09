@@ -59,11 +59,6 @@ class UserController extends Controller
         return redirect()->route('profile')->with("status", "Foto profil berhasil diubah!");
     }
 
-    public function dashboard()
-    {
-        return view("admin.dashboard");
-    }
-
     public function rank()
     {
         return view("user.rank", ["rank" => User::rank()]);

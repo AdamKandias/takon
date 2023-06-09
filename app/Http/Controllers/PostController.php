@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
         return view('post.home', ["topRank" => User::topRank(), "posts" =>  Post::with("reports")->search($request["search"])->orderBy('created_at', 'desc')->simplePaginate(10)]);
     }
 
