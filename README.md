@@ -42,7 +42,7 @@ I'm a Fullstack Developer and Mobile Developer
 ## 🛠 Skills
 **Backend:** PHP, Codeigniter, Laravel, Java, Java Spring, Golang
 
-**Frontend:** HTML, CSS, JavaScript, TypeScript
+**Frontend:** HTML, CSS, Bootstrap, Tailwind, JavaScript, TypeScript
 
 **Mobile:** Dart, Flutter
 
